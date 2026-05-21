@@ -12,6 +12,7 @@ export interface MissionStat {
   category: string;       // ex: "Kills"
   category_key: string;   // ex: "MSC_Kills"
   type: string;           // "Integer" ou "Float"
+  unit?: string;          // unité ex: "cm", "s", ou vide
   total: number;          // total toutes classes confondues
   by_class: {             // valeur par classe
     Driller?: number;

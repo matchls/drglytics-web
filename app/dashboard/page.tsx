@@ -4,6 +4,7 @@ import { DashboardData } from "@/lib/types";
 import ClassCard from "@/components/ClassCard";
 import HeroStats from "@/components/HeroStats";
 import OverclockList from "@/components/OverclockList";
+import MissionStats from "@/components/MissionStats";
 
 export default function DashboardPage() {
   const [data, setData] = useState<DashboardData | null>(null);
@@ -29,6 +30,7 @@ export default function DashboardPage() {
             ))}
           </div>
           <OverclockList overclocks={data.overclocks} />
+          <MissionStats missionStats={data.mission_stats} />
         </>
       )}
     </div>
