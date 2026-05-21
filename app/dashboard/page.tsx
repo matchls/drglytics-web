@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { DashboardData } from "@/lib/types";
 import ClassCard from "@/components/ClassCard";
 import HeroStats from "@/components/HeroStats";
+import OverclockList from "@/components/OverclockList";
 
 export default function DashboardPage() {
   const [data, setData] = useState<DashboardData | null>(null);
@@ -27,9 +28,7 @@ export default function DashboardPage() {
               <ClassCard key={classData.name} classData={classData} />
             ))}
           </div>
-          <pre className="text-xs text-white mt-8">
-            {JSON.stringify(data.hero_stats, null, 2)}
-          </pre>
+          <OverclockList overclocks={data.overclocks} />
         </>
       )}
     </div>
