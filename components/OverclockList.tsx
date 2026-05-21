@@ -1,5 +1,7 @@
 import { OverclocksData } from "@/lib/types";
 import { CLASS_NAMES, CLASS_COLORS } from "@/lib/types";
+import { WEAPON_ICONS } from "@/lib/weaponIcons";
+import Image from "next/image";
 
 interface Props {
   overclocks: OverclocksData;
@@ -23,10 +25,21 @@ export default function OverclockList({ overclocks }: Props) {
             {overclocks.forged_by_dwarf[className]?.map((oc) => (
               <div
                 key={oc.guid}
-                className="bg-drg-panel border border-drg-orange rounded p-2"
+                className="bg-drg-panel border border-drg-border rounded p-2 flex items-center gap-3"
               >
-                <p className="font-bold text-sm text-drg-orange">{oc.name}</p>
-                <p className="text-gray-400 text-xs">{oc.weapon}</p>
+                {WEAPON_ICONS[oc.weapon] && (
+                  <Image
+                    src={WEAPON_ICONS[oc.weapon]}
+                    alt={oc.weapon}
+                    width={90}
+                    height={90}
+                    className="opacity-80"
+                  />
+                )}
+                <div>
+                  <p className="font-bold text-sm">{oc.name}</p>
+                  <p className="text-gray-400 text-xs">{oc.weapon}</p>
+                </div>
               </div>
             ))}
           </div>
