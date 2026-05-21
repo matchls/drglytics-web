@@ -1,7 +1,32 @@
+"use client";
+import { useEffect, useState } from "react";
+import { DashboardData } from "@/lib/types";
+import ClassCard from "@/components/ClassCard";
+
 export default function DashboardPage() {
+  const [data, setData] = useState<DashboardData | null>(null);
+
+  useEffect(() => {
+    const raw = sessionStorage.getItem("dashboardData");
+    if (!raw) return;
+    const parsed = JSON.parse(raw);
+    setData(parsed.data);
+  }, []);
+
   return (
-    <div className="min-h-screen bg-drg-dark text-white flex items-center justify-center">
-      <h1 className="text-drg-orange text-4xl font-bold">Dashboard</h1>
+    <div className="min-h-screen bg-drg-dark text-white p-8">
+      {data && (
+        <>
+          <h1 className="text-drg-orange text-4xl font-bold uppercase tracking-widest">
+            {data.player.name}
+          </h1>
+          <div className="grid grid-cols-2 gap-4 mt-8">
+            {data.classes.map((classData) => (
+              <ClassCard key={classData.name} classData={classData} />
+            ))}
+          </div>
+        </>
+      )}
     </div>
   );
 }

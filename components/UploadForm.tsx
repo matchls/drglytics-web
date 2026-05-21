@@ -2,7 +2,7 @@
 
 import { parseSaveFile } from "@/lib/api";
 import { ApiResponse } from "@/lib/types";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 
 const tips = [
@@ -17,6 +17,7 @@ export default function UploadForm() {
   const [playerName, setPlayerName] = useState("");
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [result, setResult] = useState<ApiResponse | null>(null);
+  const resultRef = useRef<ApiResponse | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [progress, setProgress] = useState(0);
   const [currentTip, setCurrentTip] = useState(0);
@@ -28,20 +29,25 @@ export default function UploadForm() {
       setProgress((prev) => {
         if (prev >= 100) {
           clearInterval(interval);
+          sessionStorage.setItem(
+            "dashboardData",
+            JSON.stringify(resultRef.current),
+          );
           router.push("/dashboard");
           return 100;
         }
         return prev + 1;
       });
-      return () => clearInterval(interval);
     }, 40);
-  }, [isLoading]);
+    return () => clearInterval(interval);
+  }, [isLoading, router]);
 
   async function handleSubmit() {
     if (!playerName || !selectedFile) return;
     setIsLoading(true);
     const response = await parseSaveFile(selectedFile, playerName);
     setResult(response);
+    resultRef.current = response;
   }
 
   useEffect(() => {
