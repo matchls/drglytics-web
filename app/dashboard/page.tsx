@@ -64,7 +64,7 @@ export default function DashboardPage() {
   return (
     <div className="min-h-screen bg-drg-dark text-white p-8">
       {data && (
-        <>
+        <div className="max-w-7xl mx-auto">
           <h1 className="text-drg-orange text-4xl font-bold uppercase tracking-widest">
             {data.player.name}
           </h1>
@@ -76,7 +76,7 @@ export default function DashboardPage() {
           </div>
           <OverclockList overclocks={data.overclocks} />
           <MissionStats missionStats={data.mission_stats} />
-        </>
+        </div>
       )}
     </div>
   );
