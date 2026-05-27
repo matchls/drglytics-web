@@ -5,20 +5,25 @@ interface Props {
 }
 
 export default function HeroStats({ heroStats }: Props) {
-  const totalHours = Math.floor(heroStats.MS_TimePlayed.total / 3600);
-  const distanceKm = Math.floor(heroStats.MS_DistanceTravelled.total / 100000);
-  const minerals = Math.floor(heroStats.MS_Mined_TotalMinerals.total);
+  // L'opérateur ?. lit la propriété seulement si l'objet existe
+  // L'opérateur ?? retourne la valeur de droite si celle de gauche est null/undefined
+  // Exemple : heroStats.MS_TimePlayed?.total ?? 0
+  //   → si MS_TimePlayed existe : utilise .total
+  //   → sinon : utilise 0 (valeur par défaut)
+  const totalHours = Math.floor((heroStats.MS_TimePlayed?.total ?? 0) / 3600);
+  const distanceKm = Math.floor((heroStats.MS_DistanceTravelled?.total ?? 0) / 100000);
+  const minerals = Math.floor(heroStats.MS_Mined_TotalMinerals?.total ?? 0);
 
   const stats = [
-    { label: "Missions", value: heroStats.MS_Completed_TotalMissions.total },
+    { label: "Missions", value: heroStats.MS_Completed_TotalMissions?.total ?? 0 },
     {
       label: "Kills",
-      value: heroStats.MS_Killed_TotalEnemies.total.toLocaleString(),
+      value: (heroStats.MS_Killed_TotalEnemies?.total ?? 0).toLocaleString(),
     },
     { label: "Heures jouées", value: `${totalHours}h` },
     { label: "Distance", value: `${distanceKm} km` },
     { label: "Minerals", value: minerals.toLocaleString() },
-    { label: "Downs", value: heroStats.MS_Death_TotalDowns.total },
+    { label: "Downs", value: heroStats.MS_Death_TotalDowns?.total ?? 0 },
   ];
 
   return (

@@ -20,32 +20,45 @@ export default function UploadForm() {
   const [isLoading, setIsLoading] = useState(false);
   const [progress, setProgress] = useState(0);
   const [currentTip, setCurrentTip] = useState(0);
+  // apiDone passe à true quand le backend a répondu
+  const [apiDone, setApiDone] = useState(false);
   const router = useRouter();
 
+  // Effect 1 : anime la barre de progression sur 4 secondes
+  // Elle s'arrête à 100% et attend l'API si besoin
   useEffect(() => {
     if (!isLoading) return;
     const interval = setInterval(() => {
       setProgress((prev) => {
         if (prev >= 100) {
           clearInterval(interval);
-          sessionStorage.setItem(
-            "dashboardData",
-            JSON.stringify(resultRef.current),
-          );
-          router.push("/dashboard");
           return 100;
         }
         return prev + 1;
       });
     }, 40);
     return () => clearInterval(interval);
-  }, [isLoading, router]);
+  }, [isLoading]);
+
+  // Effect 2 : redirige vers /dashboard quand les DEUX conditions sont vraies :
+  //   - l'API a répondu (apiDone)
+  //   - la barre de progression est terminée (progress >= 100)
+  // Analogie : deux coureurs qui doivent tous les deux franchir la ligne
+  // avant qu'on ouvre la porte suivante.
+  useEffect(() => {
+    if (apiDone && progress >= 100) {
+      sessionStorage.setItem("dashboardData", JSON.stringify(resultRef.current));
+      router.push("/dashboard");
+    }
+  }, [apiDone, progress, router]);
 
   async function handleSubmit() {
     if (!playerName || !selectedFile) return;
     setIsLoading(true);
     const response = await parseSaveFile(selectedFile, playerName);
     resultRef.current = response;
+    // Signaler que l'API a répondu — l'Effect 2 se chargera du redirect
+    setApiDone(true);
   }
 
   useEffect(() => {
