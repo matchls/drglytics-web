@@ -1,5 +1,4 @@
 "use client";
-
 import { useState } from "react";
 import { DashboardData, CLASS_COLORS } from "@/lib/types";
 
@@ -7,16 +6,28 @@ interface Props {
   missionStats: DashboardData["mission_stats"];
 }
 
+// Traduction des clés backend → labels affichés
+const CATEGORY_LABELS: Record<string, string> = {
+  MSC_Missions: "MISSIONS",
+  MSC_Bioms: "BIOMES",
+  MSC_Warnings: "WARNINGS",
+  MSC_Mined: "EXTRACTED DATA",
+  MSC_Seasons: "SEASONS",
+  MSC_Forging: "FORGING",
+  MSC_Assignments: "ASSIGNMENTS",
+  MSC_DeepDives: "DEEP DIVES",
+};
+
 export default function MissionStats({ missionStats }: Props) {
   const categories = Array.from(
     new Set(Object.values(missionStats).map((s) => s.category)),
   );
-
   const [activeCategory, setActiveCategory] = useState(categories[0]);
 
   const filteredStats = Object.values(missionStats).filter(
     (s) => s.category === activeCategory,
   );
+
   function formatValue(value: number, unit?: string): string {
     if (unit === "cm") return (value / 100000).toFixed(1) + " km";
     if (unit === "s") {
@@ -26,79 +37,93 @@ export default function MissionStats({ missionStats }: Props) {
     }
     return value.toLocaleString();
   }
+
   return (
-    <div className="mt-8">
-      <h2 className="text-2xl font-bold uppercase tracking-widest text-drg-orange mb-4">
-        Mission Stats
-      </h2>
+    <div className="industrial-panel mt-6">
+      {/* Header */}
+      <div className="p-4 border-b-4 border-outline flex items-center gap-3">
+        <span className="material-symbols-outlined text-primary">
+          analytics
+        </span>
+        <p className="font-display text-xl text-on-surface tracking-widest">
+          EMPLOYEE PERFORMANCE REPORT
+        </p>
+      </div>
+
       {/* Onglets */}
-      <div className="flex gap-2 flex-wrap mb-6">
+      <div className="flex gap-1 flex-wrap p-4 border-b-4 border-outline">
         {categories.map((cat) => (
           <button
             key={cat}
             onClick={() => setActiveCategory(cat)}
-            className={`px-4 py-2 uppercase text-sm font-bold tracking-widest border ${
-              activeCategory === cat
-                ? "bg-drg-orange text-drg-dark border-drg-orange"
-                : "bg-drg-panel text-white border-drg-border"
-            }`}
+            className={`px-4 py-2 font-mono text-xs tracking-widest border-2 transition-colors
+              ${
+                activeCategory === cat
+                  ? "bg-primary text-on-primary border-primary"
+                  : "bg-surface-container text-on-surface-variant border-outline hover:bg-surface-container-high"
+              }`}
           >
-            {cat}
+            {CATEGORY_LABELS[cat] ?? cat}
           </button>
         ))}
       </div>
-      {/* Stats */}
-      <div className="flex flex-col gap-4">
-        {filteredStats.map((stat) => {
-          const maxValue = Math.max(
-            ...Object.values(stat.by_class).filter(
-              (v): v is number => v !== undefined,
-            ),
-          );
-          return (
-            <div
-              key={stat.guid}
-              className="bg-drg-panel border border-drg-border rounded p-4"
-            >
-              <div className="flex justify-between mb-2">
-                <span className="font-bold">{stat.name}</span>
-                <span className="text-drg-orange font-bold">
+
+      {/* Table */}
+      <table className="w-full">
+        <thead>
+          <tr className="border-b-4 border-outline text-on-surface-variant font-mono text-xs tracking-widest uppercase">
+            <th className="p-4 text-left">Stat Name</th>
+            <th className="p-4 text-right">Total</th>
+            <th className="p-4 text-left w-1/3">Class Breakdown</th>
+          </tr>
+        </thead>
+        <tbody>
+          {filteredStats.map((stat) => {
+            const classes = ["Driller", "Gunner", "Engineer", "Scout"] as const;
+            const total = classes.reduce(
+              (sum, c) => sum + (stat.by_class[c] ?? 0),
+              0,
+            );
+
+            return (
+              <tr
+                key={stat.guid}
+                className="border-b border-outline hover:bg-surface-container-high"
+              >
+                <td className="p-4 font-mono text-sm text-on-surface">
+                  {stat.name}
+                </td>
+                <td className="p-4 font-mono text-sm text-primary text-right">
                   {formatValue(stat.total, stat.unit)}
-                </span>
-              </div>
-              {(["Driller", "Gunner", "Engineer", "Scout"] as const).map(
-                (className) => {
-                  const value = stat.by_class[className] ?? 0;
-                  const percentage =
-                    maxValue > 0 ? (value / maxValue) * 100 : 0;
-                  return (
-                    <div
-                      key={className}
-                      className="flex items-center gap-2 mt-1"
-                    >
-                      <span className="text-xs w-20 text-gray-400">
-                        {className}
-                      </span>
-                      <div className="flex-1 bg-drg-dark rounded h-2">
-                        <div
-                          className="h-2 rounded"
-                          style={{
-                            width: `${percentage}%`,
-                            backgroundColor: CLASS_COLORS[className],
-                          }}
-                        />
-                      </div>
-                      <span className="text-xs w-16 text-right">
-                        {formatValue(value, stat.unit)}
-                      </span>
-                    </div>
-                  );
-                },
-              )}
-            </div>
-          );
-        })}
-      </div>
+                </td>
+                <td className="p-4">
+                  {/* Barre segmentée : chaque classe occupe sa part proportionnelle */}
+                  <div className="flex h-4 w-full overflow-hidden border border-outline">
+                    {total > 0 ? (
+                      classes.map((c) => {
+                        const val = stat.by_class[c] ?? 0;
+                        const pct = (val / total) * 100;
+                        return pct > 0 ? (
+                          <div
+                            key={c}
+                            title={`${c}: ${formatValue(val, stat.unit)}`}
+                            style={{
+                              width: `${pct}%`,
+                              backgroundColor: CLASS_COLORS[c],
+                            }}
+                          />
+                        ) : null;
+                      })
+                    ) : (
+                      <div className="w-full bg-primary" />
+                    )}
+                  </div>
+                </td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
     </div>
   );
 }
