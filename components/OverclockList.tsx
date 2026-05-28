@@ -1,7 +1,8 @@
-import { OverclocksData } from "@/lib/types";
-import { CLASS_NAMES } from "@/lib/types";
+"use client";
+import { OverclocksData, CLASS_NAMES, CLASS_COLORS } from "@/lib/types";
 import { WEAPON_ICONS } from "@/lib/weaponIcons";
 import Image from "next/image";
+import { useState } from "react";
 
 interface Props {
   overclocks: OverclocksData;
@@ -9,7 +10,10 @@ interface Props {
 
 export default function OverclockList({ overclocks }: Props) {
   const totalForged = overclocks.forged_count;
-
+  // null = toutes les classes affichées, sinon le nom de la classe sélectionnée
+  const [selectedClass, setSelectedClass] = useState<
+    (typeof CLASS_NAMES)[number] | null
+  >(null);
   return (
     <div className="industrial-panel flex flex-col h-full">
       {/* Header */}
@@ -21,10 +25,46 @@ export default function OverclockList({ overclocks }: Props) {
           FORGE STATUS
         </p>
       </div>
+      {/* Filtres par classe */}
+      <div className="px-4 pt-3 pb-1 flex gap-2 flex-wrap">
+        {/* Bouton "TOUTES" */}
+        <button
+          onClick={() => setSelectedClass(null)}
+          className={`font-display text-xs tracking-widest px-2 py-1 border transition-colors ${
+            selectedClass === null
+              ? "border-drg-orange text-drg-orange"
+              : "border-drg-border text-on-surface-variant hover:border-drg-orange"
+          }`}
+        >
+          TOUTES
+        </button>
 
+        {/* Un bouton par classe */}
+        {CLASS_NAMES.map((className) => (
+          <button
+            key={className}
+            onClick={() => setSelectedClass(className)}
+            style={
+              selectedClass === className
+                ? {
+                    color: CLASS_COLORS[className],
+                    borderColor: CLASS_COLORS[className],
+                  }
+                : {}
+            }
+            className={`font-display text-xs tracking-widest px-2 py-1 border transition-colors ${
+              selectedClass === className
+                ? ""
+                : "border-drg-border text-on-surface-variant hover:border-drg-orange"
+            }`}
+          >
+            {className.toUpperCase()}
+          </button>
+        ))}
+      </div>
       {/* Liste scrollable */}
       <div className="flex-1 overflow-y-auto p-4 flex flex-col gap-4">
-        {CLASS_NAMES.map((className) => {
+        {(selectedClass ? [selectedClass] : CLASS_NAMES).map((className) => {
           const classOverclocks = overclocks.forged_by_dwarf[className] ?? [];
           if (classOverclocks.length === 0) return null;
 
