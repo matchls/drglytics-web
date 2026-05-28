@@ -1,17 +1,42 @@
-// Mapping nom de stat (tel que renvoyé par le backend) → icone de mission
-// Les noms correspondent aux types de missions dans Deep Rock Galactic
+// Mapping nom de stat (tel que renvoyé par le backend) → icone
+// Couvre les types de missions ET les ressources/objectifs secondaires
 export const MISSION_STAT_ICONS: Record<string, string> = {
-  // Noms anglais (backend)
-  "Escort Duty":           "/icons/missions/escort_duty_icon.png",
-  "Elimination":           "/icons/missions/elimination_icon.png",
-  "Point Extraction":      "/icons/missions/point_extraction_icon.png",
-  "Mining Expedition":     "/icons/missions/mining_expedition_icon.png",
-  "Egg Hunt":              "/icons/missions/egg_hunt_icon.png",
-  "Salvage Operation":     "/icons/missions/salvage_icon.png",
-  "Black Box":             "/icons/missions/blackbox_icon.png",
-  "Deep Scan":             "/icons/missions/deep_scan_icon.png",
-  "Heavy Extraction":      "/icons/missions/heavy_extraction_icon.png",
-  "Industrial Sabotage":   "/icons/missions/industrial_sabotage_icon.png",
-  "On-Site Refining":      "/icons/missions/on_site_refining_icon.png",
-  "Search And Destroy":    "/icons/missions/search_and_extract_icon.png",
+  // --- Types de missions ---
+  "Egg Hunts":           "/icons/missions/egg_hunt_icon.png",
+  "Elimination Missions": "/icons/missions/elimination_icon.png",
+  "Kill Fester Fleas":   "/icons/missions/elimination_icon.png",
+  "Escort Missions":     "/icons/missions/escort_duty_icon.png",
+  "Refinery Missions":   "/icons/missions/on_site_refining_icon.png",
+  "Salvage Missions":    "/icons/missions/salvage_icon.png",
+  "Mining Expeditions":  "/icons/missions/mining_expedition_icon.png",
+  "Point Extractions":   "/icons/missions/point_extraction_icon.png",
+  "Black Box Missions":  "/icons/missions/blackbox_icon.png",
+  "Deep Scan Missions":  "/icons/missions/deep_scan_icon.png",
+
+  // --- Ressources / objectifs secondaires ---
+  "Apoca Bloom":         "/icons/resources/apoca_bloom_icon.png",
+  "Boolo Caps":          "/icons/resources/boolo_cap_icon.png",
+  "Destroy Bha Barnacle": "/icons/resources/bha_barnacle_icon.png",
+  "Destroy Eggs":        "/icons/resources/glyphid_egg_icon.png",
+  "Find Ebonut":         "/icons/resources/ebonut_icon.png",
+  "Find Gunk Seed":      "/icons/resources/gunk_seed_icon.png",
+  "Fossils":             "/icons/resources/fossil_icon.png",
+  "Holomite":            "/icons/resources/hollomite_icon.png",
 };
+
+// Stats à masquer (données peu pertinentes pour l'affichage)
+export const STATS_HIDDEN = new Set([
+  "Hazard 3",
+  "Hazard 5",
+  "Hazard3",
+  "Hazard5",
+]);
+
+// Stats à afficher en fin de liste (ordre secondaire)
+export const STATS_SORT_LAST = new Set([
+  "Secondary Missions",
+  "Total Campaign Missions",
+  "Total Campaigns",
+  "Total Missions",
+  "Tutorial",
+]);

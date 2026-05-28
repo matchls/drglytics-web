@@ -6,7 +6,7 @@ import { usePrefs } from "@/lib/PrefsContext";
 import { formatDistance, formatTime } from "@/lib/formatters";
 import { useTranslation, TranslationKey } from "@/lib/i18n";
 import { translateStatName } from "@/lib/data-translations";
-import { MISSION_STAT_ICONS } from "@/lib/missionIcons";
+import { MISSION_STAT_ICONS, STATS_HIDDEN, STATS_SORT_LAST } from "@/lib/missionIcons";
 
 interface Props {
   missionStats: DashboardData["mission_stats"];
@@ -39,9 +39,16 @@ export default function MissionStats({ missionStats }: Props) {
   );
   const [activeCategory, setActiveCategory] = useState(categories[0]);
 
-  const filteredStats = Object.values(missionStats).filter(
-    (s) => s.category === activeCategory,
-  );
+  const filteredStats = Object.values(missionStats)
+    .filter((s) => s.category === activeCategory)
+    // Masquer les stats indésirables (Hazard3, Hazard5, etc.)
+    .filter((s) => !STATS_HIDDEN.has(s.name))
+    // Pousser certaines stats en fin de liste
+    .sort((a, b) => {
+      const wa = STATS_SORT_LAST.has(a.name) ? 1 : 0;
+      const wb = STATS_SORT_LAST.has(b.name) ? 1 : 0;
+      return wa - wb;
+    });
 
   function formatValue(value: number, unit?: string): string {
     if (unit === "cm") return formatDistance(value, prefs);
