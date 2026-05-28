@@ -95,13 +95,13 @@ export default function ClassCard({ classData }: Props) {
         </div>
 
         {/* Photo de classe — visible uniquement sur grands écrans */}
-        <div className="hidden xl:flex items-end justify-center flex-shrink-0 w-28 -mb-4 -mr-4">
+        <div className="hidden xl:flex items-center justify-center flex-shrink-0 w-24 py-2 pr-1">
           <Image
             src={CLASS_IMAGES[classData.name] ?? ""}
             alt={classData.name}
-            width={112}
-            height={160}
-            className="object-contain object-bottom opacity-80"
+            width={96}
+            height={96}
+            className="object-contain opacity-80"
           />
         </div>
       </div>
