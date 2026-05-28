@@ -13,22 +13,23 @@ const QUOTES = [
 
 export default function Footer() {
   const [time, setTime] = useState("");
-  const [quote] = useState(
-    () => QUOTES[Math.floor(Math.random() * QUOTES.length)],
-  );
-  const [depth] = useState(() => Math.floor(Math.random() * 3000) + 500);
+  const [quote, setQuote] = useState("");
+  const [depth, setDepth] = useState<number | null>(null);
+  const [playerName, setPlayerName] = useState("OPERATIVE");
 
   useEffect(() => {
+    // Horloge
     const tick = () => setTime(new Date().toLocaleTimeString("fr-FR"));
     tick();
     const id = setInterval(tick, 1000);
+
+    // Valeurs client-only (calculées une seule fois après le mount)
+    setQuote(QUOTES[Math.floor(Math.random() * QUOTES.length)]);
+    setDepth(Math.floor(Math.random() * 3000) + 500);
+    setPlayerName(sessionStorage.getItem("playerName") ?? "OPERATIVE");
+
     return () => clearInterval(id);
   }, []);
-
-  const playerName =
-    typeof window !== "undefined"
-      ? (sessionStorage.getItem("playerName") ?? "OPERATIVE")
-      : "OPERATIVE";
 
   return (
     <footer className="font-mono text-xs tracking-widest bg-surface-container border-t border-drg-border">
