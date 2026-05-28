@@ -35,6 +35,8 @@ export const STATS_HIDDEN = new Set([
   "Hazard 5",
   "Hazard3",
   "Hazard5",
+  "Facility",
+  "Tutorial",
 ]);
 
 // Stats à afficher en fin de liste (ordre secondaire)
