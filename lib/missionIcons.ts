@@ -2,26 +2,31 @@
 // Couvre les types de missions ET les ressources/objectifs secondaires
 export const MISSION_STAT_ICONS: Record<string, string> = {
   // --- Types de missions ---
-  "Egg Hunts":           "/icons/missions/egg_hunt_icon.png",
+  "Egg Hunts": "/icons/missions/egg_hunt_icon.png",
   "Elimination Missions": "/icons/missions/elimination_icon.png",
-  "Kill Fester Fleas":   "/icons/missions/elimination_icon.png",
-  "Escort Missions":     "/icons/missions/escort_duty_icon.png",
-  "Refinery Missions":   "/icons/missions/on_site_refining_icon.png",
-  "Salvage Missions":    "/icons/missions/salvage_icon.png",
-  "Mining Expeditions":  "/icons/missions/mining_expedition_icon.png",
-  "Point Extractions":   "/icons/missions/point_extraction_icon.png",
-  "Black Box Missions":  "/icons/missions/blackbox_icon.png",
-  "Deep Scan Missions":  "/icons/missions/deep_scan_icon.png",
+  "Kill Fester Fleas": "/icons/missions/elimination_icon.png",
+  "Escort Missions": "/icons/missions/escort_duty_icon.png",
+  "Refinery Missions": "/icons/missions/on_site_refining_icon.png",
+  "Salvage Missions": "/icons/missions/salvage_icon.png",
+  "Mining Expeditions": "/icons/missions/mining_expedition_icon.png",
+  "Point Extractions": "/icons/missions/point_extraction_icon.png",
+  "Black Box Missions": "/icons/missions/blackbox_icon.png",
+  "Deep Scan Missions": "/icons/missions/deep_scan_icon.png",
+  "Heavy Extraction": "/icons/missions/heavy_extraction_icon.png",
+  "Mining Expedition": "/icons/missions/mining_expedition_icon.png",
+  "Point Extraction": "/icons/missions/point_extraction_icon.png",
+  "Deep Scan": "/icons/missions/deep_scan_icon.png",
 
   // --- Ressources / objectifs secondaires ---
-  "Apoca Bloom":         "/icons/resources/apoca_bloom_icon.png",
-  "Boolo Caps":          "/icons/resources/boolo_cap_icon.png",
+  "Apoca Bloom": "/icons/resources/apoca_bloom_icon.png",
+  "Boolo Caps": "/icons/resources/boolo_cap_icon.png",
   "Destroy Bha Barnacle": "/icons/resources/bha_barnacle_icon.png",
-  "Destroy Eggs":        "/icons/resources/glyphid_egg_icon.png",
-  "Find Ebonut":         "/icons/resources/ebonut_icon.png",
-  "Find Gunk Seed":      "/icons/resources/gunk_seed_icon.png",
-  "Fossils":             "/icons/resources/fossil_icon.png",
-  "Holomite":            "/icons/resources/hollomite_icon.png",
+  "Destroy Eggs": "/icons/resources/glyphid_egg_icon.png",
+  "Find Ebonut": "/icons/resources/ebonut_icon.png",
+  "Find Gunk Seed": "/icons/resources/gunk_seed_icon.png",
+  Fossils: "/icons/resources/fossil_icon.png",
+  Holomite: "/icons/resources/hollomite_icon.png",
+  Dystrum: "/icons/resources/dystrum_icon.png",
 };
 
 // Stats à masquer (données peu pertinentes pour l'affichage)
