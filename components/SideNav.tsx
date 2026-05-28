@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 const navItems = [
   { label: "TERMINAL", href: "/", icon: "terminal", active: true },
   { label: "MISSION CONTROL", href: "/dashboard", icon: "radar", active: true },
-  { label: "ABYSS BAR", href: "#", icon: "local_bar", active: false },
+  { label: "ABYSS BAR", href: "/abyss-bar", icon: "local_bar", active: true },
   {
     label: "MEMORIAL",
     href: "/leaderboard",
