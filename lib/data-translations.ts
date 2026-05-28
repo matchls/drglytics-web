@@ -43,11 +43,21 @@ export const OVERCLOCK_NAMES_FR: Record<string, string> = {
   // "Volatile Impact Mixture": "Mélange à impact volatil",
 };
 
-// Lookup avec fallback : retourne la traduction FR si elle existe,
+// Overrides EN : noms backend qui doivent être remplacés même en anglais
+const STAT_NAMES_EN: Record<string, string> = {
+  "Character": "All",
+};
+
+// Overrides FR : noms backend → traduction française
+const STAT_NAMES_FR_EXTRA: Record<string, string> = {
+  "Character": "Tous",
+};
+
+// Lookup avec fallback : retourne la traduction si elle existe,
 // sinon retourne le nom original nettoyé des underscores
 export function translateStatName(name: string, language: "fr" | "en"): string {
-  if (language === "en") return name.replace(/_/g, " ");
-  return STAT_NAMES_FR[name] ?? name.replace(/_/g, " ");
+  if (language === "en") return STAT_NAMES_EN[name] ?? name.replace(/_/g, " ");
+  return STAT_NAMES_FR_EXTRA[name] ?? STAT_NAMES_FR[name] ?? name.replace(/_/g, " ");
 }
 
 export function translateOverclockName(name: string, language: "fr" | "en"): string {

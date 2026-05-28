@@ -12,6 +12,14 @@ interface Props {
   missionStats: DashboardData["mission_stats"];
 }
 
+// Icones des classes pour la catégorie MSC_Classes
+const CLASS_ICONS: Record<string, string> = {
+  Driller:  "/icons/classes/driller_icon.png",
+  Gunner:   "/icons/classes/gunner_icon.png",
+  Engineer: "/icons/classes/engineer_icon.png",
+  Scout:    "/icons/classes/scout_icon.png",
+};
+
 // Mapping clés backend → clés i18n
 const CATEGORY_KEYS: Record<string, TranslationKey> = {
   MSC_Missions: "catMissions",
@@ -110,8 +118,18 @@ export default function MissionStats({ missionStats }: Props) {
               >
                 <td className="p-4 font-mono text-sm text-on-surface">
                   <div className="flex items-center gap-2">
-                    {/* Icone de mission si disponible */}
-                    {MISSION_STAT_ICONS[stat.name] && (
+                    {/* Icone de classe (catégorie MSC_Classes) */}
+                    {CLASS_ICONS[stat.name] && (
+                      <Image
+                        src={CLASS_ICONS[stat.name]}
+                        alt={stat.name}
+                        width={24}
+                        height={24}
+                        className="opacity-80 flex-shrink-0"
+                      />
+                    )}
+                    {/* Icone de mission (autres catégories) */}
+                    {!CLASS_ICONS[stat.name] && MISSION_STAT_ICONS[stat.name] && (
                       <Image
                         src={MISSION_STAT_ICONS[stat.name]}
                         alt={stat.name}
