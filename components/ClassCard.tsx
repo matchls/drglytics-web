@@ -30,6 +30,14 @@ const CLASS_IMAGES: Record<string, string> = {
   Scout: "/icons/classes/scout_img.png",
 };
 
+// Taille d'affichage par classe — compense les différences de padding dans les PNG sources
+const CLASS_IMAGE_SIZE: Record<string, number> = {
+  Driller:  130,
+  Gunner:   130,
+  Engineer:  96,
+  Scout:     96,
+};
+
 // Retourne la clé i18n du rang selon le nombre de missions
 function getRankKey(missions: number): { key: TranslationKey; className: string } {
   if (missions >= 500) return { key: "rankVeteran",    className: "text-primary border border-primary" };
@@ -95,12 +103,12 @@ export default function ClassCard({ classData }: Props) {
         </div>
 
         {/* Photo de classe — visible uniquement sur grands écrans */}
-        <div className="hidden xl:flex items-center justify-center flex-shrink-0 w-24 py-2 pr-1">
+        <div className="hidden xl:flex items-center justify-center flex-shrink-0 w-28 py-2 pr-1">
           <Image
             src={CLASS_IMAGES[classData.name] ?? ""}
             alt={classData.name}
-            width={96}
-            height={96}
+            width={CLASS_IMAGE_SIZE[classData.name] ?? 96}
+            height={CLASS_IMAGE_SIZE[classData.name] ?? 96}
             className="object-contain opacity-80"
           />
         </div>
