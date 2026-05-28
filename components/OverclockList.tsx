@@ -1,6 +1,9 @@
 "use client";
 import { OverclocksData, CLASS_NAMES, CLASS_COLORS } from "@/lib/types";
 import { WEAPON_ICONS } from "@/lib/weaponIcons";
+import { useTranslation } from "@/lib/i18n";
+import { translateOverclockName } from "@/lib/data-translations";
+import { usePrefs } from "@/lib/PrefsContext";
 import Image from "next/image";
 import { useState } from "react";
 
@@ -9,6 +12,8 @@ interface Props {
 }
 
 export default function OverclockList({ overclocks }: Props) {
+  const t = useTranslation();
+  const { prefs } = usePrefs();
   const totalForged = overclocks.forged_count;
   // null = toutes les classes affichées, sinon le nom de la classe sélectionnée
   const [selectedClass, setSelectedClass] = useState<
@@ -22,7 +27,7 @@ export default function OverclockList({ overclocks }: Props) {
           construction
         </span>
         <p className="font-display text-xl text-on-surface tracking-widest">
-          FORGE STATUS
+          {t("forgeStatus")}
         </p>
       </div>
       {/* Filtres par classe */}
@@ -36,7 +41,7 @@ export default function OverclockList({ overclocks }: Props) {
               : "border-drg-border text-on-surface-variant hover:border-drg-orange"
           }`}
         >
-          TOUTES
+          {t("allClasses")}
         </button>
 
         {/* Un bouton par classe */}
@@ -72,7 +77,7 @@ export default function OverclockList({ overclocks }: Props) {
             <div key={className} className="flex flex-col gap-2">
               {/* Header par classe */}
               <p className="font-display text-sm text-drg-orange tracking-widest border-b border-drg-border pb-1">
-                {className.toUpperCase()} · {classOverclocks.length} FORGED
+                {className.toUpperCase()} · {classOverclocks.length} {t("forged")}
               </p>
               {/* Overclocks de cette classe */}
               {classOverclocks.map((oc) => (
@@ -91,7 +96,7 @@ export default function OverclockList({ overclocks }: Props) {
                   )}
                   <div>
                     <p className="font-mono text-sm text-on-surface">
-                      {oc.name}
+                      {translateOverclockName(oc.name, prefs.language)}
                     </p>
                     <p className="font-mono text-xs text-on-surface-variant">
                       {oc.weapon}
@@ -107,7 +112,7 @@ export default function OverclockList({ overclocks }: Props) {
       {/* Footer */}
       <div className="p-4 border-t-4 border-outline">
         <p className="font-mono text-xs text-on-surface-variant tracking-widest">
-          TOTAL FORGED: {totalForged} / AVAILABLE SLOTS: ∞
+          {t("totalForged")}: {totalForged} / AVAILABLE SLOTS: ∞
         </p>
       </div>
     </div>

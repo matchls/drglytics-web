@@ -5,16 +5,10 @@ import { ApiResponse } from "@/lib/types";
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabase";
-
-const tips = [
-  "⛏ Drilling through your save file...",
-  "🪨 Rock and Stone, Miner!",
-  "📊 Counting your kills...",
-  "🍺 Almost ready for a beer...",
-  "💎 Gathering your stats...",
-];
+import { useTranslation } from "@/lib/i18n";
 
 export default function UploadForm() {
+  const t = useTranslation();
   const [playerName, setPlayerName] = useState("");
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const resultRef = useRef<ApiResponse | null>(null);
@@ -26,8 +20,10 @@ export default function UploadForm() {
   const [showHelp, setShowHelp] = useState(false);
   const router = useRouter();
 
+  // Tips traduits — recalculés si la langue change
+  const tips = [t("tip1"), t("tip2"), t("tip3"), t("tip4"), t("tip5")];
+
   // Effect 1 : anime la barre de progression sur 4 secondes
-  // Elle s'arrête à 100% et attend l'API si besoin
   useEffect(() => {
     if (!isLoading) return;
     const interval = setInterval(() => {
@@ -42,11 +38,7 @@ export default function UploadForm() {
     return () => clearInterval(interval);
   }, [isLoading]);
 
-  // Effect 2 : redirige vers /dashboard quand les DEUX conditions sont vraies :
-  //   - l'API a répondu (apiDone)
-  //   - la barre de progression est terminée (progress >= 100)
-  // Analogie : deux coureurs qui doivent tous les deux franchir la ligne
-  // avant qu'on ouvre la porte suivante.
+  // Effect 2 : redirige vers /dashboard quand les DEUX conditions sont vraies
   useEffect(() => {
     if (apiDone && progress >= 100) {
       sessionStorage.setItem(
@@ -63,9 +55,9 @@ export default function UploadForm() {
     setIsLoading(true);
     const response = await parseSaveFile(selectedFile, playerName);
     resultRef.current = response;
-    // Signaler que l'API a répondu — l'Effect 2 se chargera du redirect
     setApiDone(true);
   }
+
   async function handleDemo() {
     const demoPlayer = process.env.NEXT_PUBLIC_DEMO_PLAYER ?? "poussif";
     const { data, error } = await supabase
@@ -87,13 +79,14 @@ export default function UploadForm() {
     sessionStorage.setItem("playerName", demoPlayer);
     router.push("/dashboard");
   }
+
   useEffect(() => {
     if (!isLoading) return;
     const interval = setInterval(() => {
       setCurrentTip((prev) => (prev + 1) % tips.length);
     }, 1500);
     return () => clearInterval(interval);
-  }, [isLoading]);
+  }, [isLoading, tips.length]);
 
   if (isLoading) {
     return (
@@ -110,11 +103,12 @@ export default function UploadForm() {
           </div>
         </div>
         <p className="font-mono text-xs text-on-surface-variant tracking-widest">
-          PROCESSING... {progress}%
+          {t("processing")} {progress}%
         </p>
       </div>
     );
   }
+
   return (
     <div className="min-h-screen bg-background industrial-grid flex items-center justify-center relative overflow-hidden">
       {/* Coins en rayures danger */}
@@ -131,7 +125,7 @@ export default function UploadForm() {
             terminal
           </span>
           <h1 className="font-display text-3xl text-on-surface tracking-widest">
-            SAVE-FILE SUBMISSION TERMINAL
+            {t("formTitle")}
           </h1>
         </div>
 
@@ -145,7 +139,7 @@ export default function UploadForm() {
               type="text"
               value={playerName}
               onChange={(e) => setPlayerName(e.target.value)}
-              placeholder="ENTER OPERATIVE ID"
+              placeholder={t("operativeId")}
               className="w-full bg-surface-dim border-b-4 border-primary text-on-surface font-mono pl-10 pr-4 py-3 placeholder:text-on-surface-variant placeholder:tracking-widest focus:outline-none"
             />
           </div>
@@ -156,7 +150,7 @@ export default function UploadForm() {
               architecture
             </span>
             <p className="font-mono text-sm text-on-surface-variant tracking-widest">
-              DRAG &amp; DROP .SAV FILE HERE
+              {t("dragDrop")}
             </p>
             <input
               type="file"
@@ -170,6 +164,7 @@ export default function UploadForm() {
               </p>
             )}
           </div>
+
           {/* Aide pour trouver le fichier */}
           <div>
             <button
@@ -180,38 +175,36 @@ export default function UploadForm() {
               <span className="material-symbols-outlined text-sm">
                 {showHelp ? "expand_less" : "expand_more"}
               </span>
-              OÙ TROUVER MON FICHIER ?
+              {t("whereFindFile")}
             </button>
 
             {showHelp && (
               <div className="mt-2 bg-surface-dim border-l-4 border-primary p-4 font-mono text-xs text-on-surface-variant flex flex-col gap-2">
                 <p>
-                  1. Clic droit sur{" "}
-                  <span className="text-primary">Deep Rock Galactic</span> dans
-                  Steam
+                  {t("helpStep1")}{" "}
+                  <span className="text-primary">Deep Rock Galactic</span>{" "}
+                  dans Steam
                 </p>
                 <p>
-                  2. Gérer →{" "}
-                  <span className="text-primary">
-                    Parcourir les fichiers locaux
-                  </span>
+                  {t("helpStep2Prefix")}{" "}
+                  <span className="text-primary">{t("helpStep2Action")}</span>
                 </p>
                 <p>
-                  3. Naviguer vers{" "}
+                  {t("helpStep3Prefix")}{" "}
                   <span className="text-primary">FSD \ Saved \ SaveGames</span>
                 </p>
                 <p>
-                  4. Prendre le fichier{" "}
-                  <span className="text-primary">.sav le plus récent</span>
+                  {t("helpStep4Prefix")}{" "}
+                  <span className="text-primary">{t("helpStep4Suffix")}</span>
                 </p>
               </div>
             )}
           </div>
+
           {/* Avertissement */}
           <div className="bg-surface-dim border-l-4 border-error px-4 py-3">
             <p className="font-mono text-xs text-on-surface-variant italic">
-              ⚠ AUTHORIZED PERSONNEL ONLY — UNAUTHORIZED ACCESS WILL BE REPORTED
-              TO MANAGEMENT
+              {t("warning")}
             </p>
           </div>
 
@@ -223,8 +216,9 @@ export default function UploadForm() {
           >
             <div className="absolute inset-0 hazard-stripes opacity-10" />
             <span className="material-symbols-outlined">cloud_upload</span>
-            SUBMIT FOR ANALYSIS
+            {t("submitBtn")}
           </button>
+
           {/* Séparateur */}
           <div className="flex items-center gap-3">
             <div className="flex-1 border-t border-drg-border" />
@@ -240,7 +234,7 @@ export default function UploadForm() {
             onClick={handleDemo}
             className="w-full border-2 border-drg-border text-on-surface-variant font-display text-lg tracking-widest py-2 hover:border-drg-orange hover:text-drg-orange transition-colors"
           >
-            TRY DEMO
+            {t("tryDemo")}
           </button>
         </div>
 

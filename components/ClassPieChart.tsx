@@ -8,6 +8,9 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import { DashboardData, CLASS_COLORS } from "@/lib/types";
+import { useTranslation } from "@/lib/i18n";
+import { usePrefs } from "@/lib/PrefsContext";
+import { translateStatName } from "@/lib/data-translations";
 
 interface Props {
   heroStats: DashboardData["hero_stats"];
@@ -15,14 +18,17 @@ interface Props {
 }
 
 export default function ClassPieChart({ heroStats, selectedStatKey }: Props) {
+  const t = useTranslation();
+  const { prefs } = usePrefs();
+
   // Aucune stat sélectionnée → message d'invite
   if (!selectedStatKey || !heroStats[selectedStatKey]) {
     return (
       <div className="industrial-panel p-4 flex items-center justify-center h-full">
         <p className="font-mono text-xs text-on-surface-variant tracking-widest text-center">
-          CLIQUEZ UNE STAT
+          {t("clickStat")}
           <br />
-          POUR LA DÉTAILLER
+          {t("toDetail")}
         </p>
       </div>
     );
@@ -39,12 +45,7 @@ export default function ClassPieChart({ heroStats, selectedStatKey }: Props) {
   return (
     <div className="industrial-panel p-4 flex flex-col gap-2 h-full">
       <p className="font-display text-sm text-drg-orange tracking-widest border-b border-drg-border pb-2">
-        {selectedStatKey
-          .replace("MS_", "")
-          .split("_")
-          .map((part) => part.replace(/([A-Z])/g, " $1").trim())
-          .join(" ")
-          .trim()}
+        {translateStatName(stat.label, prefs.language)}
       </p>
       <ResponsiveContainer width="100%" height={250}>
         <PieChart>

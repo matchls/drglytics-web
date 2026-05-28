@@ -1,5 +1,7 @@
 "use client";
 import { DashboardData } from "@/lib/types";
+import { usePrefs } from "@/lib/PrefsContext";
+import { formatDistance } from "@/lib/formatters";
 
 interface Props {
   heroStats: DashboardData["hero_stats"];
@@ -12,6 +14,7 @@ export default function HeroStats({
   selectedStatKey,
   onStatClick,
 }: Props) {
+  const { prefs } = usePrefs();
   const stats = [
     {
       key: "MS_Completed_TotalMissions",
@@ -28,14 +31,16 @@ export default function HeroStats({
     {
       key: "MS_TimePlayed",
       label: "HOURS",
-      value: Math.floor((heroStats.MS_TimePlayed?.total ?? 0) / 3600) + " h",
+      value: Math.floor((heroStats.MS_TimePlayed?.total ?? 0) / 3600),
     },
     {
       key: "MS_DistanceTravelled",
-      label: "DISTANCE",
-      value:
-        Math.floor((heroStats.MS_DistanceTravelled?.total ?? 0) / 100000) +
-        " km",
+      label: prefs.distanceUnit.toUpperCase(),
+      value: formatDistance(
+        heroStats.MS_DistanceTravelled?.total ?? 0,
+        prefs,
+        false,
+      ),
     },
     {
       key: "MS_Death_TotalDowns",

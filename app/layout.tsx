@@ -4,6 +4,7 @@ import "./globals.css";
 import SideNav from "@/components/SideNav";
 import TopBar from "@/components/TopBar";
 import Footer from "@/components/Footer";
+import { PrefsProvider } from "@/lib/PrefsContext";
 
 const barlowCondensed = Barlow_Condensed({
   subsets: ["latin"],
@@ -45,12 +46,15 @@ export default function RootLayout({
       <body
         className={`${barlowCondensed.variable} ${bebasNeue.variable} ${jetbrainsMono.variable} font-sans antialiased bg-background text-on-surface flex h-screen`}
       >
-        <SideNav />
-        <div className="flex flex-col flex-1 overflow-hidden">
-          <TopBar />
-          <main className="flex-1 overflow-y-auto">{children}</main>
-          <Footer />
-        </div>
+        {" "}
+        <PrefsProvider>
+          <SideNav />
+          <div className="flex flex-col flex-1 overflow-hidden">
+            <TopBar />
+            <main className="flex-1 overflow-y-auto">{children}</main>
+            <Footer />
+          </div>
+        </PrefsProvider>
       </body>
     </html>
   );

@@ -1,3 +1,7 @@
+"use client";
+import { usePrefs } from "@/lib/PrefsContext";
+import { formatDistance, formatTime } from "@/lib/formatters";
+import { useTranslation, TranslationKey } from "@/lib/i18n";
 import { ClassSummary } from "@/lib/types";
 import Image from "next/image";
 
@@ -19,36 +23,25 @@ const CLASS_ICONS: Record<string, string> = {
   Scout: "/icons/classes/scout_icon.png",
 };
 
-function getRankBadge(missions: number): { label: string; className: string } {
-  if (missions >= 500)
-    return {
-      label: "VETERAN",
-      className: "text-primary border border-primary",
-    };
-  if (missions >= 200)
-    return {
-      label: "EXPERIENCED",
-      className: "text-tertiary border border-tertiary",
-    };
-  if (missions >= 50)
-    return {
-      label: "ROOKIE",
-      className: "text-on-surface-variant border border-outline-variant",
-    };
-  return { label: "GREENBEARD", className: "text-error border border-error" };
+// Retourne la clé i18n du rang selon le nombre de missions
+function getRankKey(missions: number): { key: TranslationKey; className: string } {
+  if (missions >= 500) return { key: "rankVeteran",    className: "text-primary border border-primary" };
+  if (missions >= 200) return { key: "rankExperienced", className: "text-tertiary border border-tertiary" };
+  if (missions >= 50)  return { key: "rankRookie",      className: "text-on-surface-variant border border-outline-variant" };
+  return                      { key: "rankGreenbeard",  className: "text-error border border-error" };
 }
 
 export default function ClassCard({ classData }: Props) {
-  const hours = Math.floor(classData.time_played_s / 3600);
-  const distanceKm = (classData.distance_cm / 100000).toFixed(1);
-  const rank = getRankBadge(classData.missions_completed);
+  const { prefs } = usePrefs();
+  const t = useTranslation();
+  const rank = getRankKey(classData.missions_completed);
 
   const stats = [
-    { label: "MISSIONS", value: classData.missions_completed.toLocaleString() },
-    { label: "KILLS", value: classData.kills.toLocaleString() },
-    { label: "HOURS", value: `${hours} h` },
-    { label: "DISTANCE", value: `${distanceKm} km` },
-    { label: "DOWNS", value: classData.downs.toLocaleString() }, // ← ajouter ici
+    { label: t("catMissions"), value: classData.missions_completed.toLocaleString() },
+    { label: t("catKills"),    value: classData.kills.toLocaleString() },
+    { label: prefs.timeFormat === "hours" ? t("timeFormatHours") : t("timeFormatDhm"), value: formatTime(classData.time_played_s, prefs) },
+    { label: prefs.distanceUnit.toUpperCase(), value: formatDistance(classData.distance_cm, prefs, false) },
+    { label: t("downs"),        value: classData.downs.toLocaleString() },
   ];
 
   return (
@@ -74,7 +67,7 @@ export default function ClassCard({ classData }: Props) {
           <span
             className={`font-mono text-xs px-2 py-0.5 tracking-widest ${rank.className}`}
           >
-            {rank.label}
+            {t(rank.key)}
           </span>
         </div>
 
