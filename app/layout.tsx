@@ -34,6 +34,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined&display=optional"
+        />
+      </head>
+
       <body
         className={`${barlowCondensed.variable} ${bebasNeue.variable} ${jetbrainsMono.variable} font-sans antialiased bg-background text-on-surface flex h-screen`}
       >
