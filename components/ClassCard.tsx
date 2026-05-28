@@ -46,8 +46,9 @@ export default function ClassCard({ classData }: Props) {
   const stats = [
     { label: "MISSIONS", value: classData.missions_completed.toLocaleString() },
     { label: "KILLS", value: classData.kills.toLocaleString() },
-    { label: "HOURS", value: `${hours}h` },
+    { label: "HOURS", value: `${hours} h` },
     { label: "DISTANCE", value: `${distanceKm} km` },
+    { label: "DOWNS", value: classData.downs.toLocaleString() }, // ← ajouter ici
   ];
 
   return (

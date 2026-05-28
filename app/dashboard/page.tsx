@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
+import ClassPieChart from "@/components/ClassPieChart";
 import { DashboardData } from "@/lib/types";
 import ClassCard from "@/components/ClassCard";
 import HeroStats from "@/components/HeroStats";
@@ -9,6 +10,7 @@ import { supabase } from "@/lib/supabase";
 
 export default function DashboardPage() {
   const [data, setData] = useState<DashboardData | null>(null);
+  const [selectedStatKey, setSelectedStatKey] = useState<string | null>(null);
 
   useEffect(() => {
     console.log("useEffect déclenché");
@@ -66,14 +68,24 @@ export default function DashboardPage() {
       {data && (
         <>
           {/* KPI Row */}
-          <HeroStats heroStats={data.hero_stats} />
+          <HeroStats
+            heroStats={data.hero_stats}
+            selectedStatKey={selectedStatKey}
+            onStatClick={setSelectedStatKey}
+          />
 
           {/* Grille principale */}
           {/* Class Grid 2x2 */}
-          <div className="grid grid-cols-2 gap-4">
-            {data.classes.map((classData) => (
-              <ClassCard key={classData.name} classData={classData} />
-            ))}
+          <div className="grid grid-cols-3 gap-6 items-start">
+            <div className="col-span-2 grid grid-cols-2 gap-4">
+              {data.classes.map((classData) => (
+                <ClassCard key={classData.name} classData={classData} />
+              ))}
+            </div>
+            <ClassPieChart
+              heroStats={data.hero_stats}
+              selectedStatKey={selectedStatKey}
+            />
           </div>
           {/* Employee Performance Report */}
           <MissionStats missionStats={data.mission_stats} />
