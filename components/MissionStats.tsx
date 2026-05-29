@@ -20,23 +20,24 @@ const CLASS_ICONS: Record<string, string> = {
   Scout:    "/icons/classes/scout_icon.png",
 };
 
-// Mapping clés backend → clés i18n
+// Mapping labels backend (produits par get_stat_category_name()) → clés i18n
+// Le backend renvoie stat.category = "Kills", "Missions", etc. (pas les clés MSC_*)
 const CATEGORY_KEYS: Record<string, TranslationKey> = {
-  MSC_Missions: "catMissions",
-  MSC_Bioms: "catBiomes",
-  MSC_Warnings: "catWarnings",
-  MSC_Mined: "catMined",
-  MSC_Seasons: "catSeasons",
-  MSC_Forging: "catForging",
-  MSC_Assignments: "catAssignments",
-  MSC_DeepDives: "catDeepDives",
-  MSC_Bar: "catBar",
-  MSC_Classes: "catClasses",
-  MSC_Purchases: "catPurchases",
-  MSC_Deaths: "catDeaths",
-  MSC_Distance: "catDistance",
-  MSC_Kills: "catKills",
-  MSC_Time: "catTime",
+  "Kills":       "catKills",
+  "Missions":    "catMissions",
+  "Classes":     "catClasses",
+  "Biomes":      "catBiomes",
+  "Deep Dives":  "catDeepDives",
+  "Mining":      "catMined",
+  "Distance":    "catDistance",
+  "Time":        "catTime",
+  "Deaths":      "catDeaths",
+  "Bar":         "catBar",
+  "Forging":     "catForging",
+  "Warnings":    "catWarnings",
+  "Seasons":     "catSeasons",
+  "Assignments": "catAssignments",
+  "Purchases":   "catPurchases",
 };
 
 export default function MissionStats({ missionStats }: Props) {
