@@ -115,7 +115,7 @@ export const CLASS_NAMES: ClassName[] = ["Driller", "Gunner", "Engineer", "Scout
 
 export const CLASS_COLORS: Record<ClassName, string> = {
   Driller:  "#e6c020",
-  Gunner:   "#d44a4a",
-  Engineer: "#5cba5c",
+  Gunner:   "#5cba5c",
+  Engineer: "#d44a4a",
   Scout:    "#4a8fd4",
 };

@@ -11,8 +11,8 @@ interface Props {
 
 const CLASS_TOP_COLORS: Record<string, string> = {
   Driller: "bg-[#e6c020]",
-  Gunner: "bg-[#d44a4a]",
-  Engineer: "bg-[#5cba5c]",
+  Gunner: "bg-[#5cba5c]",
+  Engineer: "bg-[#d44a4a]",
   Scout: "bg-[#4a8fd4]",
 };
 

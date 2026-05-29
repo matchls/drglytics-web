@@ -94,8 +94,8 @@ drg-orange-light : #f5b942
 Couleurs des classes :
 ```
 Driller  : #e6c020  (jaune)
-Gunner   : #d44a4a  (rouge)
-Engineer : #5cba5c  (vert)
+Gunner   : #5cba5c  (vert)
+Engineer : #d44a4a  (rouge)
 Scout    : #4a8fd4  (bleu)
 ```
 
