@@ -32,7 +32,8 @@ export default function DashboardPage() {
         const scout = dashboardData.classes.find((c) => c.name === "Scout");
         const { error } = await supabase.from("players").upsert(
           {
-            player_name: dashboardData.player.name,
+            // Normalisation en majuscules — évite les doublons si la casse change entre deux uploads
+            player_name: dashboardData.player.name.trim().toUpperCase(),
             perk_points: dashboardData.player.perk_points,
 
             // Stats globales (depuis hero_stats)
