@@ -32,18 +32,33 @@ const CLASS_IMAGES: Record<string, string> = {
 
 // Taille d'affichage par classe — compense les différences de padding dans les PNG sources
 const CLASS_IMAGE_SIZE: Record<string, number> = {
-  Driller:  130,
-  Gunner:   130,
-  Engineer:  96,
-  Scout:     96,
+  Driller: 190,
+  Gunner: 180,
+  Engineer: 130,
+  Scout: 120,
 };
 
 // Retourne la clé i18n du rang selon le nombre de missions
-function getRankKey(missions: number): { key: TranslationKey; className: string } {
-  if (missions >= 500) return { key: "rankVeteran",    className: "text-primary border border-primary" };
-  if (missions >= 200) return { key: "rankExperienced", className: "text-tertiary border border-tertiary" };
-  if (missions >= 50)  return { key: "rankRookie",      className: "text-on-surface-variant border border-outline-variant" };
-  return                      { key: "rankGreenbeard",  className: "text-error border border-error" };
+function getRankKey(missions: number): {
+  key: TranslationKey;
+  className: string;
+} {
+  if (missions >= 500)
+    return {
+      key: "rankVeteran",
+      className: "text-primary border border-primary",
+    };
+  if (missions >= 200)
+    return {
+      key: "rankExperienced",
+      className: "text-tertiary border border-tertiary",
+    };
+  if (missions >= 50)
+    return {
+      key: "rankRookie",
+      className: "text-on-surface-variant border border-outline-variant",
+    };
+  return { key: "rankGreenbeard", className: "text-error border border-error" };
 }
 
 export default function ClassCard({ classData }: Props) {
@@ -52,21 +67,44 @@ export default function ClassCard({ classData }: Props) {
   const rank = getRankKey(classData.missions_completed);
 
   const stats = [
-    { label: t("catMissions"), value: classData.missions_completed.toLocaleString() },
-    { label: t("catKills"),    value: classData.kills.toLocaleString() },
-    { label: prefs.timeFormat === "hours" ? t("timeFormatHours") : t("timeFormatDhm"), value: formatTime(classData.time_played_s, prefs) },
-    { label: prefs.distanceUnit.toUpperCase(), value: formatDistance(classData.distance_cm, prefs, false) },
-    { label: t("downs"),        value: classData.downs.toLocaleString() },
+    {
+      label: t("catMissions"),
+      value: classData.missions_completed.toLocaleString(),
+    },
+    { label: t("catKills"), value: classData.kills.toLocaleString() },
+    {
+      label:
+        prefs.timeFormat === "hours"
+          ? t("timeFormatHours")
+          : t("timeFormatDhm"),
+      value: formatTime(classData.time_played_s, prefs),
+    },
+    {
+      label: prefs.distanceUnit.toUpperCase(),
+      value: formatDistance(classData.distance_cm, prefs, false),
+    },
+    { label: t("downs"), value: classData.downs.toLocaleString() },
   ];
 
   return (
-    <div className="industrial-panel pressed-metal overflow-hidden">
+    <div className="industrial-panel pressed-metal overflow-hidden relative">
+      {/* Image de fond semi-transparente — centrée dans la card */}
+      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+        <Image
+          src={CLASS_IMAGES[classData.name] ?? ""}
+          alt=""
+          width={CLASS_IMAGE_SIZE[classData.name] ?? 130}
+          height={CLASS_IMAGE_SIZE[classData.name] ?? 130}
+          className="object-contain opacity-[0.2]"
+        />
+      </div>
+
       {/* Bande colorée en haut */}
       <div
         className={`h-1.5 w-full ${CLASS_TOP_COLORS[classData.name] ?? "bg-primary"}`}
       />
 
-      <div className="p-4 flex gap-4">
+      <div className="p-4 flex gap-4 relative z-10">
         {/* Colonne gauche : header + stats */}
         <div className="flex-1 min-w-0">
           {/* Header : icône + nom + badge */}
@@ -100,17 +138,6 @@ export default function ClassCard({ classData }: Props) {
               <span className="font-mono text-sm text-on-surface">{value}</span>
             </div>
           ))}
-        </div>
-
-        {/* Photo de classe — visible uniquement sur grands écrans */}
-        <div className="hidden xl:flex items-center justify-center flex-shrink-0 w-28 py-2 pr-1">
-          <Image
-            src={CLASS_IMAGES[classData.name] ?? ""}
-            alt={classData.name}
-            width={CLASS_IMAGE_SIZE[classData.name] ?? 96}
-            height={CLASS_IMAGE_SIZE[classData.name] ?? 96}
-            className="object-contain opacity-80"
-          />
         </div>
       </div>
     </div>
