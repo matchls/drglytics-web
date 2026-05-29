@@ -1,6 +1,6 @@
 "use client";
-import { createContext, useContext, useState, ReactNode } from "react";
-import { getPrefs, setPrefs, Preferences } from "@/lib/preferences";
+import { createContext, useContext, useState, useEffect, ReactNode } from "react";
+import { getPrefs, setPrefs, Preferences, DEFAULTS } from "@/lib/preferences";
 
 // Le contexte : contient les prefs + une fonction pour les modifier
 const PrefsContext = createContext<{
@@ -10,7 +10,14 @@ const PrefsContext = createContext<{
 
 // Le Provider : à mettre une seule fois dans layout.tsx
 export function PrefsProvider({ children }: { children: ReactNode }) {
-  const [prefs, setPrefsState] = useState<Preferences>(getPrefs());
+  // On démarre TOUJOURS avec les valeurs par défaut — serveur et client sont ainsi identiques
+  // lors du premier rendu (évite le crash d'hydration Next.js)
+  const [prefs, setPrefsState] = useState<Preferences>(DEFAULTS);
+
+  // Après hydration, on lit les vraies prefs depuis localStorage
+  useEffect(() => {
+    setPrefsState(getPrefs());
+  }, []);
 
   function update(partial: Partial<Preferences>) {
     setPrefs(partial); // sauvegarde dans localStorage

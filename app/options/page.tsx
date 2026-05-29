@@ -1,8 +1,17 @@
 "use client";
+import { useState } from "react";
 import { usePrefs } from "@/lib/PrefsContext";
+import { sendContactEmail } from "@/app/actions/sendContactEmail";
 
 export default function OptionsPage() {
   const { prefs, update } = usePrefs();
+
+  // État du formulaire de contact
+  const [contactPseudo, setContactPseudo] = useState(prefs.playerName ?? "");
+  const [contactMessage, setContactMessage] = useState("");
+  const [contactLoading, setContactLoading] = useState(false);
+  const [contactResult, setContactResult] = useState<"success" | "error" | null>(null);
+  const [contactError, setContactError] = useState("");
 
   return (
     <div className="min-h-screen bg-background p-6 flex flex-col gap-6">
@@ -163,6 +172,83 @@ export default function OptionsPage() {
               ))}
             </div>
           </div>
+        </div>
+      </div>
+
+      {/* Formulaire de contact */}
+      <div className="industrial-panel p-6">
+        <div className="flex flex-col gap-6">
+          <div>
+            <p className="font-display text-lg text-on-surface tracking-widest border-b border-drg-border pb-2">
+              CONTACTER L&apos;ADMINISTRATION
+            </p>
+            <p className="font-mono text-xs text-on-surface-variant mt-2">
+              Problème avec ton PIN, tes stats ou autre chose ? Envoie un message.
+            </p>
+          </div>
+
+          {/* Pseudo */}
+          <div className="flex flex-col gap-2">
+            <p className="font-mono text-xs text-on-surface-variant tracking-widest">
+              PSEUDO
+            </p>
+            <input
+              type="text"
+              value={contactPseudo}
+              onChange={(e) => setContactPseudo(e.target.value)}
+              maxLength={32}
+              className="bg-surface-container-highest border border-drg-border text-on-surface font-mono text-sm p-2 focus:outline-none focus:border-drg-orange"
+            />
+          </div>
+
+          {/* Message */}
+          <div className="flex flex-col gap-2">
+            <p className="font-mono text-xs text-on-surface-variant tracking-widest">
+              MESSAGE
+            </p>
+            <textarea
+              value={contactMessage}
+              onChange={(e) => setContactMessage(e.target.value)}
+              rows={4}
+              placeholder="Décris ton problème..."
+              className="bg-surface-container-highest border border-drg-border text-on-surface font-mono text-sm p-2 focus:outline-none focus:border-drg-orange resize-none placeholder:text-on-surface-variant"
+            />
+          </div>
+
+          {/* Erreur de validation */}
+          {contactResult === "error" && (
+            <p className="font-mono text-xs text-error tracking-widest">
+              ⚠ {contactError}
+            </p>
+          )}
+
+          {/* Confirmation d'envoi */}
+          {contactResult === "success" && (
+            <p className="font-mono text-xs text-primary tracking-widest">
+              ✓ MESSAGE ENVOYÉ — L&apos;ADMINISTRATION A ÉTÉ NOTIFIÉE.
+            </p>
+          )}
+
+          {/* Bouton */}
+          <button
+            disabled={contactLoading || contactResult === "success"}
+            onClick={async () => {
+              setContactLoading(true);
+              setContactResult(null);
+              const result = await sendContactEmail(contactPseudo, contactMessage);
+              if (result.success) {
+                setContactResult("success");
+                setContactMessage("");
+              } else {
+                setContactResult("error");
+                setContactError(result.error);
+              }
+              setContactLoading(false);
+            }}
+            className="self-start bg-primary text-on-primary font-display tracking-widest px-6 py-2 hover:bg-primary-fixed transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            {contactLoading ? "ENVOI EN COURS..." : "ENVOYER"}
+          </button>
         </div>
       </div>
     </div>

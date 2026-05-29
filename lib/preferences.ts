@@ -6,7 +6,7 @@ export type Preferences = {
   playerName: string;
 };
 
-const DEFAULTS: Preferences = {
+export const DEFAULTS: Preferences = {
   showOnLeaderboard: true,
   language: "fr",
   distanceUnit: "km",

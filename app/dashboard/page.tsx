@@ -22,6 +22,9 @@ export default function DashboardPage() {
     setIsDemo(sessionStorage.getItem("isDemo") === "true");
     async function saveToSupabase() {
       const isDemo = sessionStorage.getItem("isDemo") === "true";
+      // pinHash n'est présent que pour les nouveaux joueurs (création de PIN)
+      // Pour les joueurs existants, le hash est déjà en base → on ne l'écrase pas
+      const pinHash = sessionStorage.getItem("pinHash");
 
       if (getPrefs().showOnLeaderboard && !isDemo) {
         const driller = dashboardData.classes.find((c) => c.name === "Driller");
@@ -36,48 +39,49 @@ export default function DashboardPage() {
             player_name: dashboardData.player.name.trim().toUpperCase(),
             perk_points: dashboardData.player.perk_points,
 
-            // Stats globales (depuis hero_stats)
+            // Stats globales (depuis hero_stats) — Math.round() car les floats Unreal ne sont pas acceptés en bigint/integer
             total_missions:
-              dashboardData.hero_stats.MS_Completed_TotalMissions?.total ?? 0,
+              Math.round(dashboardData.hero_stats.MS_Completed_TotalMissions?.total ?? 0),
             total_kills:
-              dashboardData.hero_stats.MS_Killed_TotalEnemies?.total ?? 0,
-            total_time_s: dashboardData.hero_stats.MS_TimePlayed?.total ?? 0,
+              Math.round(dashboardData.hero_stats.MS_Killed_TotalEnemies?.total ?? 0),
+            total_time_s:
+              Math.round(dashboardData.hero_stats.MS_TimePlayed?.total ?? 0),
             total_distance_cm:
-              dashboardData.hero_stats.MS_DistanceTravelled?.total ?? 0,
+              Math.round(dashboardData.hero_stats.MS_DistanceTravelled?.total ?? 0),
             total_downs:
-              dashboardData.hero_stats.MS_Death_TotalDowns?.total ?? 0,
+              Math.round(dashboardData.hero_stats.MS_Death_TotalDowns?.total ?? 0),
             total_minerals:
-              dashboardData.hero_stats.MS_Mined_TotalMinerals?.total ?? 0,
+              Math.round(dashboardData.hero_stats.MS_Mined_TotalMinerals?.total ?? 0),
 
             // Missions par classe
-            driller_missions: driller?.missions_completed ?? 0,
-            gunner_missions: gunner?.missions_completed ?? 0,
-            engineer_missions: engineer?.missions_completed ?? 0,
-            scout_missions: scout?.missions_completed ?? 0,
+            driller_missions:  Math.round(driller?.missions_completed ?? 0),
+            gunner_missions:   Math.round(gunner?.missions_completed ?? 0),
+            engineer_missions: Math.round(engineer?.missions_completed ?? 0),
+            scout_missions:    Math.round(scout?.missions_completed ?? 0),
 
             // Kills par classe
-            driller_kills: driller?.kills ?? 0,
-            gunner_kills: gunner?.kills ?? 0,
-            engineer_kills: engineer?.kills ?? 0,
-            scout_kills: scout?.kills ?? 0,
+            driller_kills:  Math.round(driller?.kills ?? 0),
+            gunner_kills:   Math.round(gunner?.kills ?? 0),
+            engineer_kills: Math.round(engineer?.kills ?? 0),
+            scout_kills:    Math.round(scout?.kills ?? 0),
 
             // Temps par classe (en secondes)
-            driller_time_s: driller?.time_played_s ?? 0,
-            gunner_time_s: gunner?.time_played_s ?? 0,
-            engineer_time_s: engineer?.time_played_s ?? 0,
-            scout_time_s: scout?.time_played_s ?? 0,
+            driller_time_s:  Math.round(driller?.time_played_s ?? 0),
+            gunner_time_s:   Math.round(gunner?.time_played_s ?? 0),
+            engineer_time_s: Math.round(engineer?.time_played_s ?? 0),
+            scout_time_s:    Math.round(scout?.time_played_s ?? 0),
 
             // Distance par classe (en centimètres)
-            driller_distance_cm: driller?.distance_cm ?? 0,
-            gunner_distance_cm: gunner?.distance_cm ?? 0,
-            engineer_distance_cm: engineer?.distance_cm ?? 0,
-            scout_distance_cm: scout?.distance_cm ?? 0,
+            driller_distance_cm:  Math.round(driller?.distance_cm ?? 0),
+            gunner_distance_cm:   Math.round(gunner?.distance_cm ?? 0),
+            engineer_distance_cm: Math.round(engineer?.distance_cm ?? 0),
+            scout_distance_cm:    Math.round(scout?.distance_cm ?? 0),
 
             // Downs par classe
-            driller_downs: driller?.downs ?? 0,
-            gunner_downs: gunner?.downs ?? 0,
-            engineer_downs: engineer?.downs ?? 0,
-            scout_downs: scout?.downs ?? 0,
+            driller_downs:  Math.round(driller?.downs ?? 0),
+            gunner_downs:   Math.round(gunner?.downs ?? 0),
+            engineer_downs: Math.round(engineer?.downs ?? 0),
+            scout_downs:    Math.round(scout?.downs ?? 0),
 
             // Overclocks
             forged_overclocks: dashboardData.overclocks.forged_count,
@@ -98,11 +102,17 @@ export default function DashboardPage() {
 
             // JSON complet — filet de sécurité pour les évolutions futures
             raw_data: dashboardData,
+
+            // PIN hash — uniquement pour les nouveaux joueurs (ne pas écraser si déjà en base)
+            ...(pinHash ? { pin_hash: pinHash } : {}),
           },
           { onConflict: "player_name" },
         );
         if (error) console.error("Supabase insert error:", error);
-        else console.log("Saved to Supabase!");
+        else {
+          console.log("Saved to Supabase!");
+          sessionStorage.removeItem("pinHash"); // nettoyage après upsert réussi
+        }
       }
     }
 

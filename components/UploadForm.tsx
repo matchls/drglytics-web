@@ -6,6 +6,8 @@ import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabase";
 import { useTranslation } from "@/lib/i18n";
+import { checkPlayer } from "@/app/actions/pinActions";
+import PinModal from "@/components/PinModal";
 
 export default function UploadForm() {
   const t = useTranslation();
@@ -19,6 +21,8 @@ export default function UploadForm() {
   const [apiDone, setApiDone] = useState(false);
   const [showHelp, setShowHelp] = useState(false);
   const [formError, setFormError] = useState<string | null>(null);
+  // PIN — modal affiché après validation du formulaire, avant l'upload
+  const [pinModalMode, setPinModalMode] = useState<"create" | "verify" | null>(null);
   const router = useRouter();
 
   // Tips traduits — recalculés si la langue change
@@ -65,8 +69,33 @@ export default function UploadForm() {
       return;
     }
     setFormError(null);
+
+    // Vérifie si le joueur existe et s'il a un PIN avant d'uploader
+    const { exists, hasPIN } = await checkPlayer(playerName);
+    if (!exists || !hasPIN) {
+      // Nouveau joueur ou joueur sans PIN → création du PIN
+      setPinModalMode("create");
+    } else {
+      // Joueur existant avec PIN → vérification
+      setPinModalMode("verify");
+    }
+  }
+
+  // Appelée par PinModal après succès (création ou vérification)
+  async function handlePinSuccess(pinHash: string) {
+    setPinModalMode(null);
+    // Si nouveau joueur → stocker le hash pour l'upsert dans dashboard/page.tsx
+    if (pinHash) {
+      sessionStorage.setItem("pinHash", pinHash);
+    } else {
+      sessionStorage.removeItem("pinHash");
+    }
+    // Un vrai upload n'est jamais une démo — on nettoie le flag si l'utilisateur
+    // avait essayé le mode démo avant (sinon l'upsert Supabase est skippé)
+    sessionStorage.removeItem("isDemo");
+    // Lance l'upload maintenant que l'identité est confirmée
     setIsLoading(true);
-    const response = await parseSaveFile(selectedFile, playerName);
+    const response = await parseSaveFile(selectedFile!, playerName);
     resultRef.current = response;
     setApiDone(true);
   }
@@ -124,6 +153,14 @@ export default function UploadForm() {
 
   return (
     <div className="min-h-screen bg-background industrial-grid flex items-center justify-center relative overflow-hidden">
+      {/* Modal PIN — s'affiche par-dessus le formulaire */}
+      {pinModalMode && (
+        <PinModal
+          mode={pinModalMode}
+          playerName={playerName.trim().toUpperCase()}
+          onSuccess={handlePinSuccess}
+        />
+      )}
       {/* Coins en rayures danger */}
       <div className="absolute top-0 left-0 w-24 h-24 hazard-stripes opacity-40" />
       <div className="absolute top-0 right-0 w-24 h-24 hazard-stripes opacity-40" />
