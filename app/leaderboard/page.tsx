@@ -69,6 +69,10 @@ function getBestClass(player: PlayerRow): ClassName {
   )[0];
 }
 
+// Milestones communautaires pour les Bounty Targets
+const COMMUNITY_KILL_MILESTONE    = 2_000_000;
+const COMMUNITY_MISSION_MILESTONE = 10_000;
+
 // Les colonnes sur lesquelles on peut trier
 type SortKey =
   | "total_missions"
@@ -128,6 +132,14 @@ export default function LeaderboardPage() {
   });
 
   const top3 = players.slice(0, 3);
+
+  // Company Quota : top 5 joueurs, barres proportionnelles au leader
+  const top5 = players.slice(0, 5);
+  const leaderMissions = top5[0]?.total_missions ?? 1; // ?? 1 évite la division par zéro
+
+  // Bounty Targets : somme communautaire de tous les joueurs
+  const communityKills    = players.reduce((sum, p) => sum + p.total_kills, 0);
+  const communityMissions = players.reduce((sum, p) => sum + p.total_missions, 0);
 
   return (
     <div className="min-h-screen bg-background scanline-overlay p-6 flex flex-col gap-6">
@@ -306,50 +318,74 @@ export default function LeaderboardPage() {
         </div>
       </div>
 
-      {/* Sections placeholder */}
       <div className="grid grid-cols-2 gap-4">
-        {/* Company Quota Fulfillment */}
+        {/* Company Quota Fulfillment — top 5 joueurs, proportionnel au leader */}
         <div className="industrial-panel p-4 flex flex-col gap-4">
           <p className="font-display text-lg text-on-surface tracking-widest">
             COMPANY QUOTA FULFILLMENT
           </p>
           <div className="flex items-end gap-2 h-24">
-            {[60, 85, 45, 95, 70].map((h, i) => (
-              <div
-                key={i}
-                className="flex-1 bg-primary/20 border border-primary/40 relative"
-              >
-                <div
-                  className="bg-primary absolute bottom-0 w-full"
-                  style={{ height: `${h}%` }}
-                />
-              </div>
-            ))}
+            {top5.map((player) => {
+              const pct = Math.round((player.total_missions / leaderMissions) * 100);
+              // Initiales : première lettre de chaque mot, max 3 caractères
+              const initials = player.player_name
+                .split(" ")
+                .map((word) => word[0]?.toUpperCase() ?? "")
+                .join("")
+                .slice(0, 3);
+              return (
+                <div key={player.player_name} className="flex-1 flex flex-col items-center gap-1">
+                  <div className="w-full bg-primary/20 border border-primary/40 relative h-full">
+                    <div
+                      className="bg-primary absolute bottom-0 w-full transition-all"
+                      style={{ height: `${pct}%` }}
+                    />
+                  </div>
+                  <span className="font-mono text-xs text-on-surface-variant tracking-widest">
+                    {initials}
+                  </span>
+                </div>
+              );
+            })}
           </div>
         </div>
 
-        {/* Bounty Targets */}
+        {/* Bounty Targets — agrégats communautaires vs milestones */}
         <div className="industrial-panel p-4 flex flex-col gap-4">
           <p className="font-display text-lg text-on-surface tracking-widest">
             BOUNTY TARGETS: HOXXES IV
           </p>
           {[
-            { label: "GLYPHID DREADNOUGHT", value: 72 },
-            { label: "CAVE LEECH CLUSTER", value: 41 },
-          ].map((target) => (
-            <div key={target.label} className="flex flex-col gap-1">
-              <div className="flex justify-between font-mono text-xs text-on-surface-variant">
-                <span>{target.label}</span>
-                <span>{target.value}%</span>
+            {
+              label: "COMMUNITY KILLS",
+              current: communityKills,
+              milestone: COMMUNITY_KILL_MILESTONE,
+            },
+            {
+              label: "COMMUNITY MISSIONS",
+              current: communityMissions,
+              milestone: COMMUNITY_MISSION_MILESTONE,
+            },
+          ].map((target) => {
+            // Math.min(100, ...) : cap à 100% si le milestone est dépassé
+            const pct = Math.min(100, Math.round((target.current / target.milestone) * 100));
+            return (
+              <div key={target.label} className="flex flex-col gap-1">
+                <div className="flex justify-between font-mono text-xs text-on-surface-variant">
+                  <span>{target.label}</span>
+                  <span>
+                    {target.current.toLocaleString()} / {target.milestone.toLocaleString()} ({pct}%)
+                  </span>
+                </div>
+                <div className="h-3 bg-surface-container-highest border border-outline">
+                  <div
+                    className="h-full bg-error transition-all"
+                    style={{ width: `${pct}%` }}
+                  />
+                </div>
               </div>
-              <div className="h-3 bg-surface-container-highest border border-outline">
-                <div
-                  className="h-full bg-error"
-                  style={{ width: `${target.value}%` }}
-                />
-              </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </div>
