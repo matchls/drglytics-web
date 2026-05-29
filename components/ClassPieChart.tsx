@@ -56,6 +56,7 @@ export default function ClassPieChart({ heroStats, selectedStatKey }: Props) {
             cx="50%"
             cy="50%"
             outerRadius={80}
+            stroke="none"
           >
             {data.map((entry) => (
               <Cell
@@ -64,7 +65,19 @@ export default function ClassPieChart({ heroStats, selectedStatKey }: Props) {
               />
             ))}
           </Pie>
-          <Tooltip />
+          <Tooltip
+            contentStyle={{
+              backgroundColor: "#1e1208",
+              border: "1px solid #3d2a0f",
+              borderRadius: 0,
+              fontFamily: "'JetBrains Mono', monospace",
+              fontSize: "11px",
+              color: "#f5e6c8",
+              letterSpacing: "0.1em",
+            }}
+            itemStyle={{ color: "#e8a320" }}
+            cursor={false}
+          />
           <Legend />
         </PieChart>
       </ResponsiveContainer>
