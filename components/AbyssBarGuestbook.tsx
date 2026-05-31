@@ -1,6 +1,8 @@
 "use client";
 import { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabase";
+import { saveGuestbookMessage } from "@/app/actions/saveGuestbookMessage";
+import PinModal from "@/components/PinModal";
 
 interface GuestbookEntry {
   player_name: string;
@@ -16,44 +18,61 @@ export default function AbyssBarGuestbook({ playerName }: Props) {
   const [entries, setEntries] = useState<GuestbookEntry[]>([]);
   const [draft, setDraft] = useState("");
   const [saving, setSaving] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  // Le modal PIN s'ouvre au moment de soumettre, pour prouver l'identité.
+  const [pinModalOpen, setPinModalOpen] = useState(false);
 
-  // Charger les messages au montage
-  useEffect(() => {
-    async function fetchEntries() {
-      const { data } = await supabase
-        .from("guestbook")
-        .select("player_name, message, updated_at")
-        .order("updated_at", { ascending: false });
-      if (data) setEntries(data);
-    }
-    fetchEntries();
-  }, []);
-
-  // Soumettre ou mettre à jour le message
-  async function handleSubmit(e: React.FormEvent) {
-    e.preventDefault();
-    if (!draft.trim()) return;
-    setSaving(true);
-    await supabase.from("guestbook").upsert(
-      {
-        player_name: playerName,
-        message: draft.trim(),
-        updated_at: new Date().toISOString(),
-      },
-      { onConflict: "player_name" },
-    );
-    setSaving(false);
-    // Recharger les entrées après soumission
+  // Lecture des messages — reste en lecture seule via la clé anon (autorisée par les RLS).
+  async function loadEntries() {
     const { data } = await supabase
       .from("guestbook")
       .select("player_name, message, updated_at")
       .order("updated_at", { ascending: false });
     if (data) setEntries(data);
+  }
+
+  useEffect(() => {
+    loadEntries();
+  }, []);
+
+  // Étape 1 : l'utilisateur soumet → on demande le PIN (on n'écrit pas encore).
+  function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    setError(null);
+    if (!draft.trim()) return;
+    if (!playerName.trim()) {
+      setError("⚠ ENTRE TON PSEUDO POUR LAISSER UN MESSAGE.");
+      return;
+    }
+    setPinModalOpen(true);
+  }
+
+  // Étape 2 : PIN saisi et pré-vérifié → écriture VÉRIFIÉE côté serveur.
+  async function handlePinSuccess(pin: string) {
+    setPinModalOpen(false);
+    setSaving(true);
+    const result = await saveGuestbookMessage(playerName, pin, draft);
+    setSaving(false);
+    if (!result.ok) {
+      setError(result.error);
+      return;
+    }
     setDraft("");
+    await loadEntries();
   }
 
   return (
     <div className="industrial-panel p-6 flex flex-col gap-4">
+      {/* Modal PIN — par-dessus le contenu */}
+      {pinModalOpen && (
+        <PinModal
+          mode="verify"
+          playerName={playerName.trim().toUpperCase()}
+          onSuccess={handlePinSuccess}
+          onCancel={() => setPinModalOpen(false)}
+        />
+      )}
+
       {/* Header */}
       <div className="flex items-center gap-3 border-b-4 border-outline pb-3">
         <span className="material-symbols-outlined text-primary">
@@ -78,6 +97,9 @@ export default function AbyssBarGuestbook({ playerName }: Props) {
           placeholder="Rock and Stone..."
           className="bg-surface-container-highest border border-drg-border text-on-surface font-mono text-sm p-2 resize-none focus:outline-none focus:border-drg-orange"
         />
+        {error && (
+          <p className="font-mono text-xs text-error tracking-widest">{error}</p>
+        )}
         <button
           type="submit"
           disabled={saving || !draft.trim()}

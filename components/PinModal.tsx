@@ -1,15 +1,18 @@
 "use client";
 import { useState } from "react";
-import { verifyPIN, hashPIN } from "@/app/actions/pinActions";
+import { verifyPIN } from "@/app/actions/pinActions";
 
 interface Props {
   mode: "create" | "verify";
   playerName: string;
-  // onSuccess reçoit le hash (create) ou une chaîne vide (verify — hash déjà en base)
-  onSuccess: (pinHash: string) => void;
+  // onSuccess reçoit le PIN EN CLAIR. Le hachage (création) et la vérification
+  // autoritaire se font côté serveur dans savePlayerStats — jamais ici.
+  onSuccess: (pin: string) => void;
+  // onCancel : ferme le modal sans rien valider (clic sur ✕ ou sur le fond).
+  onCancel: () => void;
 }
 
-export default function PinModal({ mode, playerName, onSuccess }: Props) {
+export default function PinModal({ mode, playerName, onSuccess, onCancel }: Props) {
   const [pin, setPin] = useState("");
   const [pinConfirm, setPinConfirm] = useState("");
   const [error, setError] = useState<string | null>(null);
@@ -30,33 +33,50 @@ export default function PinModal({ mode, playerName, onSuccess }: Props) {
         return;
       }
       setLoading(true);
-      const hash = await hashPIN(pin);
-      onSuccess(hash);
+      // Plus de hachage côté client : on transmet le PIN en clair, le serveur s'en charge.
+      onSuccess(pin);
     }
 
     if (mode === "verify") {
       setLoading(true);
+      // Pré-vérification pour un retour immédiat à l'utilisateur (UX).
+      // La vérification qui FAIT FOI a lieu côté serveur dans savePlayerStats.
       const { valid } = await verifyPIN(playerName, pin);
       if (!valid) {
         setError("⚠ CODE PIN INCORRECT.");
         setLoading(false);
         return;
       }
-      // Pour verify, on passe une chaîne vide — le hash existe déjà en base
-      onSuccess("");
+      onSuccess(pin);
     }
   }
 
   return (
-    // Fond semi-transparent par-dessus la page
-    <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4">
-      <div className="industrial-panel w-full max-w-sm">
+    // Fond semi-transparent par-dessus la page — un clic dessus ferme le modal.
+    <div
+      className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4"
+      onClick={onCancel}
+    >
+      {/* stopPropagation : un clic DANS le panel ne doit pas le fermer */}
+      <div
+        className="industrial-panel w-full max-w-sm"
+        onClick={(e) => e.stopPropagation()}
+      >
         {/* Header */}
         <div className="p-4 border-b-4 border-outline flex items-center gap-3">
           <span className="material-symbols-outlined text-primary">lock</span>
-          <p className="font-display text-lg text-on-surface tracking-widest">
+          <p className="font-display text-lg text-on-surface tracking-widest flex-1">
             {mode === "create" ? "CRÉER UN CODE PIN" : "VÉRIFICATION D'IDENTITÉ"}
           </p>
+          {/* Bouton de fermeture manuelle */}
+          <button
+            type="button"
+            onClick={onCancel}
+            aria-label="Fermer"
+            className="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors"
+          >
+            close
+          </button>
         </div>
 
         <div className="p-6 flex flex-col gap-4">

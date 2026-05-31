@@ -6,8 +6,6 @@ import ClassCard from "@/components/ClassCard";
 import HeroStats from "@/components/HeroStats";
 import OverclockList from "@/components/OverclockList";
 import MissionStats from "@/components/MissionStats";
-import { supabase } from "@/lib/supabase";
-import { getPrefs } from "@/lib/preferences";
 
 export default function DashboardPage() {
   const [data, setData] = useState<DashboardData | null>(null);
@@ -17,106 +15,11 @@ export default function DashboardPage() {
     const raw = sessionStorage.getItem("dashboardData");
     if (!raw) return;
     const parsed = JSON.parse(raw);
-    const dashboardData = parsed.data as DashboardData;
-    setData(dashboardData);
+    setData(parsed.data as DashboardData);
     setIsDemo(sessionStorage.getItem("isDemo") === "true");
-    async function saveToSupabase() {
-      const isDemo = sessionStorage.getItem("isDemo") === "true";
-      // pinHash n'est présent que pour les nouveaux joueurs (création de PIN)
-      // Pour les joueurs existants, le hash est déjà en base → on ne l'écrase pas
-      const pinHash = sessionStorage.getItem("pinHash");
-
-      if (getPrefs().showOnLeaderboard && !isDemo) {
-        const driller = dashboardData.classes.find((c) => c.name === "Driller");
-        const gunner = dashboardData.classes.find((c) => c.name === "Gunner");
-        const engineer = dashboardData.classes.find(
-          (c) => c.name === "Engineer",
-        );
-        const scout = dashboardData.classes.find((c) => c.name === "Scout");
-        const { error } = await supabase.from("players").upsert(
-          {
-            // Normalisation en majuscules — évite les doublons si la casse change entre deux uploads
-            player_name: dashboardData.player.name.trim().toUpperCase(),
-            perk_points: dashboardData.player.perk_points,
-
-            // Stats globales (depuis hero_stats) — Math.round() car les floats Unreal ne sont pas acceptés en bigint/integer
-            total_missions:
-              Math.round(dashboardData.hero_stats.MS_Completed_TotalMissions?.total ?? 0),
-            total_kills:
-              Math.round(dashboardData.hero_stats.MS_Killed_TotalEnemies?.total ?? 0),
-            total_time_s:
-              Math.round(dashboardData.hero_stats.MS_TimePlayed?.total ?? 0),
-            total_distance_cm:
-              Math.round(dashboardData.hero_stats.MS_DistanceTravelled?.total ?? 0),
-            total_downs:
-              Math.round(dashboardData.hero_stats.MS_Death_TotalDowns?.total ?? 0),
-            total_minerals:
-              Math.round(dashboardData.hero_stats.MS_Mined_TotalMinerals?.total ?? 0),
-
-            // Missions par classe
-            driller_missions:  Math.round(driller?.missions_completed ?? 0),
-            gunner_missions:   Math.round(gunner?.missions_completed ?? 0),
-            engineer_missions: Math.round(engineer?.missions_completed ?? 0),
-            scout_missions:    Math.round(scout?.missions_completed ?? 0),
-
-            // Kills par classe
-            driller_kills:  Math.round(driller?.kills ?? 0),
-            gunner_kills:   Math.round(gunner?.kills ?? 0),
-            engineer_kills: Math.round(engineer?.kills ?? 0),
-            scout_kills:    Math.round(scout?.kills ?? 0),
-
-            // Temps par classe (en secondes)
-            driller_time_s:  Math.round(driller?.time_played_s ?? 0),
-            gunner_time_s:   Math.round(gunner?.time_played_s ?? 0),
-            engineer_time_s: Math.round(engineer?.time_played_s ?? 0),
-            scout_time_s:    Math.round(scout?.time_played_s ?? 0),
-
-            // Distance par classe (en centimètres)
-            driller_distance_cm:  Math.round(driller?.distance_cm ?? 0),
-            gunner_distance_cm:   Math.round(gunner?.distance_cm ?? 0),
-            engineer_distance_cm: Math.round(engineer?.distance_cm ?? 0),
-            scout_distance_cm:    Math.round(scout?.distance_cm ?? 0),
-
-            // Downs par classe
-            driller_downs:  Math.round(driller?.downs ?? 0),
-            gunner_downs:   Math.round(gunner?.downs ?? 0),
-            engineer_downs: Math.round(engineer?.downs ?? 0),
-            scout_downs:    Math.round(scout?.downs ?? 0),
-
-            // Overclocks
-            forged_overclocks: dashboardData.overclocks.forged_count,
-            unforged_overclocks: dashboardData.overclocks.unforged_count,
-
-            // Abyss Bar
-            bartender_tips: Math.floor(
-              dashboardData.mission_stats["MS_BartenderTips"]?.total ?? 0,
-            ),
-            beers_consumed: Math.floor(
-              dashboardData.mission_stats["MS_Drinkable_TotalConsumed"]
-                ?.total ?? 0,
-            ),
-            rounds_ordered: Math.floor(
-              dashboardData.mission_stats["MS_Drinkable_TotalRoundsOrdered"]
-                ?.total ?? 0,
-            ),
-
-            // JSON complet — filet de sécurité pour les évolutions futures
-            raw_data: dashboardData,
-
-            // PIN hash — uniquement pour les nouveaux joueurs (ne pas écraser si déjà en base)
-            ...(pinHash ? { pin_hash: pinHash } : {}),
-          },
-          { onConflict: "player_name" },
-        );
-        if (error) console.error("Supabase insert error:", error);
-        else {
-          console.log("Saved to Supabase!");
-          sessionStorage.removeItem("pinHash"); // nettoyage après upsert réussi
-        }
-      }
-    }
-
-    saveToSupabase();
+    // L'enregistrement en base se fait désormais à l'upload
+    // (UploadForm → savePlayerStats), côté serveur et après vérification du PIN.
+    // Cette page ne fait plus qu'afficher les données de la session.
   }, []);
 
   return (
