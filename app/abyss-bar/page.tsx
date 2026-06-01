@@ -14,15 +14,15 @@ export default function AbyssBarPage() {
   useEffect(() => {
     const raw = sessionStorage.getItem("dashboardData");
     const savedName = sessionStorage.getItem("playerName") ?? "";
+    const isDemo = sessionStorage.getItem("isDemo") === "true";
 
-    if (raw) {
-      const parsed = JSON.parse(raw);
-      setData(parsed.data);
-      setGuestName(parsed.data.player.name);
-    } else if (savedName) {
-      // Visiteur qui a déjà eu une session (ex: mode démo)
-      setGuestName(savedName);
-    }
+    // Les données de session alimentent les badges (valable même en démo).
+    if (raw) setData(JSON.parse(raw).data);
+
+    // Identité du livre d'or = le pseudo du formulaire (= player_name en base).
+    // En DÉMO, on n'adopte AUCUNE identité : le visiteur reste un invité et doit
+    // choisir son propre pseudo — impossible de poster sous le joueur démo.
+    if (!isDemo && savedName) setGuestName(savedName);
   }, []);
 
   return (
