@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
-import { supabase } from "@/lib/supabase";
+import { getPlayerProfile } from "@/app/actions/getPlayerProfile";
 import { DashboardData } from "@/lib/types";
 import HeroStats from "@/components/HeroStats";
 import ClassCard from "@/components/ClassCard";
@@ -19,14 +19,9 @@ export default function PlayerProfilePage() {
 
   useEffect(() => {
     async function fetchPlayer() {
-      const { data: row, error: err } = await supabase
-        .from("players")
-        .select("raw_data")
-        .eq("player_name", playerName)
-        .single();
-
-      if (err) setError("Miner not found in Company records.");
-      else setData(row.raw_data as DashboardData);
+      const profile = await getPlayerProfile(playerName);
+      if (!profile) setError("Miner not found in Company records.");
+      else setData(profile);
       setLoading(false);
     }
     fetchPlayer();

@@ -9,6 +9,9 @@ export default function OptionsPage() {
   // État du formulaire de contact
   const [contactPseudo, setContactPseudo] = useState(prefs.playerName ?? "");
   const [contactMessage, setContactMessage] = useState("");
+  // Honeypot anti-bot : doit rester VIDE. Un humain ne voit pas ce champ ; un bot
+  // qui remplit aveuglément tous les inputs le remplira et sera filtré côté serveur.
+  const [contactHoneypot, setContactHoneypot] = useState("");
   const [contactLoading, setContactLoading] = useState(false);
   const [contactResult, setContactResult] = useState<"success" | "error" | null>(null);
   const [contactError, setContactError] = useState("");
@@ -210,10 +213,24 @@ export default function OptionsPage() {
               value={contactMessage}
               onChange={(e) => setContactMessage(e.target.value)}
               rows={4}
+              maxLength={2000}
               placeholder="Décris ton problème..."
               className="bg-surface-container-highest border border-drg-border text-on-surface font-mono text-sm p-2 focus:outline-none focus:border-drg-orange resize-none placeholder:text-on-surface-variant"
             />
           </div>
+
+          {/* Honeypot anti-bot — INVISIBLE pour un humain (hors écran, non focusable,
+              exclu des lecteurs d'écran et de l'autocomplétion). Doit rester vide. */}
+          <input
+            type="text"
+            name="website"
+            tabIndex={-1}
+            autoComplete="off"
+            aria-hidden="true"
+            value={contactHoneypot}
+            onChange={(e) => setContactHoneypot(e.target.value)}
+            className="absolute left-[-9999px] w-px h-px opacity-0"
+          />
 
           {/* Erreur de validation */}
           {contactResult === "error" && (
@@ -235,7 +252,11 @@ export default function OptionsPage() {
             onClick={async () => {
               setContactLoading(true);
               setContactResult(null);
-              const result = await sendContactEmail(contactPseudo, contactMessage);
+              const result = await sendContactEmail(
+                contactPseudo,
+                contactMessage,
+                contactHoneypot,
+              );
               if (result.success) {
                 setContactResult("success");
                 setContactMessage("");
