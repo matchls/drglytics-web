@@ -26,7 +26,6 @@ export interface MissionStat {
 
 export interface ClassSummary {
   name: "Driller" | "Gunner" | "Engineer" | "Scout";
-  color: string;              // couleur hex ex: "#e6c020"
   missions_completed: number;
   kills: number;
   time_played_s: number;      // temps en secondes
@@ -118,4 +117,13 @@ export const CLASS_COLORS: Record<ClassName, string> = {
   Gunner:   "#5cba5c",
   Engineer: "#d44a4a",
   Scout:    "#4a8fd4",
+};
+
+// Icônes de classe — source unique partagée par tous les composants.
+// (Auparavant dupliquées dans ClassCard, MissionStats et OverclockList.)
+export const CLASS_ICONS: Record<ClassName, string> = {
+  Driller:  "/icons/classes/driller_icon.png",
+  Gunner:   "/icons/classes/gunner_icon.png",
+  Engineer: "/icons/classes/engineer_icon.png",
+  Scout:    "/icons/classes/scout_icon.png",
 };

@@ -1,5 +1,5 @@
 "use client";
-import { OverclocksData, CLASS_NAMES, CLASS_COLORS } from "@/lib/types";
+import { OverclocksData, CLASS_NAMES, CLASS_COLORS, CLASS_ICONS } from "@/lib/types";
 import { WEAPON_ICONS } from "@/lib/weaponIcons";
 import { useTranslation } from "@/lib/i18n";
 import { translateOverclockName } from "@/lib/data-translations";
@@ -10,13 +10,6 @@ import { useState } from "react";
 interface Props {
   overclocks: OverclocksData;
 }
-
-const CLASS_ICONS: Record<string, string> = {
-  Driller: "/icons/classes/driller_icon.png",
-  Gunner: "/icons/classes/gunner_icon.png",
-  Engineer: "/icons/classes/engineer_icon.png",
-  Scout: "/icons/classes/scout_icon.png",
-};
 
 export default function OverclockList({ overclocks }: Props) {
   const t = useTranslation();
