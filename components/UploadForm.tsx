@@ -10,6 +10,7 @@ import { checkPlayer } from "@/app/actions/pinActions";
 import { savePlayerStats } from "@/app/actions/savePlayerStats";
 import { buildPlayerRow } from "@/lib/buildPlayerRow";
 import { getPrefs } from "@/lib/preferences";
+import { setDashboardSession } from "@/lib/session";
 import PinModal from "@/components/PinModal";
 
 export default function UploadForm() {
@@ -49,11 +50,9 @@ export default function UploadForm() {
   // Effect 2 : redirige vers /dashboard quand les DEUX conditions sont vraies
   useEffect(() => {
     if (apiDone && progress >= 100) {
-      sessionStorage.setItem(
-        "dashboardData",
-        JSON.stringify(resultRef.current),
-      );
-      sessionStorage.setItem("playerName", playerName);
+      // resultRef.current est garanti non-null ici (posé dans handlePinSuccess).
+      // false : un vrai upload n'est jamais une démo.
+      setDashboardSession(resultRef.current!, playerName, false);
       router.push("/dashboard");
     }
   }, [apiDone, progress, router, playerName]);
@@ -124,12 +123,8 @@ export default function UploadForm() {
       return;
     }
 
-    sessionStorage.setItem(
-      "dashboardData",
-      JSON.stringify({ ok: true, data: data.raw_data }),
-    );
-    sessionStorage.setItem("isDemo", "true");
-    sessionStorage.setItem("playerName", demoPlayer);
+    // true : ces données viennent de la démo, pas d'un vrai upload.
+    setDashboardSession({ ok: true, data: data.raw_data }, demoPlayer, true);
     router.push("/dashboard");
   }
 

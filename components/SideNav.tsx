@@ -3,6 +3,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useTranslation } from "@/lib/i18n";
+import { getDashboardSession } from "@/lib/session";
 
 export default function SideNav() {
   const pathname = usePathname();
@@ -33,12 +34,11 @@ export default function SideNav() {
   ];
 
   useEffect(() => {
-    const data = sessionStorage.getItem("dashboardData");
-    if (data) {
-      const parsed = JSON.parse(data);
-      // La session stocke l'objet ApiResponse complet → { data: DashboardData, ... }
-      // Il faut descendre dans .data.player.name, pas directement .player.name
-      setPlayerName(parsed.data?.player?.name ?? "DEEP ROCK GALACTIC");
+    const session = getDashboardSession();
+    if (session) {
+      // On affiche le nom porté par les stats (data.player.name), pas le pseudo
+      // saisi à l'upload (session.name) — comportement historique conservé.
+      setPlayerName(session.data.player?.name ?? "DEEP ROCK GALACTIC");
     }
   }, []);
 

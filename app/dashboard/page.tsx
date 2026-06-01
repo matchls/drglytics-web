@@ -6,17 +6,17 @@ import ClassCard from "@/components/ClassCard";
 import HeroStats from "@/components/HeroStats";
 import OverclockList from "@/components/OverclockList";
 import MissionStats from "@/components/MissionStats";
+import { getDashboardSession } from "@/lib/session";
 
 export default function DashboardPage() {
   const [data, setData] = useState<DashboardData | null>(null);
   const [selectedStatKey, setSelectedStatKey] = useState<string | null>(null);
   const [isDemo, setIsDemo] = useState(false);
   useEffect(() => {
-    const raw = sessionStorage.getItem("dashboardData");
-    if (!raw) return;
-    const parsed = JSON.parse(raw);
-    setData(parsed.data as DashboardData);
-    setIsDemo(sessionStorage.getItem("isDemo") === "true");
+    const session = getDashboardSession();
+    if (!session) return;
+    setData(session.data);
+    setIsDemo(session.isDemo);
     // L'enregistrement en base se fait désormais à l'upload
     // (UploadForm → savePlayerStats), côté serveur et après vérification du PIN.
     // Cette page ne fait plus qu'afficher les données de la session.

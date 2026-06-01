@@ -4,6 +4,7 @@ import { DashboardData } from "@/lib/types";
 import AbyssBarGuestbook from "@/components/AbyssBarGuestbook";
 import AbyssBarBadges from "@/components/AbyssBarBadges";
 import AbyssBarHonorRoll from "@/components/AbyssBarHonorRoll";
+import { getDashboardSession } from "@/lib/session";
 
 export default function AbyssBarPage() {
   const [data, setData] = useState<DashboardData | null>(null);
@@ -12,17 +13,16 @@ export default function AbyssBarPage() {
   const [guestName, setGuestName] = useState("");
 
   useEffect(() => {
-    const raw = sessionStorage.getItem("dashboardData");
-    const savedName = sessionStorage.getItem("playerName") ?? "";
-    const isDemo = sessionStorage.getItem("isDemo") === "true";
+    const session = getDashboardSession();
+    if (!session) return;
 
     // Les données de session alimentent les badges (valable même en démo).
-    if (raw) setData(JSON.parse(raw).data);
+    setData(session.data);
 
     // Identité du livre d'or = le pseudo du formulaire (= player_name en base).
     // En DÉMO, on n'adopte AUCUNE identité : le visiteur reste un invité et doit
     // choisir son propre pseudo — impossible de poster sous le joueur démo.
-    if (!isDemo && savedName) setGuestName(savedName);
+    if (!session.isDemo && session.name) setGuestName(session.name);
   }, []);
 
   return (

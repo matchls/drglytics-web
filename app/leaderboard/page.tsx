@@ -6,6 +6,7 @@ import { useTranslation, TranslationKey } from "@/lib/i18n";
 import { ClassName, CLASS_COLORS } from "@/lib/types";
 import { useRouter } from "next/navigation";
 import { getFriends, addFriend, removeFriend, isFriend } from "@/lib/friends";
+import { getDashboardSession } from "@/lib/session";
 
 interface PlayerRow {
   player_name: string;
@@ -98,11 +99,8 @@ export default function LeaderboardPage() {
 
   // Nom du joueur connecté depuis sessionStorage
   useEffect(() => {
-    const data = sessionStorage.getItem("dashboardData");
-    if (data) {
-      const parsed = JSON.parse(data);
-      setCurrentPlayerName(parsed.data?.player?.name ?? null);
-    }
+    const session = getDashboardSession();
+    setCurrentPlayerName(session?.data.player?.name ?? null);
     // Charge la liste d'amis depuis localStorage au montage
     setFriends(getFriends());
   }, []);
