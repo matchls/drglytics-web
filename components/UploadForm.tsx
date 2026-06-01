@@ -4,7 +4,7 @@ import { parseSaveFile } from "@/lib/api";
 import { ApiResponse } from "@/lib/types";
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
-import { supabase } from "@/lib/supabase";
+import { getPlayerProfile } from "@/app/actions/getPlayerProfile";
 import { useTranslation } from "@/lib/i18n";
 import { checkPlayer } from "@/app/actions/pinActions";
 import { savePlayerStats } from "@/app/actions/savePlayerStats";
@@ -110,21 +110,17 @@ export default function UploadForm() {
 
   async function handleDemo() {
     const demoPlayer = process.env.NEXT_PUBLIC_DEMO_PLAYER ?? "poussif";
-    // ilike = comparaison INSENSIBLE À LA CASSE : "poussif" retrouve "Poussif".
-    // (demoPlayer est une constante de config maîtrisée, sans joker % ou _.)
-    const { data, error } = await supabase
-      .from("players")
-      .select("raw_data")
-      .ilike("player_name", demoPlayer)
-      .single();
+    // Lecture côté serveur (#31) : raw_data n'est plus exposé à la clé anon.
+    // getPlayerProfile fait la recherche insensible à la casse via service_role.
+    const data = await getPlayerProfile(demoPlayer);
 
-    if (error || !data?.raw_data) {
+    if (!data) {
       alert("Données démo non disponibles. Réessaie plus tard.");
       return;
     }
 
     // true : ces données viennent de la démo, pas d'un vrai upload.
-    setDashboardSession({ ok: true, data: data.raw_data }, demoPlayer, true);
+    setDashboardSession({ ok: true, data }, demoPlayer, true);
     router.push("/dashboard");
   }
 
