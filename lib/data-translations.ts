@@ -60,11 +60,11 @@ const STAT_NAMES_FR: Record<string, string> = {
   // ── Kills ─────────────────────────────────────────────────────────────────
   "Total Enemies":       "Ennemis éliminés",
   // Labels hero stats (format backend avec unité — utilisés dans ClassPieChart)
+  // NB : "Total Missions" et "Total Downs" sont déjà définis plus haut/bas
+  // (mêmes valeurs) → non redéfinis ici pour éviter les clés dupliquées.
   "Total Enemies Killed":     "Ennemis éliminés",
-  "Total Missions":           "Missions totales",
   "Time Played (s)":          "Temps joué",
   "Distance Travelled (cm)":  "Distance parcourue",
-  "Total Downs":              "Fois mis à terre",
   "Total Minerals Mined":     "Minéraux extraits",
 
   // ── Deaths ────────────────────────────────────────────────────────────────
