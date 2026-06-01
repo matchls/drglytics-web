@@ -111,10 +111,12 @@ export default function UploadForm() {
 
   async function handleDemo() {
     const demoPlayer = process.env.NEXT_PUBLIC_DEMO_PLAYER ?? "poussif";
+    // ilike = comparaison INSENSIBLE À LA CASSE : "poussif" retrouve "Poussif".
+    // (demoPlayer est une constante de config maîtrisée, sans joker % ou _.)
     const { data, error } = await supabase
       .from("players")
       .select("raw_data")
-      .eq("player_name", demoPlayer)
+      .ilike("player_name", demoPlayer)
       .single();
 
     if (error || !data?.raw_data) {
@@ -166,7 +168,7 @@ export default function UploadForm() {
       {pinModalMode && (
         <PinModal
           mode={pinModalMode}
-          playerName={playerName.trim().toUpperCase()}
+          playerName={playerName.trim()}
           onSuccess={handlePinSuccess}
           onCancel={() => setPinModalMode(null)}
         />
