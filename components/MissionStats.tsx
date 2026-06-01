@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import Image from "next/image";
-import { DashboardData, CLASS_COLORS } from "@/lib/types";
+import { DashboardData, CLASS_COLORS, CLASS_ICONS, ClassName } from "@/lib/types";
 import { usePrefs } from "@/lib/PrefsContext";
 import { formatDistance, formatTime } from "@/lib/formatters";
 import { useTranslation, TranslationKey } from "@/lib/i18n";
@@ -11,14 +11,6 @@ import { MISSION_STAT_ICONS, STATS_HIDDEN, STATS_SORT_LAST } from "@/lib/mission
 interface Props {
   missionStats: DashboardData["mission_stats"];
 }
-
-// Icones des classes pour la catégorie MSC_Classes
-const CLASS_ICONS: Record<string, string> = {
-  Driller:  "/icons/classes/driller_icon.png",
-  Gunner:   "/icons/classes/gunner_icon.png",
-  Engineer: "/icons/classes/engineer_icon.png",
-  Scout:    "/icons/classes/scout_icon.png",
-};
 
 // Mapping labels backend (produits par get_stat_category_name()) → clés i18n
 // Le backend renvoie stat.category = "Kills", "Missions", etc. (pas les clés MSC_*)
@@ -120,9 +112,9 @@ export default function MissionStats({ missionStats }: Props) {
                 <td className="p-4 font-mono text-sm text-on-surface">
                   <div className="flex items-center gap-2">
                     {/* Icone de classe (catégorie MSC_Classes) */}
-                    {CLASS_ICONS[stat.name] && (
+                    {CLASS_ICONS[stat.name as ClassName] && (
                       <Image
-                        src={CLASS_ICONS[stat.name]}
+                        src={CLASS_ICONS[stat.name as ClassName]}
                         alt={stat.name}
                         width={24}
                         height={24}
@@ -130,7 +122,7 @@ export default function MissionStats({ missionStats }: Props) {
                       />
                     )}
                     {/* Icone de mission (autres catégories) */}
-                    {!CLASS_ICONS[stat.name] && MISSION_STAT_ICONS[stat.name] && (
+                    {!CLASS_ICONS[stat.name as ClassName] && MISSION_STAT_ICONS[stat.name] && (
                       <Image
                         src={MISSION_STAT_ICONS[stat.name]}
                         alt={stat.name}

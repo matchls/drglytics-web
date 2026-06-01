@@ -2,26 +2,12 @@
 import { usePrefs } from "@/lib/PrefsContext";
 import { formatDistance, formatTime } from "@/lib/formatters";
 import { useTranslation, TranslationKey } from "@/lib/i18n";
-import { ClassSummary } from "@/lib/types";
+import { ClassSummary, CLASS_COLORS, CLASS_ICONS } from "@/lib/types";
 import Image from "next/image";
 
 interface Props {
   classData: ClassSummary;
 }
-
-const CLASS_TOP_COLORS: Record<string, string> = {
-  Driller: "bg-[#e6c020]",
-  Gunner: "bg-[#5cba5c]",
-  Engineer: "bg-[#d44a4a]",
-  Scout: "bg-[#4a8fd4]",
-};
-
-const CLASS_ICONS: Record<string, string> = {
-  Driller: "/icons/classes/driller_icon.png",
-  Gunner: "/icons/classes/gunner_icon.png",
-  Engineer: "/icons/classes/engineer_icon.png",
-  Scout: "/icons/classes/scout_icon.png",
-};
 
 const CLASS_IMAGES: Record<string, string> = {
   Driller: "/icons/classes/driller_img.png",
@@ -101,7 +87,8 @@ export default function ClassCard({ classData }: Props) {
 
       {/* Bande colorée en haut */}
       <div
-        className={`h-1.5 w-full ${CLASS_TOP_COLORS[classData.name] ?? "bg-primary"}`}
+        className="h-1.5 w-full"
+        style={{ backgroundColor: CLASS_COLORS[classData.name] }}
       />
 
       <div className="p-4 flex gap-4 relative z-10">
