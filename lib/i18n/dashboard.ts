@@ -32,6 +32,10 @@ export const dashboard = {
     allClasses: "ALL",
     downs: "DOWNS",
     minerals: "MINERALS",
+    noSessionTitle: "NO ACTIVE SESSION",
+    noSessionDesc: "Upload a save file or try the demo to see your stats.",
+    noSessionUpload: "UPLOAD A SAVE",
+    noSessionDemo: "TRY THE DEMO",
   },
   fr: {
     employeeReport: "RAPPORT DE PERFORMANCE DE L'EMPLOYÉ",
@@ -66,5 +70,9 @@ export const dashboard = {
     allClasses: "TOUTES",
     downs: "MORTS",
     minerals: "MINERAIS",
+    noSessionTitle: "PAS DE SESSION ACTIVE",
+    noSessionDesc: "Uploadez un fichier de sauvegarde ou essayez la démo pour voir vos stats.",
+    noSessionUpload: "UPLOADER UN SAVE",
+    noSessionDemo: "ESSAYER LA DÉMO",
   },
 } as const;

@@ -97,8 +97,6 @@ export default function UploadForm() {
   // Appelée par PinModal après succès — reçoit le PIN EN CLAIR (jamais persisté).
   async function handlePinSuccess(pin: string) {
     setPinModalMode(null);
-    // Un vrai upload n'est jamais une démo — on nettoie le flag éventuel.
-    sessionStorage.removeItem("isDemo");
     // Lance l'upload maintenant que l'identité est saisie.
     setIsLoading(true);
     const response = await parseSaveFile(selectedFile!, playerName);
