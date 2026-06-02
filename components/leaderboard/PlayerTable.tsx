@@ -5,6 +5,7 @@ import { type PlayerRow } from "@/lib/data/players";
 import { TranslationKey } from "@/lib/i18n";
 import { ClassName, CLASS_COLORS } from "@/lib/types";
 import { getStatusBadge, getBestClass, type SortKey } from "@/lib/leaderboard";
+import { normalizeName } from "@/lib/friends";
 import { usePrefs } from "@/lib/PrefsContext";
 import { formatTime, formatDistance } from "@/lib/formatters";
 
@@ -125,8 +126,13 @@ export default function PlayerTable({
           </thead>
           <tbody>
             {players.map((player, index) => {
+              // Comparaison via la clé canonique : insensible à la casse, comme
+              // les amis et le filtre de la page (évite un échec de surbrillance
+              // si la casse diffère entre le pseudo et player_name en base).
               const isCurrentPlayer =
-                player.player_name === currentPlayerName;
+                currentPlayerName != null &&
+                normalizeName(player.player_name) ===
+                  normalizeName(currentPlayerName);
               const badge = getStatusBadge(player.total_missions, t);
               // Conversions déléguées à lib/formatters → respectent les
               // préférences (km/mi, format de temps) au lieu de les ignorer.
@@ -199,7 +205,7 @@ export default function PlayerTable({
                           e.stopPropagation();
                           onToggleFriend(player.player_name);
                         }}
-                        title={friends.includes(player.player_name.toUpperCase()) ? "Retirer des amis" : "Ajouter aux amis"}
+                        title={friends.includes(normalizeName(player.player_name)) ? "Retirer des amis" : "Ajouter aux amis"}
                         className="hover:scale-125 transition-transform inline-flex items-center justify-center"
                       >
                         <Image
@@ -208,7 +214,7 @@ export default function PlayerTable({
                           width={20}
                           height={20}
                           className={`transition-opacity ${
-                            friends.includes(player.player_name.toUpperCase())
+                            friends.includes(normalizeName(player.player_name))
                               ? "opacity-100"
                               : "opacity-20 grayscale"
                           }`}

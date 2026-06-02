@@ -2,8 +2,14 @@
 import { useEffect, useState } from "react";
 import { fetchLeaderboard, type PlayerRow } from "@/lib/data/players";
 import { useTranslation } from "@/lib/i18n";
-import { getFriends, addFriend, removeFriend, isFriend } from "@/lib/friends";
-import { getDashboardSession } from "@/lib/session";
+import {
+  getFriends,
+  addFriend,
+  removeFriend,
+  isFriend,
+  normalizeName,
+} from "@/lib/friends";
+import { getCurrentIdentity } from "@/lib/session";
 import { type SortKey } from "@/lib/leaderboard";
 import Podium from "@/components/leaderboard/Podium";
 import PlayerTable from "@/components/leaderboard/PlayerTable";
@@ -22,10 +28,11 @@ export default function LeaderboardPage() {
   const [friends, setFriends] = useState<string[]>([]);
   const t = useTranslation();
 
-  // Nom du joueur connecté depuis sessionStorage
+  // Identité courante (source unique) — sert à surligner "ma" ligne.
+  // On utilise le pseudo : c'est lui qui correspond à player_name en base.
   useEffect(() => {
-    const session = getDashboardSession();
-    setCurrentPlayerName(session?.data.player?.name ?? null);
+    const id = getCurrentIdentity();
+    setCurrentPlayerName(id.displayName || null);
     // Charge la liste d'amis depuis localStorage au montage
     setFriends(getFriends());
   }, []);
@@ -64,12 +71,13 @@ export default function LeaderboardPage() {
     return sortAsc ? diff : -diff;
   });
 
-  // Filtre "amis seulement" : toi + tes amis
+  // Filtre "amis seulement" : toi + tes amis. Comparaisons via la clé canonique.
+  const meKey = currentPlayerName ? normalizeName(currentPlayerName) : null;
   const displayedPlayers = friendsOnly
     ? sortedPlayers.filter(
         (p) =>
-          p.player_name.toUpperCase() === currentPlayerName?.toUpperCase() ||
-          friends.includes(p.player_name.toUpperCase()),
+          normalizeName(p.player_name) === meKey ||
+          friends.includes(normalizeName(p.player_name)),
       )
     : sortedPlayers;
 

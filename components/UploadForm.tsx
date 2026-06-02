@@ -9,7 +9,7 @@ import { useTranslation } from "@/lib/i18n";
 import { checkPlayer } from "@/app/actions/pinActions";
 import { savePlayerStats } from "@/app/actions/savePlayerStats";
 import { buildPlayerRow } from "@/lib/buildPlayerRow";
-import { getPrefs } from "@/lib/preferences";
+import { getPrefs, setPrefs } from "@/lib/preferences";
 import { setDashboardSession } from "@/lib/session";
 import PinModal from "@/components/PinModal";
 
@@ -32,6 +32,14 @@ export default function UploadForm() {
   // Tips traduits — recalculés si la langue change
   const tips = [t("tip1"), t("tip2"), t("tip3"), t("tip4"), t("tip5")];
 
+  // Synchro Options → upload : on pré-remplit le pseudo avec la préférence
+  // persistante (réglée dans Options). Lu après hydration pour éviter un
+  // décalage serveur/client (localStorage n'existe pas côté serveur).
+  useEffect(() => {
+    const saved = getPrefs().playerName;
+    if (saved) setPlayerName(saved);
+  }, []);
+
   // Effect 1 : anime la barre de progression sur 4 secondes
   useEffect(() => {
     if (!isLoading) return;
@@ -53,6 +61,9 @@ export default function UploadForm() {
       // resultRef.current est garanti non-null ici (posé dans handlePinSuccess).
       // false : un vrai upload n'est jamais une démo.
       setDashboardSession(resultRef.current!, playerName, false);
+      // Synchro upload → Options : l'identité réellement utilisée devient la
+      // préférence persistante, pour qu'Options et l'upload restent alignés.
+      setPrefs({ playerName });
       router.push("/dashboard");
     }
   }, [apiDone, progress, router, playerName]);

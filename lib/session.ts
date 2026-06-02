@@ -13,6 +13,8 @@
 // composants, sans typage ni garde d'erreur. Ici, tout est typé et protégé.
 
 import { ApiResponse, DashboardData } from "./types";
+import { getPrefs } from "./preferences";
+import { normalizeName } from "./friends";
 
 const DASHBOARD_KEY = "dashboardData";
 const NAME_KEY = "playerName";
@@ -71,6 +73,63 @@ export function setDashboardSession(
   sessionStorage.setItem(NAME_KEY, name);
   if (isDemo) sessionStorage.setItem(DEMO_KEY, "true");
   else sessionStorage.removeItem(DEMO_KEY);
+}
+
+/**
+ * L'IDENTITÉ COURANTE — source de vérité unique du « qui suis-je ».
+ *
+ * Avant ce resolver, chaque page reconstruisait l'identité à sa façon (pseudo
+ * de session, nom du fichier de save, préférence Options…), avec des résultats
+ * divergents. Désormais tout le monde passe par ce guichet.
+ *
+ * Précédence :
+ *   1. session active (upload/démo) → `session.name` (le pseudo ENGAGÉ)
+ *   2. sinon préférence persistante  → `prefs.playerName` (réglée dans Options)
+ *   3. sinon invité                  → chaîne vide
+ *
+ * `data.player.name` (le nom inscrit dans le .sav) n'est volontairement PAS une
+ * source d'identité ici : ce n'est qu'une métadonnée des stats.
+ */
+export interface CurrentIdentity {
+  // Nom à AFFICHER (casse d'origine). "" si invité.
+  displayName: string;
+  // Clé de COMPARAISON canonique (cf. normalizeName). "" si invité.
+  key: string;
+  // D'où vient l'identité — utile pour le débogage et les gardes (ex: démo).
+  source: "session" | "prefs" | "none";
+  // true si l'identité provient d'une session de démo (à ne pas « adopter »).
+  isDemo: boolean;
+}
+
+export function getCurrentIdentity(): CurrentIdentity {
+  if (typeof window === "undefined") {
+    return { displayName: "", key: "", source: "none", isDemo: false };
+  }
+
+  // 1. Session active : le pseudo saisi à l'upload prime (= player_name en base).
+  const session = getDashboardSession();
+  if (session?.name) {
+    return {
+      displayName: session.name,
+      key: normalizeName(session.name),
+      source: "session",
+      isDemo: session.isDemo,
+    };
+  }
+
+  // 2. Pas de session : on retombe sur la préférence persistante (Options).
+  const prefName = getPrefs().playerName;
+  if (prefName) {
+    return {
+      displayName: prefName,
+      key: normalizeName(prefName),
+      source: "prefs",
+      isDemo: false,
+    };
+  }
+
+  // 3. Rien de connu : visiteur anonyme.
+  return { displayName: "", key: "", source: "none", isDemo: false };
 }
 
 /** Efface toutes les clés de session du dashboard. */
