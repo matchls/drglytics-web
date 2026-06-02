@@ -59,15 +59,15 @@ export default function UploadForm() {
 
   async function handleSubmit() {
     if (!playerName && !selectedFile) {
-      setFormError("⚠ ENTER YOUR OPERATIVE ID AND SELECT A SAVE FILE.");
+      setFormError(t("errMissingBoth"));
       return;
     }
     if (!playerName) {
-      setFormError("⚠ ENTER YOUR OPERATIVE ID.");
+      setFormError(t("errMissingId"));
       return;
     }
     if (!selectedFile) {
-      setFormError("⚠ SELECT A SAVE FILE.");
+      setFormError(t("errMissingFile"));
       return;
     }
     setFormError(null);

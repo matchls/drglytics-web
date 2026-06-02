@@ -1,10 +1,12 @@
 "use client";
 import { useState } from "react";
 import { usePrefs } from "@/lib/PrefsContext";
+import { useTranslation } from "@/lib/i18n";
 import { sendContactEmail } from "@/app/actions/sendContactEmail";
 
 export default function OptionsPage() {
   const { prefs, update } = usePrefs();
+  const t = useTranslation();
 
   // État du formulaire de contact
   const [contactPseudo, setContactPseudo] = useState(prefs.playerName ?? "");
@@ -21,7 +23,7 @@ export default function OptionsPage() {
       <div className="industrial-panel p-4 border-b-4 border-outline flex items-center gap-3">
         <span className="material-symbols-outlined text-primary">settings</span>
         <p className="font-display text-2xl text-on-surface tracking-widest">
-          OPTIONS
+          {t("optionsTitle")}
         </p>
       </div>
 
@@ -29,13 +31,13 @@ export default function OptionsPage() {
       <div className="industrial-panel p-6">
         <div className="flex flex-col gap-6">
           <p className="font-display text-lg text-on-surface tracking-widest border-b border-drg-border pb-2">
-            PROFIL & LEADERBOARD
+            {t("optProfileLeaderboard")}
           </p>
 
           {/* Changement de pseudo */}
           <div className="flex flex-col gap-2">
             <p className="font-mono text-xs text-on-surface-variant tracking-widest">
-              PSEUDO
+              {t("optPseudo")}
             </p>
             <div className="flex gap-3">
               <input
@@ -47,7 +49,7 @@ export default function OptionsPage() {
               />
             </div>
             <p className="font-mono text-xs text-on-surface-variant">
-              Modifié au prochain upload.
+              {t("optPseudoHint")}
             </p>
           </div>
 
@@ -55,11 +57,10 @@ export default function OptionsPage() {
           <div className="flex items-center justify-between">
             <div className="flex flex-col gap-1">
               <p className="font-mono text-sm text-on-surface tracking-widest">
-                APPARAÎTRE DANS LE LEADERBOARD
+                {t("optShowOnLeaderboard")}
               </p>
               <p className="font-mono text-xs text-on-surface-variant">
-                Si désactivé, vos stats ne seront plus visibles par les autres
-                joueurs.
+                {t("optShowOnLeaderboardHint")}
               </p>
             </div>
             <button
@@ -85,15 +86,15 @@ export default function OptionsPage() {
       <div className="industrial-panel p-6">
         <div className="flex flex-col gap-6">
           <p className="font-display text-lg text-on-surface tracking-widest border-b border-drg-border pb-2">
-            LANGUE
+            {t("languageLabel")}
           </p>
           <div className="flex items-center justify-between">
             <div className="flex flex-col gap-1">
               <p className="font-mono text-sm text-on-surface tracking-widest">
-                LANGUAGE
+                {t("languageLabel")}
               </p>
               <p className="font-mono text-xs text-on-surface-variant">
-                Français ou English.
+                {t("optLanguageHint")}
               </p>
             </div>
             <div className="flex gap-2">
@@ -119,17 +120,17 @@ export default function OptionsPage() {
       <div className="industrial-panel p-6">
         <div className="flex flex-col gap-6">
           <p className="font-display text-lg text-on-surface tracking-widest border-b border-drg-border pb-2">
-            UNITÉS
+            {t("unitsLabel")}
           </p>
 
           {/* Distance */}
           <div className="flex items-center justify-between">
             <div className="flex flex-col gap-1">
               <p className="font-mono text-sm text-on-surface tracking-widest">
-                DISTANCE
+                {t("distanceLabel")}
               </p>
               <p className="font-mono text-xs text-on-surface-variant">
-                Kilomètres ou miles.
+                {t("optDistanceHint")}
               </p>
             </div>
             <div className="flex gap-2">
@@ -153,10 +154,10 @@ export default function OptionsPage() {
           <div className="flex items-center justify-between">
             <div className="flex flex-col gap-1">
               <p className="font-mono text-sm text-on-surface tracking-widest">
-                FORMAT TEMPS
+                {t("timeFormatLabel")}
               </p>
               <p className="font-mono text-xs text-on-surface-variant">
-                342h 15m — ou — 14j 6h
+                {t("optTimeFormatHint")}
               </p>
             </div>
             <div className="flex gap-2">
@@ -170,7 +171,7 @@ export default function OptionsPage() {
                       : "border-drg-border text-on-surface-variant hover:border-drg-orange"
                   }`}
                 >
-                  {fmt === "hours" ? "HEURES" : "J+H"}
+                  {fmt === "hours" ? t("timeFormatHours") : t("timeFormatDhm")}
                 </button>
               ))}
             </div>
@@ -183,17 +184,17 @@ export default function OptionsPage() {
         <div className="flex flex-col gap-6">
           <div>
             <p className="font-display text-lg text-on-surface tracking-widest border-b border-drg-border pb-2">
-              CONTACTER L&apos;ADMINISTRATION
+              {t("optContactTitle")}
             </p>
             <p className="font-mono text-xs text-on-surface-variant mt-2">
-              Problème avec ton PIN, tes stats ou autre chose ? Envoie un message.
+              {t("optContactHint")}
             </p>
           </div>
 
           {/* Pseudo */}
           <div className="flex flex-col gap-2">
             <p className="font-mono text-xs text-on-surface-variant tracking-widest">
-              PSEUDO
+              {t("optPseudo")}
             </p>
             <input
               type="text"
@@ -207,14 +208,14 @@ export default function OptionsPage() {
           {/* Message */}
           <div className="flex flex-col gap-2">
             <p className="font-mono text-xs text-on-surface-variant tracking-widest">
-              MESSAGE
+              {t("optMessage")}
             </p>
             <textarea
               value={contactMessage}
               onChange={(e) => setContactMessage(e.target.value)}
               rows={4}
               maxLength={2000}
-              placeholder="Décris ton problème..."
+              placeholder={t("optMessagePlaceholder")}
               className="bg-surface-container-highest border border-drg-border text-on-surface font-mono text-sm p-2 focus:outline-none focus:border-drg-orange resize-none placeholder:text-on-surface-variant"
             />
           </div>
@@ -242,7 +243,7 @@ export default function OptionsPage() {
           {/* Confirmation d'envoi */}
           {contactResult === "success" && (
             <p className="font-mono text-xs text-primary tracking-widest">
-              ✓ MESSAGE ENVOYÉ — L&apos;ADMINISTRATION A ÉTÉ NOTIFIÉE.
+              {t("optContactSuccess")}
             </p>
           )}
 
@@ -268,7 +269,7 @@ export default function OptionsPage() {
             }}
             className="self-start bg-primary text-on-primary font-display tracking-widest px-6 py-2 hover:bg-primary-fixed transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            {contactLoading ? "ENVOI EN COURS..." : "ENVOYER"}
+            {contactLoading ? t("optContactSending") : t("optContactSend")}
           </button>
         </div>
       </div>
