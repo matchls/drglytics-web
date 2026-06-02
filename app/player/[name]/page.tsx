@@ -13,9 +13,14 @@ export default function PlayerProfilePage() {
   const playerName = decodeURIComponent(params.name as string);
 
   // useAsync remplace les 3 useState + 1 useEffect qui chargeaient le profil.
-  // Si getPlayerProfile retourne null (joueur introuvable), data reste null.
+  // On wrappe le fetcher : si getPlayerProfile retourne null (joueur introuvable),
+  // on lève une erreur explicite pour que useAsync la capture dans `error`.
   const { data, loading, error } = useAsync(
-    () => getPlayerProfile(playerName),
+    async () => {
+      const profile = await getPlayerProfile(playerName);
+      if (!profile) throw new Error("Miner not found in Company records.");
+      return profile;
+    },
     [playerName],
   );
   const [selectedStatKey, setSelectedStatKey] = useState<string | null>(null);
