@@ -1,6 +1,6 @@
 "use client";
-import { useEffect, useState } from "react";
 import { fetchHonorRoll } from "@/lib/data/players";
+import { useAsync } from "@/lib/hooks/useAsync";
 
 interface HonorEntry {
   label: string;
@@ -10,34 +10,18 @@ interface HonorEntry {
 }
 
 export default function AbyssBarHonorRoll() {
-  const [honors, setHonors] = useState<HonorEntry[]>([]);
+  // useAsync remplace le useState + useEffect qui chargeaient le honor roll.
+  const { data: roll } = useAsync(() => fetchHonorRoll());
 
-  useEffect(() => {
-    async function loadHonors() {
-      const roll = await fetchHonorRoll();
-      setHonors([
-        {
-          label: "PLUS GROS TIPSEUR",
-          playerName: roll.tips.playerName,
-          value: roll.tips.value,
-          unit: "crédits",
-        },
-        {
-          label: "PLUS GRAND BUVEUR",
-          playerName: roll.beers.playerName,
-          value: roll.beers.value,
-          unit: "bières",
-        },
-        {
-          label: "PLUS DE TOURNÉES",
-          playerName: roll.rounds.playerName,
-          value: roll.rounds.value,
-          unit: "tournées",
-        },
-      ]);
-    }
-    loadHonors();
-  }, []);
+  // Transformation HonorRoll → liste de HonorEntry pour l'affichage.
+  // Calculée à chaque rendu (trivial : 3 entrées, pas de mémorisation nécessaire).
+  const honors: HonorEntry[] = roll
+    ? [
+        { label: "PLUS GROS TIPSEUR", playerName: roll.tips.playerName, value: roll.tips.value, unit: "crédits" },
+        { label: "PLUS GRAND BUVEUR", playerName: roll.beers.playerName, value: roll.beers.value, unit: "bières" },
+        { label: "PLUS DE TOURNÉES", playerName: roll.rounds.playerName, value: roll.rounds.value, unit: "tournées" },
+      ]
+    : [];
 
   return (
     <div className="industrial-panel p-6 flex flex-col gap-4">
