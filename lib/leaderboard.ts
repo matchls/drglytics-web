@@ -8,6 +8,7 @@
 import { TranslationKey } from "@/lib/i18n";
 import { ClassName } from "@/lib/types";
 import { type PlayerRow } from "@/lib/data/players";
+import { LEADERBOARD_STATUS_THRESHOLDS } from "@/lib/ranks";
 
 // Les colonnes sur lesquelles on peut trier
 export type SortKey =
@@ -23,17 +24,17 @@ export function getStatusBadge(
   missions: number,
   t: (key: TranslationKey) => string,
 ): { label: string; className: string } {
-  if (missions >= 2000)
+  if (missions >= LEADERBOARD_STATUS_THRESHOLDS.legendary)
     return {
       label: t("lbLegendary"),
       className: "bg-primary text-on-primary px-2 py-0.5",
     };
-  if (missions >= 500)
+  if (missions >= LEADERBOARD_STATUS_THRESHOLDS.productive)
     return {
       label: t("lbProductive"),
       className: "border border-tertiary text-tertiary px-2 py-0.5",
     };
-  if (missions >= 100)
+  if (missions >= LEADERBOARD_STATUS_THRESHOLDS.adequate)
     return {
       label: t("lbAdequate"),
       className:

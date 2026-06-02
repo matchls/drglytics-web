@@ -1,4 +1,5 @@
 import { DashboardData } from "@/lib/types";
+import { ABYSS_BADGE_THRESHOLDS } from "@/lib/ranks";
 
 interface Badge {
   id: string;
@@ -24,7 +25,9 @@ export default function AbyssBarBadges({ data }: Props) {
     (data.hero_stats.MS_TimePlayed?.total ?? 0) / 3600,
   );
   const forgedCount = data.overclocks.forged_count;
-  const allClassesAt50 = data.classes.every((c) => c.missions_completed >= 50);
+  const allClassesAt50 = data.classes.every(
+    (c) => c.missions_completed >= ABYSS_BADGE_THRESHOLDS.jackOfAllTrades,
+  );
 
   // TODO : définir les badges ici
   const badges: Badge[] = [
@@ -32,50 +35,50 @@ export default function AbyssBarBadges({ data }: Props) {
       id: "rock-and-stone",
       label: "ROCK AND STONE",
       description: "10 missions complétées — bienvenue dans les rangs.",
-      unlocked: totalMissions >= 10,
+      unlocked: totalMissions >= ABYSS_BADGE_THRESHOLDS.rockAndStone,
     },
     {
       id: "veteran",
       label: "DEEP VETERAN",
       description: "500 missions — Management a noté vos services.",
-      unlocked: totalMissions >= 500,
+      unlocked: totalMissions >= ABYSS_BADGE_THRESHOLDS.deepVeteran,
     },
     {
       id: "bug-zapper",
       label: "BUG ZAPPER",
       description: "100 000 ennemis éliminés — efficace.",
-      unlocked: totalKills >= 100000,
+      unlocked: totalKills >= ABYSS_BADGE_THRESHOLDS.bugZapper,
     },
     {
       id: "karls-chosen",
       label: "KARL'S CHOSEN",
       description: "1 000 000 éliminations — Karl vous salue.",
-      unlocked: totalKills >= 1000000,
+      unlocked: totalKills >= ABYSS_BADGE_THRESHOLDS.karlsChosen,
     },
     {
       id: "underground",
       label: "UNDERGROUND",
       description: "100 heures sous Hoxxes IV.",
-      unlocked: totalHours >= 100,
+      unlocked: totalHours >= ABYSS_BADGE_THRESHOLDS.underground,
     },
     {
       id: "legend",
       label: "LEGEND OF THE DEEP",
       description: "1 000 heures. Vous n'avez pas de vie en surface.",
-      unlocked: totalHours >= 1000,
+      unlocked: totalHours >= ABYSS_BADGE_THRESHOLDS.legend,
     },
     {
       id: "gear-head",
       label: "GEAR HEAD",
       description: "10 overclocks forgés — l'armurerie vous connaît.",
-      unlocked: forgedCount >= 10,
+      unlocked: forgedCount >= ABYSS_BADGE_THRESHOLDS.gearHead,
     },
     {
       id: "full-arsenal",
       label: "FULL ARSENAL",
       description:
         "50 overclocks forgés — vous avez investi dans votre survie.",
-      unlocked: forgedCount >= 50,
+      unlocked: forgedCount >= ABYSS_BADGE_THRESHOLDS.fullArsenal,
     },
     {
       id: "jack-of-all-trades",
