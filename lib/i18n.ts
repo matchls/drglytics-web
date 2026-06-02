@@ -25,6 +25,10 @@ const translations = {
       "⚠ AUTHORIZED PERSONNEL ONLY — UNAUTHORIZED ACCESS WILL BE REPORTED TO MANAGEMENT",
     submitBtn: "SUBMIT FOR ANALYSIS",
     tryDemo: "TRY DEMO",
+    // Erreurs de validation du formulaire d'upload
+    errMissingBoth: "⚠ ENTER YOUR OPERATIVE ID AND SELECT A SAVE FILE.",
+    errMissingId: "⚠ ENTER YOUR OPERATIVE ID.",
+    errMissingFile: "⚠ SELECT A SAVE FILE.",
 
     // --- MissionStats ---
     employeeReport: "EMPLOYEE PERFORMANCE REPORT",
@@ -71,6 +75,25 @@ const translations = {
     allClasses: "ALL",
     downs: "DOWNS",
     minerals: "MINERALS",
+    // Page Options (titres, hints, formulaire de contact)
+    optionsTitle: "OPTIONS",
+    optProfileLeaderboard: "PROFILE & LEADERBOARD",
+    optPseudo: "USERNAME",
+    optPseudoHint: "Applied on next upload.",
+    optShowOnLeaderboard: "APPEAR ON LEADERBOARD",
+    optShowOnLeaderboardHint:
+      "If disabled, your stats will no longer be visible to other players.",
+    optLanguageHint: "Français or English.",
+    optDistanceHint: "Kilometers or miles.",
+    optTimeFormatHint: "342h 15m — or — 14d 6h",
+    optContactTitle: "CONTACT ADMINISTRATION",
+    optContactHint:
+      "Problem with your PIN, your stats or something else? Send a message.",
+    optMessage: "MESSAGE",
+    optMessagePlaceholder: "Describe your problem...",
+    optContactSuccess: "✓ MESSAGE SENT — ADMINISTRATION HAS BEEN NOTIFIED.",
+    optContactSending: "SENDING...",
+    optContactSend: "SEND",
 
     // --- Leaderboard ---
     lbRank: "RANK",
@@ -126,6 +149,11 @@ const translations = {
       "⚠ PERSONNEL AUTORISÉ UNIQUEMENT — TOUT ACCÈS NON AUTORISÉ SERA SIGNALÉ À LA DIRECTION",
     submitBtn: "ENVOYER AU DÉPARTEMENT D’ANALYSE",
     tryDemo: "ESSAYER LA DÉMO",
+    // Erreurs de validation du formulaire d'upload
+    errMissingBoth:
+      "⚠ ENTREZ VOTRE IDENTIFIANT D’OPÉRATEUR ET SÉLECTIONNEZ UN FICHIER DE SAUVEGARDE.",
+    errMissingId: "⚠ ENTREZ VOTRE IDENTIFIANT D’OPÉRATEUR.",
+    errMissingFile: "⚠ SÉLECTIONNEZ UN FICHIER DE SAUVEGARDE.",
 
     // --- MissionStats ---
     employeeReport: "RAPPORT DE PERFORMANCE DE L’EMPLOYÉ",
@@ -173,6 +201,25 @@ const translations = {
     allClasses: "TOUTES",
     downs: "MORTS",
     minerals: "MINERAIS",
+    // Page Options (titres, hints, formulaire de contact)
+    optionsTitle: "OPTIONS",
+    optProfileLeaderboard: "PROFIL & LEADERBOARD",
+    optPseudo: "PSEUDO",
+    optPseudoHint: "Modifié au prochain upload.",
+    optShowOnLeaderboard: "APPARAÎTRE DANS LE LEADERBOARD",
+    optShowOnLeaderboardHint:
+      "Si désactivé, vos stats ne seront plus visibles par les autres joueurs.",
+    optLanguageHint: "Français ou English.",
+    optDistanceHint: "Kilomètres ou miles.",
+    optTimeFormatHint: "342h 15m — ou — 14j 6h",
+    optContactTitle: "CONTACTER L’ADMINISTRATION",
+    optContactHint:
+      "Problème avec ton PIN, tes stats ou autre chose ? Envoie un message.",
+    optMessage: "MESSAGE",
+    optMessagePlaceholder: "Décris ton problème...",
+    optContactSuccess: "✓ MESSAGE ENVOYÉ — L’ADMINISTRATION A ÉTÉ NOTIFIÉE.",
+    optContactSending: "ENVOI EN COURS...",
+    optContactSend: "ENVOYER",
 
     // --- Leaderboard ---
     lbRank: "RANG",
