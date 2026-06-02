@@ -1,8 +1,8 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useParams } from "next/navigation";
 import { getPlayerProfile } from "@/app/actions/getPlayerProfile";
-import { DashboardData } from "@/lib/types";
+import { useAsync } from "@/lib/hooks/useAsync";
 import HeroStats from "@/components/HeroStats";
 import ClassCard from "@/components/ClassCard";
 import MissionStats from "@/components/MissionStats";
@@ -12,20 +12,13 @@ export default function PlayerProfilePage() {
   const params = useParams();
   const playerName = decodeURIComponent(params.name as string);
 
-  const [data, setData] = useState<DashboardData | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  // useAsync remplace les 3 useState + 1 useEffect qui chargeaient le profil.
+  // Si getPlayerProfile retourne null (joueur introuvable), data reste null.
+  const { data, loading, error } = useAsync(
+    () => getPlayerProfile(playerName),
+    [playerName],
+  );
   const [selectedStatKey, setSelectedStatKey] = useState<string | null>(null);
-
-  useEffect(() => {
-    async function fetchPlayer() {
-      const profile = await getPlayerProfile(playerName);
-      if (!profile) setError("Miner not found in Company records.");
-      else setData(profile);
-      setLoading(false);
-    }
-    fetchPlayer();
-  }, [playerName]);
 
   if (loading) {
     return (
@@ -41,7 +34,7 @@ export default function PlayerProfilePage() {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
         <p className="font-mono text-error tracking-widest">
-          ⚠ {error ?? "UNKNOWN ERROR"}
+          ⚠ {error ?? "Miner not found in Company records."}
         </p>
       </div>
     );

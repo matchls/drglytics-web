@@ -1,6 +1,7 @@
 "use client";
-import { useEffect, useState } from "react";
-import { fetchGuestbook, type GuestbookEntry } from "@/lib/data/guestbook";
+import { useState } from "react";
+import { fetchGuestbook } from "@/lib/data/guestbook";
+import { useAsync } from "@/lib/hooks/useAsync";
 import { saveGuestbookMessage } from "@/app/actions/saveGuestbookMessage";
 import { checkPlayer } from "@/app/actions/pinActions";
 import PinModal from "@/components/PinModal";
@@ -10,7 +11,11 @@ interface Props {
 }
 
 export default function AbyssBarGuestbook({ playerName }: Props) {
-  const [entries, setEntries] = useState<GuestbookEntry[]>([]);
+  // useAsync remplace le useState + useEffect + loadEntries qui chargeaient le guestbook.
+  // reload() est utilisé plus bas après soumission d'un message pour rafraîchir la liste.
+  const { data: entriesData, reload: reloadEntries } = useAsync(() => fetchGuestbook());
+  const entries = entriesData ?? [];
+
   const [draft, setDraft] = useState("");
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -21,16 +26,6 @@ export default function AbyssBarGuestbook({ playerName }: Props) {
 
   // Nom effectif : celui de la session (prop) en priorité, sinon la saisie invité.
   const activeName = (playerName || guestName).trim();
-
-  // Lecture des messages — reste en lecture seule via la clé anon (autorisée par les RLS).
-  async function loadEntries() {
-    const data = await fetchGuestbook();
-    if (data) setEntries(data);
-  }
-
-  useEffect(() => {
-    loadEntries();
-  }, []);
 
   // Soumission : on regarde si le pseudo est un joueur protégé par un PIN.
   // - Joueur enregistré → on demande le PIN via le modal.
@@ -67,7 +62,7 @@ export default function AbyssBarGuestbook({ playerName }: Props) {
       return;
     }
     setDraft("");
-    await loadEntries();
+    await reloadEntries();
   }
 
   // Appelé par le modal après saisie + pré-vérification du PIN (chemin joueur).

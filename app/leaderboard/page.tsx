@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
-import { fetchLeaderboard, type PlayerRow } from "@/lib/data/players";
+import { fetchLeaderboard } from "@/lib/data/players";
+import { useAsync } from "@/lib/hooks/useAsync";
 import { useTranslation } from "@/lib/i18n";
 import {
   getFriends,
@@ -17,7 +18,10 @@ import CompanyQuota from "@/components/leaderboard/CompanyQuota";
 import BountyTargets from "@/components/leaderboard/BountyTargets";
 
 export default function LeaderboardPage() {
-  const [players, setPlayers] = useState<PlayerRow[]>([]);
+  // useAsync remplace le useState + useEffect qui chargeaient le leaderboard.
+  const { data: playersData } = useAsync(() => fetchLeaderboard());
+  const players = playersData ?? [];
+
   const [currentPlayerName, setCurrentPlayerName] = useState<string | null>(
     null,
   );
@@ -35,14 +39,6 @@ export default function LeaderboardPage() {
     setCurrentPlayerName(id.displayName || null);
     // Charge la liste d'amis depuis localStorage au montage
     setFriends(getFriends());
-  }, []);
-
-  // Chargement du leaderboard via la couche d'accès aux données (trié par missions).
-  useEffect(() => {
-    async function loadPlayers() {
-      setPlayers(await fetchLeaderboard());
-    }
-    loadPlayers();
   }, []);
 
   // Fonction appelée quand on clique sur un en-tête de colonne
