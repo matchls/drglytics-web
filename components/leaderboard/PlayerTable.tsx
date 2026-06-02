@@ -5,6 +5,8 @@ import { type PlayerRow } from "@/lib/data/players";
 import { TranslationKey } from "@/lib/i18n";
 import { ClassName, CLASS_COLORS } from "@/lib/types";
 import { getStatusBadge, getBestClass, type SortKey } from "@/lib/leaderboard";
+import { usePrefs } from "@/lib/PrefsContext";
+import { formatTime, formatDistance } from "@/lib/formatters";
 
 interface PlayerTableProps {
   // Joueurs déjà triés ET filtrés (filtre "amis seulement") par la page.
@@ -34,6 +36,9 @@ export default function PlayerTable({
   onFriendsOnlyChange,
 }: PlayerTableProps) {
   const router = useRouter();
+  // Préférences utilisateur (unité de distance km/mi, format de temps h / j+h).
+  // Le leaderboard doit les respecter au même titre que ClassCard.
+  const { prefs } = usePrefs();
 
   return (
     <div className="industrial-panel">
@@ -94,7 +99,9 @@ export default function PlayerTable({
                 className="p-4 text-right cursor-pointer select-none hover:text-on-surface"
                 onClick={() => onSort("total_time_s")}
               >
-                {t("timeFormatHours")}{" "}
+                {prefs.timeFormat === "hours"
+                  ? t("timeFormatHours")
+                  : t("timeFormatDhm")}{" "}
                 {sortKey === "total_time_s" ? (sortAsc ? "▲" : "▼") : ""}
               </th>
               <th
@@ -121,10 +128,10 @@ export default function PlayerTable({
               const isCurrentPlayer =
                 player.player_name === currentPlayerName;
               const badge = getStatusBadge(player.total_missions, t);
-              // Convertit les secondes en heures (arrondi à 1 décimale)
-              const hours = (player.total_time_s / 3600).toFixed(1);
-              // Convertit les centimètres en kilomètres (arrondi à 1 décimale)
-              const km = (player.total_distance_cm / 100000).toFixed(1);
+              // Conversions déléguées à lib/formatters → respectent les
+              // préférences (km/mi, format de temps) au lieu de les ignorer.
+              const time = formatTime(player.total_time_s, prefs);
+              const distance = formatDistance(player.total_distance_cm, prefs);
               return (
                 <tr
                   key={player.player_name}
@@ -154,10 +161,10 @@ export default function PlayerTable({
                   <td className="p-4 font-mono text-sm text-right">
                     {player.total_kills.toLocaleString()}
                   </td>
+                  <td className="p-4 font-mono text-sm text-right">{time}</td>
                   <td className="p-4 font-mono text-sm text-right">
-                    {hours}h
+                    {distance}
                   </td>
-                  <td className="p-4 font-mono text-sm text-right">{km}km</td>
                   <td className="p-4 font-mono text-sm text-right">
                     {player.total_downs.toLocaleString()}
                   </td>

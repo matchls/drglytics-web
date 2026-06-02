@@ -3,6 +3,7 @@ import { usePrefs } from "@/lib/PrefsContext";
 import { formatDistance, formatTime } from "@/lib/formatters";
 import { useTranslation, TranslationKey } from "@/lib/i18n";
 import { ClassSummary, CLASS_COLORS, CLASS_ICONS } from "@/lib/types";
+import { CLASS_RANK_THRESHOLDS } from "@/lib/ranks";
 import Image from "next/image";
 
 interface Props {
@@ -29,17 +30,17 @@ function getRankKey(missions: number): {
   key: TranslationKey;
   className: string;
 } {
-  if (missions >= 500)
+  if (missions >= CLASS_RANK_THRESHOLDS.veteran)
     return {
       key: "rankVeteran",
       className: "text-primary border border-primary",
     };
-  if (missions >= 200)
+  if (missions >= CLASS_RANK_THRESHOLDS.experienced)
     return {
       key: "rankExperienced",
       className: "text-tertiary border border-tertiary",
     };
-  if (missions >= 50)
+  if (missions >= CLASS_RANK_THRESHOLDS.rookie)
     return {
       key: "rankRookie",
       className: "text-on-surface-variant border border-outline-variant",
