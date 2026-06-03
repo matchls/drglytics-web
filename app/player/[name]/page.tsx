@@ -1,12 +1,8 @@
 "use client";
-import { useState } from "react";
 import { useParams } from "next/navigation";
 import { getPlayerProfile } from "@/app/actions/getPlayerProfile";
 import { useAsync } from "@/lib/hooks/useAsync";
-import HeroStats from "@/components/HeroStats";
-import ClassCard from "@/components/ClassCard";
-import MissionStats from "@/components/MissionStats";
-import OverclockList from "@/components/OverclockList";
+import PlayerStatsLayout from "@/components/PlayerStatsLayout";
 import { useTranslation } from "@/lib/i18n";
 
 export default function PlayerProfilePage() {
@@ -14,9 +10,6 @@ export default function PlayerProfilePage() {
   const params = useParams();
   const playerName = decodeURIComponent(params.name as string);
 
-  // useAsync remplace les 3 useState + 1 useEffect qui chargeaient le profil.
-  // On wrappe le fetcher : si getPlayerProfile retourne null (joueur introuvable),
-  // on lève une erreur explicite pour que useAsync la capture dans `error`.
   const { data, loading, error } = useAsync(
     async () => {
       const profile = await getPlayerProfile(playerName);
@@ -25,7 +18,6 @@ export default function PlayerProfilePage() {
     },
     [playerName],
   );
-  const [selectedStatKey, setSelectedStatKey] = useState<string | null>(null);
 
   if (loading) {
     return (
@@ -48,36 +40,18 @@ export default function PlayerProfilePage() {
   }
 
   return (
-    <div className="min-h-screen bg-background p-6 flex flex-col gap-6">
-      {/* Header — dossier du personnel */}
-      <div className="industrial-panel p-6 flex flex-col gap-1">
-        <p className="font-mono text-xs text-on-surface-variant tracking-widest">
-          {t("playerFileHeader")}
-        </p>
-        <p className="font-display text-4xl text-primary tracking-widest">
-          {data.player.name.toUpperCase()}
-        </p>
-      </div>
-
-      {/* Stats globales */}
-      <HeroStats
-        heroStats={data.hero_stats}
-        selectedStatKey={selectedStatKey}
-        onStatClick={setSelectedStatKey}
-      />
-
-      {/* Cards par classe */}
-      <div className="grid grid-cols-2 gap-4">
-        {data.classes.map((classData) => (
-          <ClassCard key={classData.name} classData={classData} />
-        ))}
-      </div>
-
-      {/* Stats de mission */}
-      <MissionStats missionStats={data.mission_stats} />
-
-      {/* Overclocks */}
-      <OverclockList overclocks={data.overclocks} />
-    </div>
+    <PlayerStatsLayout
+      data={data}
+      header={
+        <div className="industrial-panel p-6 flex flex-col gap-1">
+          <p className="font-mono text-xs text-on-surface-variant tracking-widest">
+            {t("playerFileHeader")}
+          </p>
+          <p className="font-display text-4xl text-primary tracking-widest">
+            {data.player.name.toUpperCase()}
+          </p>
+        </div>
+      }
+    />
   );
 }
