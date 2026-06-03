@@ -12,25 +12,10 @@ export default function SideNav() {
 
   // navItems est défini ici car il utilise t() pour les labels traduits
   const navItems = [
-    { label: t("navTerminal"), href: "/", icon: "terminal", active: true },
-    {
-      label: t("navMissionControl"),
-      href: "/dashboard",
-      icon: "radar",
-      active: true,
-    },
-    {
-      label: t("navAbyssBar"),
-      href: "/abyss-bar",
-      icon: "local_bar",
-      active: true,
-    },
-    {
-      label: t("navMemorial"),
-      href: "/leaderboard",
-      icon: "military_tech",
-      active: true,
-    },
+    { label: t("navTerminal"), href: "/", icon: "terminal" },
+    { label: t("navMissionControl"), href: "/dashboard", icon: "radar" },
+    { label: t("navAbyssBar"), href: "/abyss-bar", icon: "local_bar" },
+    { label: t("navMemorial"), href: "/leaderboard", icon: "military_tech" },
   ];
 
   useEffect(() => {
@@ -59,15 +44,13 @@ export default function SideNav() {
           return (
             <Link
               key={item.href}
-              href={item.active ? item.href : "#"}
-              onClick={!item.active ? (e) => e.preventDefault() : undefined}
+              href={item.href}
               className={`flex items-center gap-3 px-6 py-3 transition-colors
                 ${
                   isActive
                     ? "bg-primary-container border-l-4 border-primary text-primary"
                     : "border-l-4 border-transparent text-on-surface hover:bg-surface-container-high"
                 }
-                ${!item.active ? "opacity-40 cursor-not-allowed" : ""}
               `}
             >
               <span className="material-symbols-outlined text-xl">
@@ -80,15 +63,6 @@ export default function SideNav() {
           );
         })}
       </nav>
-
-      {/*   <div className="p-4 border-t-4 border-outline">
-        <Link
-          href="/"
-          className="block w-full bg-primary text-on-primary text-center font-display text-lg py-2 tracking-widest hover:bg-primary-fixed transition-colors"
-        >
-          {t("navStartMission")}
-        </Link>
-      </div> */}
     </aside>
   );
 }
