@@ -46,9 +46,9 @@ export default function MissionStats({ missionStats }: Props) {
     .filter((s) => !STATS_HIDDEN.has(s.name))
     // Pousser certaines stats en fin de liste
     .sort((a, b) => {
-      const wa = STATS_SORT_LAST.has(a.name) ? 1 : 0;
-      const wb = STATS_SORT_LAST.has(b.name) ? 1 : 0;
-      return wa - wb;
+      const weightA = STATS_SORT_LAST.has(a.name) ? 1 : 0;
+      const weightB = STATS_SORT_LAST.has(b.name) ? 1 : 0;
+      return weightA - weightB;
     });
 
   function formatValue(value: number, unit?: string): string {
