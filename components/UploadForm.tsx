@@ -1,158 +1,39 @@
 "use client";
 
-import { parseSaveFile } from "@/lib/api";
-import { ApiResponse } from "@/lib/types";
-import { useEffect, useRef, useState } from "react";
-import { useRouter } from "next/navigation";
-import { getPlayerProfile } from "@/app/actions/getPlayerProfile";
+import { useEffect, useState } from "react";
 import { useTranslation } from "@/lib/i18n";
-import { checkPlayer } from "@/app/actions/pinActions";
-import { savePlayerStats } from "@/app/actions/savePlayerStats";
-import { buildPlayerRow } from "@/lib/buildPlayerRow";
-import { getPrefs, setPrefs } from "@/lib/preferences";
-import { setDashboardSession } from "@/lib/session";
+import { getPrefs } from "@/lib/preferences";
+import { useUpload } from "@/lib/hooks/useUpload";
 import PinModal from "@/components/PinModal";
 
 export default function UploadForm() {
   const t = useTranslation();
   const [playerName, setPlayerName] = useState("");
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
-  const resultRef = useRef<ApiResponse | null>(null);
-  const [isLoading, setIsLoading] = useState(false);
-  const [progress, setProgress] = useState(0);
-  const [currentTip, setCurrentTip] = useState(0);
-  // apiDone passe à true quand le backend a répondu
-  const [apiDone, setApiDone] = useState(false);
   const [showHelp, setShowHelp] = useState(false);
   const [formError, setFormError] = useState<string | null>(null);
-  // PIN — modal affiché après validation du formulaire, avant l'upload
   const [pinModalMode, setPinModalMode] = useState<"create" | "verify" | null>(null);
-  const router = useRouter();
 
-  // Tips traduits — recalculés si la langue change
-  const tips = [t("tip1"), t("tip2"), t("tip3"), t("tip4"), t("tip5")];
+  const {
+    isLoading,
+    progress,
+    currentTip,
+    handleSubmit,
+    handlePinSuccess,
+    handleDemo,
+  } = useUpload({ playerName, selectedFile, setFormError, setPinModalMode });
 
-  // Synchro Options → upload : on pré-remplit le pseudo avec la préférence
-  // persistante (réglée dans Options). Lu après hydration pour éviter un
-  // décalage serveur/client (localStorage n'existe pas côté serveur).
+  // Synchro Options → upload : pré-remplit le pseudo avec la préférence persistante
   useEffect(() => {
     const saved = getPrefs().playerName;
     if (saved) setPlayerName(saved);
   }, []);
 
-  // Effect 1 : anime la barre de progression sur 4 secondes
-  useEffect(() => {
-    if (!isLoading) return;
-    const interval = setInterval(() => {
-      setProgress((prev) => {
-        if (prev >= 100) {
-          clearInterval(interval);
-          return 100;
-        }
-        return prev + 1;
-      });
-    }, 40);
-    return () => clearInterval(interval);
-  }, [isLoading]);
-
-  // Effect 2 : quand l'API a répondu, force la barre à 100 % puis redirige.
-  // Découple la navigation de la vitesse d'animation : même si quelqu'un
-  // modifie les paliers ou la cadence de la barre, la redirection reste
-  // garantie dès que le backend a répondu.
-  useEffect(() => {
-    if (!apiDone) return;
-    if (progress < 100) {
-      setProgress(100);
-      return;
-    }
-    // resultRef.current est garanti non-null ici (posé dans handlePinSuccess).
-    // false : un vrai upload n'est jamais une démo.
-    setDashboardSession(resultRef.current!, playerName, false);
-    // Synchro upload → Options : l'identité réellement utilisée devient la
-    // préférence persistante, pour qu'Options et l'upload restent alignés.
-    setPrefs({ playerName });
-    router.push("/dashboard");
-    // progress est volontaire ici : le snap setProgress(100) re-déclenche cet effect pour naviguer.
-  }, [apiDone, progress, router, playerName]);
-
-  async function handleSubmit() {
-    if (!playerName && !selectedFile) {
-      setFormError(t("errMissingBoth"));
-      return;
-    }
-    if (!playerName) {
-      setFormError(t("errMissingId"));
-      return;
-    }
-    if (!selectedFile) {
-      setFormError(t("errMissingFile"));
-      return;
-    }
-    setFormError(null);
-
-    // Vérifie si le joueur existe et s'il a un PIN avant d'uploader
-    const { exists, hasPIN } = await checkPlayer(playerName);
-    if (!exists || !hasPIN) {
-      // Nouveau joueur ou joueur sans PIN → création du PIN
-      setPinModalMode("create");
-    } else {
-      // Joueur existant avec PIN → vérification
-      setPinModalMode("verify");
-    }
-  }
-
-  // Appelée par PinModal après succès — reçoit le PIN EN CLAIR (jamais persisté).
-  async function handlePinSuccess(pin: string) {
-    setPinModalMode(null);
-    // Lance l'upload maintenant que l'identité est saisie.
-    setIsLoading(true);
-    const response = await parseSaveFile(selectedFile!, playerName);
-    resultRef.current = response;
-
-    // Écriture en base : VÉRIFIÉE côté serveur (le PIN y est recontrôlé), et
-    // uniquement si l'utilisateur accepte d'apparaître au leaderboard.
-    // Le PIN reste en mémoire le temps de l'appel, il n'est jamais stocké.
-    if (response.ok && response.data && getPrefs().showOnLeaderboard) {
-      const result = await savePlayerStats(
-        playerName,
-        pin,
-        buildPlayerRow(response.data),
-      );
-      if (!result.ok) console.error("savePlayerStats:", result.error);
-    }
-
-    setApiDone(true);
-  }
-
-  async function handleDemo() {
-    const demoPlayer = process.env.NEXT_PUBLIC_DEMO_PLAYER ?? "poussif";
-    // Lecture côté serveur (#31) : raw_data n'est plus exposé à la clé anon.
-    // getPlayerProfile fait la recherche insensible à la casse via service_role.
-    const data = await getPlayerProfile(demoPlayer);
-
-    if (!data) {
-      alert(t("gbDemoUnavailable"));
-      return;
-    }
-
-    // true : ces données viennent de la démo, pas d'un vrai upload.
-    setDashboardSession({ ok: true, data }, demoPlayer, true);
-    router.push("/dashboard");
-  }
-
-  useEffect(() => {
-    if (!isLoading) return;
-    const interval = setInterval(() => {
-      setCurrentTip((prev) => (prev + 1) % tips.length);
-    }, 1500);
-    return () => clearInterval(interval);
-  }, [isLoading, tips.length]);
-
   if (isLoading) {
     return (
       <div className="min-h-screen bg-background industrial-grid flex flex-col justify-center items-center gap-6">
         <p className="font-display text-2xl text-primary tracking-widest">
-          {tips[currentTip]}
+          {currentTip}
         </p>
         <div className="w-full max-w-md border-4 border-outline p-1 bg-surface-container pressed-metal">
           <div className="h-6 bg-surface-dim overflow-hidden relative">
