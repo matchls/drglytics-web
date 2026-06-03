@@ -6,7 +6,10 @@ import { useTranslation } from "@/lib/i18n";
 interface Props {
   mode: "create" | "verify";
   playerName: string;
+  // onSuccess reçoit le PIN EN CLAIR. Le hachage (création) et la vérification
+  // autoritaire se font côté serveur dans savePlayerStats — jamais ici.
   onSuccess: (pin: string) => void;
+  // onCancel : ferme le modal sans rien valider (clic sur ✕ ou sur le fond).
   onCancel: () => void;
 }
 
@@ -36,6 +39,8 @@ export default function PinModal({ mode, playerName, onSuccess, onCancel }: Prop
 
     if (mode === "verify") {
       setLoading(true);
+      // Pré-vérification pour un retour immédiat à l'utilisateur (UX).
+      // La vérification qui FAIT FOI a lieu côté serveur dans savePlayerStats.
       const { valid } = await verifyPIN(playerName, pin);
       if (!valid) {
         setError(t("pinErrWrong"));
