@@ -9,6 +9,8 @@ import { normalizeName } from "@/lib/friends";
 import { usePrefs } from "@/lib/PrefsContext";
 import { formatTime, formatDistance } from "@/lib/formatters";
 
+const TABLE_TITLE = "COMPANY SPREADSHEET V.2.04";
+
 interface PlayerTableProps {
   // Joueurs déjà triés ET filtrés (filtre "amis seulement") par la page.
   players: PlayerRow[];
@@ -46,7 +48,7 @@ export default function PlayerTable({
       <div className="p-4 border-b-4 border-outline flex items-center gap-3">
         <span className="material-symbols-outlined text-primary">list</span>
         <p className="font-display text-xl text-on-surface tracking-widest flex-1">
-          COMPANY SPREADSHEET V.2.04
+          {TABLE_TITLE}
         </p>
         {/* Toggle Tous / Amis */}
         <div className="flex gap-1">
@@ -126,16 +128,13 @@ export default function PlayerTable({
           </thead>
           <tbody>
             {players.map((player, index) => {
-              // Comparaison via la clé canonique : insensible à la casse, comme
-              // les amis et le filtre de la page (évite un échec de surbrillance
-              // si la casse diffère entre le pseudo et player_name en base).
+              const normalizedName = normalizeName(player.player_name);
               const isCurrentPlayer =
                 currentPlayerName != null &&
-                normalizeName(player.player_name) ===
-                  normalizeName(currentPlayerName);
+                normalizedName === normalizeName(currentPlayerName);
+              const isFriend = friends.includes(normalizedName);
               const badge = getStatusBadge(player.total_missions, t);
-              // Conversions déléguées à lib/formatters → respectent les
-              // préférences (km/mi, format de temps) au lieu de les ignorer.
+              const bestClass: ClassName = getBestClass(player);
               const time = formatTime(player.total_time_s, prefs);
               const distance = formatDistance(player.total_distance_cm, prefs);
               return (
@@ -182,20 +181,15 @@ export default function PlayerTable({
                     </span>
                   </td>
                   <td className="p-4">
-                    {(() => {
-                      const bestClass: ClassName = getBestClass(player);
-                      return (
-                        <span
-                          className="font-mono text-xs tracking-widest px-2 py-0.5 border"
-                          style={{
-                            color: CLASS_COLORS[bestClass],
-                            borderColor: CLASS_COLORS[bestClass],
-                          }}
-                        >
-                          {bestClass.toUpperCase()}
-                        </span>
-                      );
-                    })()}
+                    <span
+                      className="font-mono text-xs tracking-widest px-2 py-0.5 border"
+                      style={{
+                        color: CLASS_COLORS[bestClass],
+                        borderColor: CLASS_COLORS[bestClass],
+                      }}
+                    >
+                      {bestClass.toUpperCase()}
+                    </span>
                   </td>
                   {/* Bouton ami — stopPropagation pour ne pas naviguer vers le profil */}
                   <td className="p-4 text-center">
@@ -205,7 +199,7 @@ export default function PlayerTable({
                           e.stopPropagation();
                           onToggleFriend(player.player_name);
                         }}
-                        title={friends.includes(normalizeName(player.player_name)) ? "Retirer des amis" : "Ajouter aux amis"}
+                        title={isFriend ? "Retirer des amis" : "Ajouter aux amis"}
                         className="hover:scale-125 transition-transform inline-flex items-center justify-center"
                       >
                         <Image
@@ -214,7 +208,7 @@ export default function PlayerTable({
                           width={20}
                           height={20}
                           className={`transition-opacity ${
-                            friends.includes(normalizeName(player.player_name))
+                            isFriend
                               ? "opacity-100"
                               : "opacity-20 grayscale"
                           }`}
