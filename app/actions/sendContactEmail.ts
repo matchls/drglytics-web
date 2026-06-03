@@ -15,6 +15,8 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 
 const MAX_PSEUDO_LENGTH = 32;
 const MAX_MESSAGE_LENGTH = 2000;
+const RATE_LIMIT_MAX = 3;
+const RATE_LIMIT_WINDOW_MS = 60 * 60 * 1000;
 
 export type ContactResult = { success: true } | { success: false; error: string };
 
@@ -44,7 +46,7 @@ export async function sendContactEmail(
   // 3) Rate limiting par IP : 3 messages / heure. Best-effort (voir lib/rateLimit).
   const ip =
     headers().get("x-forwarded-for")?.split(",")[0]?.trim() ?? "unknown";
-  if (!checkRateLimit(`contact:${ip}`, 3, 60 * 60 * 1000)) {
+  if (!checkRateLimit(`contact:${ip}`, RATE_LIMIT_MAX, RATE_LIMIT_WINDOW_MS)) {
     return { success: false, error: "Trop de messages. Réessaie plus tard." };
   }
 

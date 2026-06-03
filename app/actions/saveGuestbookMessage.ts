@@ -14,7 +14,9 @@ import { supabaseAdmin } from "@/lib/supabaseServer";
 import { findPlayerByName } from "@/lib/playerLookup";
 import { checkRateLimit } from "@/lib/rateLimit";
 
-const MAX_MESSAGE_LENGTH = 200; // même limite que le maxLength du textarea
+const MAX_MESSAGE_LENGTH = 200;
+const RATE_LIMIT_MAX = 5;
+const RATE_LIMIT_WINDOW_MS = 60 * 60 * 1000;
 
 export async function saveGuestbookMessage(
   playerName: string,
@@ -34,7 +36,7 @@ export async function saveGuestbookMessage(
   // Anti-spam : limite par IP (5 messages / heure). Best-effort (voir lib/rateLimit).
   const ip =
     headers().get("x-forwarded-for")?.split(",")[0]?.trim() ?? "unknown";
-  if (!checkRateLimit(`guestbook:${ip}`, 5, 60 * 60 * 1000)) {
+  if (!checkRateLimit(`guestbook:${ip}`, RATE_LIMIT_MAX, RATE_LIMIT_WINDOW_MS)) {
     return { ok: false, error: "Trop de messages. Réessaie plus tard." };
   }
 

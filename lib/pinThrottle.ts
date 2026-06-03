@@ -11,8 +11,9 @@ import "server-only";
 //    comme rateLimit.ts. Une version atomique (RPC SQL) serait l'étape d'après.
 import { supabaseAdmin } from "./supabaseServer";
 
-const MAX_FAILURES = 5; // seuil avant verrouillage
-const WINDOW_MS = 15 * 60 * 1000; // fenêtre glissante de 15 minutes
+const MAX_FAILURES = 5;
+const WINDOW_MS = 15 * 60 * 1000;
+const MAX_LOCK_MS = 24 * 60 * 60 * 1000;
 
 type AttemptRow = {
   failed_count: number;
@@ -24,7 +25,6 @@ type AttemptRow = {
 function lockDurationMs(failedCount: number): number {
   const steps = failedCount - MAX_FAILURES;
   const duration = WINDOW_MS * 2 ** steps;
-  const MAX_LOCK_MS = 24 * 60 * 60 * 1000;
   return Math.min(duration, MAX_LOCK_MS);
 }
 
