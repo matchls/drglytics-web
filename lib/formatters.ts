@@ -11,11 +11,6 @@ export function formatDistance(
   return (cm / 100000).toFixed(0) + (showUnit ? " km" : "");
 }
 
-// TODO : convertit des secondes en texte selon prefs.timeFormat
-// - "hours" : format "Xh Ym"   ex: "342h 15m"
-// - "dhm"   : format "Xj Yh"   ex: "14j 6h"  (jours + heures restantes, pas de minutes)
-//   astuce pour les jours : Math.floor(seconds / 86400)  (86400 = 60*60*24)
-//   heures restantes      : Math.floor((seconds % 86400) / 3600)
 export function formatTime(seconds: number, prefs: Preferences): string {
   if (prefs.timeFormat === "hours") {
     return (
