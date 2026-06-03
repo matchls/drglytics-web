@@ -7,8 +7,10 @@ import HeroStats from "@/components/HeroStats";
 import ClassCard from "@/components/ClassCard";
 import MissionStats from "@/components/MissionStats";
 import OverclockList from "@/components/OverclockList";
+import { useTranslation } from "@/lib/i18n";
 
 export default function PlayerProfilePage() {
+  const t = useTranslation();
   const params = useParams();
   const playerName = decodeURIComponent(params.name as string);
 
@@ -18,7 +20,7 @@ export default function PlayerProfilePage() {
   const { data, loading, error } = useAsync(
     async () => {
       const profile = await getPlayerProfile(playerName);
-      if (!profile) throw new Error("Miner not found in Company records.");
+      if (!profile) throw new Error(t("playerNotFound"));
       return profile;
     },
     [playerName],
@@ -29,7 +31,7 @@ export default function PlayerProfilePage() {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
         <p className="font-mono text-on-surface-variant tracking-widest animate-pulse">
-          ACCESSING PERSONNEL FILE...
+          {t("playerLoading")}
         </p>
       </div>
     );
@@ -39,7 +41,7 @@ export default function PlayerProfilePage() {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
         <p className="font-mono text-error tracking-widest">
-          ⚠ {error ?? "Miner not found in Company records."}
+          ⚠ {error ?? t("playerNotFound")}
         </p>
       </div>
     );
@@ -50,7 +52,7 @@ export default function PlayerProfilePage() {
       {/* Header — dossier du personnel */}
       <div className="industrial-panel p-6 flex flex-col gap-1">
         <p className="font-mono text-xs text-on-surface-variant tracking-widest">
-          PERSONNEL FILE — CLASSIFIED
+          {t("playerFileHeader")}
         </p>
         <p className="font-display text-4xl text-primary tracking-widest">
           {data.player.name.toUpperCase()}

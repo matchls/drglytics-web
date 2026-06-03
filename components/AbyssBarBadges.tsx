@@ -1,10 +1,11 @@
 import { DashboardData } from "@/lib/types";
 import { ABYSS_BADGE_THRESHOLDS } from "@/lib/ranks";
+import { useTranslation, TranslationKey } from "@/lib/i18n";
 
 interface Badge {
   id: string;
-  label: string;
-  description: string;
+  labelKey: TranslationKey;
+  descKey: TranslationKey;
   unlocked: boolean;
 }
 
@@ -13,6 +14,7 @@ interface Props {
 }
 
 export default function AbyssBarBadges({ data }: Props) {
+  const t = useTranslation();
   // Valeurs précalculées pour les conditions
   const totalMissions = data.classes.reduce(
     (sum, c) => sum + c.missions_completed,
@@ -29,61 +31,59 @@ export default function AbyssBarBadges({ data }: Props) {
     (c) => c.missions_completed >= ABYSS_BADGE_THRESHOLDS.jackOfAllTrades,
   );
 
-  // TODO : définir les badges ici
   const badges: Badge[] = [
     {
       id: "rock-and-stone",
-      label: "ROCK AND STONE",
-      description: "10 missions complétées — bienvenue dans les rangs.",
+      labelKey: "badgeRockAndStone",
+      descKey: "badgeRockAndStoneDesc",
       unlocked: totalMissions >= ABYSS_BADGE_THRESHOLDS.rockAndStone,
     },
     {
       id: "veteran",
-      label: "DEEP VETERAN",
-      description: "500 missions — Management a noté vos services.",
+      labelKey: "badgeDeepVeteran",
+      descKey: "badgeDeepVeteranDesc",
       unlocked: totalMissions >= ABYSS_BADGE_THRESHOLDS.deepVeteran,
     },
     {
       id: "bug-zapper",
-      label: "BUG ZAPPER",
-      description: "100 000 ennemis éliminés — efficace.",
+      labelKey: "badgeBugZapper",
+      descKey: "badgeBugZapperDesc",
       unlocked: totalKills >= ABYSS_BADGE_THRESHOLDS.bugZapper,
     },
     {
       id: "karls-chosen",
-      label: "KARL'S CHOSEN",
-      description: "1 000 000 éliminations — Karl vous salue.",
+      labelKey: "badgeKarlsChosen",
+      descKey: "badgeKarlsChosenDesc",
       unlocked: totalKills >= ABYSS_BADGE_THRESHOLDS.karlsChosen,
     },
     {
       id: "underground",
-      label: "UNDERGROUND",
-      description: "100 heures sous Hoxxes IV.",
+      labelKey: "badgeUnderground",
+      descKey: "badgeUndergroundDesc",
       unlocked: totalHours >= ABYSS_BADGE_THRESHOLDS.underground,
     },
     {
       id: "legend",
-      label: "LEGEND OF THE DEEP",
-      description: "1 000 heures. Vous n'avez pas de vie en surface.",
+      labelKey: "badgeLegend",
+      descKey: "badgeLegendDesc",
       unlocked: totalHours >= ABYSS_BADGE_THRESHOLDS.legend,
     },
     {
       id: "gear-head",
-      label: "GEAR HEAD",
-      description: "10 overclocks forgés — l'armurerie vous connaît.",
+      labelKey: "badgeGearHead",
+      descKey: "badgeGearHeadDesc",
       unlocked: forgedCount >= ABYSS_BADGE_THRESHOLDS.gearHead,
     },
     {
       id: "full-arsenal",
-      label: "FULL ARSENAL",
-      description:
-        "50 overclocks forgés — vous avez investi dans votre survie.",
+      labelKey: "badgeFullArsenal",
+      descKey: "badgeFullArsenalDesc",
       unlocked: forgedCount >= ABYSS_BADGE_THRESHOLDS.fullArsenal,
     },
     {
       id: "jack-of-all-trades",
-      label: "JACK OF ALL TRADES",
-      description: "50 missions avec chaque classe — un vrai polyvalent.",
+      labelKey: "badgeJackOfAllTrades",
+      descKey: "badgeJackOfAllTradesDesc",
       unlocked: allClassesAt50,
     },
   ];
@@ -96,7 +96,7 @@ export default function AbyssBarBadges({ data }: Props) {
           military_tech
         </span>
         <p className="font-display text-xl text-on-surface tracking-widest">
-          COMMENDATIONS
+          {t("badgesTitle")}
         </p>
       </div>
 
@@ -114,10 +114,10 @@ export default function AbyssBarBadges({ data }: Props) {
             <p
               className={`font-display text-sm tracking-widest ${badge.unlocked ? "text-drg-orange" : "text-on-surface-variant"}`}
             >
-              {badge.label}
+              {t(badge.labelKey)}
             </p>
             <p className="font-mono text-xs text-on-surface-variant">
-              {badge.description}
+              {t(badge.descKey)}
             </p>
           </div>
         ))}

@@ -5,6 +5,9 @@ import { leaderboard } from "./leaderboard";
 import { options } from "./options";
 import { nav } from "./nav";
 import { pin } from "./pin";
+import { player } from "./player";
+import { footer } from "./footer";
+import { abyssBar } from "./abyss-bar";
 
 const translations = {
   en: {
@@ -14,6 +17,9 @@ const translations = {
     ...options.en,
     ...nav.en,
     ...pin.en,
+    ...player.en,
+    ...footer.en,
+    ...abyssBar.en,
   },
   fr: {
     ...upload.fr,
@@ -22,6 +28,9 @@ const translations = {
     ...options.fr,
     ...nav.fr,
     ...pin.fr,
+    ...player.fr,
+    ...footer.fr,
+    ...abyssBar.fr,
   },
 } as const;
 

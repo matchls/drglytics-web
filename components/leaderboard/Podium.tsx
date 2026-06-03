@@ -32,7 +32,7 @@ export default function Podium({ players, t }: PodiumProps) {
               {player.player_name}
             </p>
             <p className="font-mono text-sm text-on-surface-variant">
-              {player.total_missions} missions
+              {player.total_missions} {t("lbMissions")}
             </p>
             <span
               className={`font-mono text-xs tracking-widest ${badge.className}`}

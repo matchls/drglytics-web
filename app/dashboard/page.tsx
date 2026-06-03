@@ -72,8 +72,7 @@ export default function DashboardPage() {
           <span className="material-symbols-outlined text-drg-orange text-sm">
             info
           </span>
-          DEMO — DONNÉES DE {data.player.name.toUpperCase()} · UPLOADEZ
-          VOTRE SAVE POUR VOIR VOS STATS
+          {t("demoBanner").replace("{name}", data.player.name.toUpperCase())}
         </div>
       )}
       <HeroStats

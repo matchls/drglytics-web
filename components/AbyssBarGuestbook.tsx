@@ -5,12 +5,14 @@ import { useAsync } from "@/lib/hooks/useAsync";
 import { saveGuestbookMessage } from "@/app/actions/saveGuestbookMessage";
 import { checkPlayer } from "@/app/actions/pinActions";
 import PinModal from "@/components/PinModal";
+import { useTranslation } from "@/lib/i18n";
 
 interface Props {
   playerName: string;
 }
 
 export default function AbyssBarGuestbook({ playerName }: Props) {
+  const t = useTranslation();
   // useAsync remplace le useState + useEffect + loadEntries qui chargeaient le guestbook.
   // reload() est utilisé plus bas après soumission d'un message pour rafraîchir la liste.
   const { data: entriesData, reload: reloadEntries } = useAsync(() => fetchGuestbook());
@@ -36,7 +38,7 @@ export default function AbyssBarGuestbook({ playerName }: Props) {
     setError(null);
     if (!draft.trim()) return;
     if (!activeName) {
-      setError("⚠ ENTRE TON PSEUDO POUR LAISSER UN MESSAGE.");
+      setError(t("gbErrNoName"));
       return;
     }
     const { exists, hasPIN } = await checkPlayer(activeName);
@@ -45,7 +47,7 @@ export default function AbyssBarGuestbook({ playerName }: Props) {
       setPinModalOpen(true);
     } else if (exists) {
       // Pseudo déjà pris par un joueur (sans PIN) → pas d'usurpation possible.
-      setError("⚠ CE PSEUDO APPARTIENT À UN JOUEUR. CHOISIS-EN UN AUTRE.");
+      setError(t("gbErrNameTaken"));
     } else {
       // Pseudo libre → chemin invité.
       await submitMessage("");
@@ -89,7 +91,7 @@ export default function AbyssBarGuestbook({ playerName }: Props) {
           menu_book
         </span>
         <p className="font-display text-xl text-on-surface tracking-widest">
-          {"LIVRE D'OR"}
+          {t("gbTitle")}
         </p>
       </div>
 
@@ -97,20 +99,20 @@ export default function AbyssBarGuestbook({ playerName }: Props) {
       <form onSubmit={handleSubmit} className="flex flex-col gap-2">
         {playerName ? (
           <p className="font-mono text-xs text-on-surface-variant tracking-widest">
-            LAISSER UN MESSAGE EN TANT QUE{" "}
+            {t("gbPostAs")}{" "}
             <span className="text-drg-orange">{playerName}</span>
           </p>
         ) : (
           <div className="flex flex-col gap-1">
             <p className="font-mono text-xs text-on-surface-variant tracking-widest">
-              TON PSEUDO
+              {t("gbYourName")}
             </p>
             <input
               type="text"
               value={guestName}
               onChange={(e) => setGuestName(e.target.value)}
               maxLength={32}
-              placeholder="ENTER OPERATIVE ID"
+              placeholder={t("gbOperativeId")}
               className="bg-surface-container-highest border border-drg-border text-on-surface font-mono text-sm p-2 focus:outline-none focus:border-drg-orange"
             />
           </div>
@@ -120,7 +122,7 @@ export default function AbyssBarGuestbook({ playerName }: Props) {
           onChange={(e) => setDraft(e.target.value)}
           maxLength={200}
           rows={2}
-          placeholder="Rock and Stone..."
+          placeholder={t("gbPlaceholder")}
           className="bg-surface-container-highest border border-drg-border text-on-surface font-mono text-sm p-2 resize-none focus:outline-none focus:border-drg-orange"
         />
         {error && (
@@ -131,7 +133,7 @@ export default function AbyssBarGuestbook({ playerName }: Props) {
           disabled={saving || !draft.trim()}
           className="self-end font-display text-sm tracking-widest px-4 py-1 bg-primary text-on-primary disabled:opacity-40 hover:bg-primary-fixed transition-colors"
         >
-          {saving ? "SAVING..." : "SOUMETTRE"}
+          {saving ? t("gbSaving") : t("gbSubmit")}
         </button>
       </form>
 
