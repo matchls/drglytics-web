@@ -55,17 +55,23 @@ export default function UploadForm() {
     return () => clearInterval(interval);
   }, [isLoading]);
 
-  // Effect 2 : redirige vers /dashboard quand les DEUX conditions sont vraies
+  // Effect 2 : quand l'API a répondu, force la barre à 100 % puis redirige.
+  // Découple la navigation de la vitesse d'animation : même si quelqu'un
+  // modifie les paliers ou la cadence de la barre, la redirection reste
+  // garantie dès que le backend a répondu.
   useEffect(() => {
-    if (apiDone && progress >= 100) {
-      // resultRef.current est garanti non-null ici (posé dans handlePinSuccess).
-      // false : un vrai upload n'est jamais une démo.
-      setDashboardSession(resultRef.current!, playerName, false);
-      // Synchro upload → Options : l'identité réellement utilisée devient la
-      // préférence persistante, pour qu'Options et l'upload restent alignés.
-      setPrefs({ playerName });
-      router.push("/dashboard");
+    if (!apiDone) return;
+    if (progress < 100) {
+      setProgress(100);
+      return;
     }
+    // resultRef.current est garanti non-null ici (posé dans handlePinSuccess).
+    // false : un vrai upload n'est jamais une démo.
+    setDashboardSession(resultRef.current!, playerName, false);
+    // Synchro upload → Options : l'identité réellement utilisée devient la
+    // préférence persistante, pour qu'Options et l'upload restent alignés.
+    setPrefs({ playerName });
+    router.push("/dashboard");
   }, [apiDone, progress, router, playerName]);
 
   async function handleSubmit() {
