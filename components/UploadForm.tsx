@@ -124,7 +124,7 @@ export default function UploadForm() {
     const data = await getPlayerProfile(demoPlayer);
 
     if (!data) {
-      alert("Données démo non disponibles. Réessaie plus tard.");
+      alert(t("gbDemoUnavailable"));
       return;
     }
 
@@ -292,7 +292,7 @@ export default function UploadForm() {
           <div className="flex items-center gap-3">
             <div className="flex-1 border-t border-drg-border" />
             <p className="font-mono text-xs text-on-surface-variant tracking-widest">
-              OR
+              {t("separator")}
             </p>
             <div className="flex-1 border-t border-drg-border" />
           </div>

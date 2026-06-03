@@ -23,6 +23,7 @@ export const upload = {
     errMissingBoth: "⚠ ENTER YOUR OPERATIVE ID AND SELECT A SAVE FILE.",
     errMissingId: "⚠ ENTER YOUR OPERATIVE ID.",
     errMissingFile: "⚠ SELECT A SAVE FILE.",
+    separator: "OR",
   },
   fr: {
     tip1: "⛏ Forage du fichier de sauvegarde...",
@@ -49,5 +50,6 @@ export const upload = {
       "⚠ ENTREZ VOTRE IDENTIFIANT D'OPÉRATEUR ET SÉLECTIONNEZ UN FICHIER DE SAUVEGARDE.",
     errMissingId: "⚠ ENTREZ VOTRE IDENTIFIANT D'OPÉRATEUR.",
     errMissingFile: "⚠ SÉLECTIONNEZ UN FICHIER DE SAUVEGARDE.",
+    separator: "OU",
   },
 } as const;

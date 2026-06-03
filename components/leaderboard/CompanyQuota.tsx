@@ -18,7 +18,7 @@ export default function CompanyQuota({ players, sortKey, t }: CompanyQuotaProps)
     <div className="industrial-panel p-4 flex flex-col gap-4">
       <div className="flex items-baseline gap-3">
         <p className="font-display text-lg text-on-surface tracking-widest">
-          COMPANY QUOTA FULFILLMENT
+          {t("lbCompanyQuota")}
         </p>
         <p className="font-mono text-xs text-primary tracking-widest">
           — {sortKey === "total_missions"    ? t("catMissions")

@@ -36,6 +36,7 @@ export const dashboard = {
     noSessionDesc: "Upload a save file or try the demo to see your stats.",
     noSessionUpload: "UPLOAD A SAVE",
     noSessionDemo: "TRY THE DEMO",
+    demoBanner: "DEMO — DATA FROM {name} · UPLOAD YOUR SAVE TO SEE YOUR STATS",
   },
   fr: {
     employeeReport: "RAPPORT DE PERFORMANCE DE L'EMPLOYÉ",
@@ -74,5 +75,6 @@ export const dashboard = {
     noSessionDesc: "Uploadez un fichier de sauvegarde ou essayez la démo pour voir vos stats.",
     noSessionUpload: "UPLOADER UN SAVE",
     noSessionDemo: "ESSAYER LA DÉMO",
+    demoBanner: "DÉMO — DONNÉES DE {name} · UPLOADEZ VOTRE SAVE POUR VOIR VOS STATS",
   },
 } as const;

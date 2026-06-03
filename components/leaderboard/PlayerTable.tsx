@@ -9,7 +9,6 @@ import { normalizeName } from "@/lib/friends";
 import { usePrefs } from "@/lib/PrefsContext";
 import { formatTime, formatDistance } from "@/lib/formatters";
 
-const TABLE_TITLE = "COMPANY SPREADSHEET V.2.04";
 
 interface PlayerTableProps {
   // Joueurs déjà triés ET filtrés (filtre "amis seulement") par la page.
@@ -48,7 +47,7 @@ export default function PlayerTable({
       <div className="p-4 border-b-4 border-outline flex items-center gap-3">
         <span className="material-symbols-outlined text-primary">list</span>
         <p className="font-display text-xl text-on-surface tracking-widest flex-1">
-          {TABLE_TITLE}
+          {t("lbTableTitle")}
         </p>
         {/* Toggle Tous / Amis */}
         <div className="flex gap-1">
@@ -156,7 +155,7 @@ export default function PlayerTable({
                     {player.player_name}
                     {isCurrentPlayer && (
                       <span className="ml-2 font-mono text-xs text-primary">
-                        [YOU]
+                        {t("lbYou")}
                       </span>
                     )}
                   </td>
@@ -199,7 +198,7 @@ export default function PlayerTable({
                           e.stopPropagation();
                           onToggleFriend(player.player_name);
                         }}
-                        title={isFriend ? "Retirer des amis" : "Ajouter aux amis"}
+                        title={isFriend ? t("lbRemoveFriend") : t("lbAddFriend")}
                         className="hover:scale-125 transition-transform inline-flex items-center justify-center"
                       >
                         <Image

@@ -96,7 +96,7 @@ export default function LeaderboardPage() {
 
       <div className="grid grid-cols-2 gap-4">
         <CompanyQuota players={sortedPlayers} sortKey={sortKey} t={t} />
-        <BountyTargets players={players} />
+        <BountyTargets players={players} t={t} />
       </div>
     </div>
   );

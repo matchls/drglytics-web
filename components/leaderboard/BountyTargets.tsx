@@ -1,4 +1,5 @@
 import { type PlayerRow } from "@/lib/data/players";
+import { TranslationKey } from "@/lib/i18n";
 import {
   COMMUNITY_KILL_MILESTONE,
   COMMUNITY_MISSION_MILESTONE,
@@ -6,26 +7,26 @@ import {
 
 interface BountyTargetsProps {
   players: PlayerRow[];
+  t: (key: TranslationKey) => string;
 }
 
-// Bounty Targets — agrégats communautaires (somme de tous les joueurs) vs milestones.
-export default function BountyTargets({ players }: BountyTargetsProps) {
+export default function BountyTargets({ players, t }: BountyTargetsProps) {
   const communityKills    = players.reduce((sum, p) => sum + p.total_kills, 0);
   const communityMissions = players.reduce((sum, p) => sum + p.total_missions, 0);
 
   return (
     <div className="industrial-panel p-4 flex flex-col gap-4">
       <p className="font-display text-lg text-on-surface tracking-widest">
-        BOUNTY TARGETS: HOXXES IV
+        {t("lbBountyTitle")}
       </p>
       {[
         {
-          label: "COMMUNITY KILLS",
+          label: t("lbCommunityKills"),
           current: communityKills,
           milestone: COMMUNITY_KILL_MILESTONE,
         },
         {
-          label: "COMMUNITY MISSIONS",
+          label: t("lbCommunityMissions"),
           current: communityMissions,
           milestone: COMMUNITY_MISSION_MILESTONE,
         },
