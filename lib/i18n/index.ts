@@ -4,6 +4,7 @@ import { dashboard } from "./dashboard";
 import { leaderboard } from "./leaderboard";
 import { options } from "./options";
 import { nav } from "./nav";
+import { pin } from "./pin";
 
 const translations = {
   en: {
@@ -12,6 +13,7 @@ const translations = {
     ...leaderboard.en,
     ...options.en,
     ...nav.en,
+    ...pin.en,
   },
   fr: {
     ...upload.fr,
@@ -19,6 +21,7 @@ const translations = {
     ...leaderboard.fr,
     ...options.fr,
     ...nav.fr,
+    ...pin.fr,
   },
 } as const;
 
