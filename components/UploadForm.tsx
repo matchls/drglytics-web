@@ -72,6 +72,7 @@ export default function UploadForm() {
     // préférence persistante, pour qu'Options et l'upload restent alignés.
     setPrefs({ playerName });
     router.push("/dashboard");
+    // progress est volontaire ici : le snap setProgress(100) re-déclenche cet effect pour naviguer.
   }, [apiDone, progress, router, playerName]);
 
   async function handleSubmit() {
