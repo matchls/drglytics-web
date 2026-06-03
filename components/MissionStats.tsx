@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import Image from "next/image";
-import { DashboardData, CLASS_COLORS, CLASS_ICONS, ClassName } from "@/lib/types";
+import { DashboardData, CLASS_COLORS, CLASS_ICONS, CLASS_NAMES, ClassName } from "@/lib/types";
 import { usePrefs } from "@/lib/PrefsContext";
 import { formatDistance, formatTime } from "@/lib/formatters";
 import { useTranslation, TranslationKey } from "@/lib/i18n";
@@ -98,8 +98,7 @@ export default function MissionStats({ missionStats }: Props) {
         </thead>
         <tbody>
           {filteredStats.map((stat) => {
-            const classes = ["Driller", "Gunner", "Engineer", "Scout"] as const;
-            const total = classes.reduce(
+            const total = CLASS_NAMES.reduce(
               (sum, c) => sum + (stat.by_class[c] ?? 0),
               0,
             );
@@ -141,7 +140,7 @@ export default function MissionStats({ missionStats }: Props) {
                   {/* Barre segmentée : chaque classe occupe sa part proportionnelle */}
                   <div className="flex h-4 w-full overflow-hidden border border-outline">
                     {total > 0 ? (
-                      classes.map((c) => {
+                      CLASS_NAMES.map((c) => {
                         const val = stat.by_class[c] ?? 0;
                         const pct = (val / total) * 100;
                         return pct > 0 ? (
