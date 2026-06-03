@@ -20,29 +20,9 @@ type AttemptRow = {
   locked_until: string | null;
 };
 
-/**
- * lockDurationMs — combien de temps verrouiller, en fonction du nombre d'échecs.
- *
- * 👉 À TOI DE L'ÉCRIRE (voir le TODO ci-dessous). C'est LA décision de sécurité
- *    du #30 : la courbe de backoff. Quelques pistes et leurs compromis :
- *
- *    • Plat (toujours 15 min) : simple, mais un attaquant patient reprend
- *      pile 5 essais toutes les 15 min → ~480 essais/jour, encore beaucoup.
- *    • Progressif / exponentiel (15 min, puis 30, 1 h, 2 h…) : chaque palier
- *      franchi coûte de plus en plus cher → le brute-force devient non rentable,
- *      sans punir trop fort un joueur légitime qui se trompe une fois.
- *    • Pense à BORNER le maximum (ex. 24 h) pour ne pas verrouiller à vie sur
- *      faute de frappe répétée, et au confort d'un vrai joueur qui a oublié son PIN.
- *
- * @param failedCount nombre d'échecs cumulés dans la fenêtre (>= MAX_FAILURES ici)
- * @returns durée du verrou en millisecondes
- */
+/** Backoff exponentiel borné : 15 min → 30 min → 1 h → … → 24 h max. */
 function lockDurationMs(failedCount: number): number {
-  // 👉 À TOI DE TUNER cette courbe. Base de départ : backoff exponentiel borné.
-  //   - On compte les paliers AU-DELÀ du seuil : 5e échec → palier 0, 6e → 1, etc.
-  //   - Chaque palier double la durée : 15 min, 30 min, 1 h, 2 h…
-  //   - Plafonné à 24 h pour ne pas verrouiller un vrai joueur « à vie ».
-  const steps = failedCount - MAX_FAILURES; // 0 au premier verrouillage
+  const steps = failedCount - MAX_FAILURES;
   const duration = WINDOW_MS * 2 ** steps;
   const MAX_LOCK_MS = 24 * 60 * 60 * 1000;
   return Math.min(duration, MAX_LOCK_MS);
