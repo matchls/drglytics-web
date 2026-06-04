@@ -18,6 +18,7 @@ export default function UploadForm() {
     isLoading,
     progress,
     currentTip,
+    leaderboardFailed,
     handleSubmit,
     handlePinSuccess,
     handleDemo,
@@ -46,6 +47,11 @@ export default function UploadForm() {
         <p className="font-mono text-xs text-on-surface-variant tracking-widest">
           {t("processing")} {progress}%
         </p>
+        {leaderboardFailed && (
+          <p className="font-mono text-xs text-error tracking-widest text-center max-w-md px-4">
+            {t("leaderboardSaveWarning")}
+          </p>
+        )}
       </div>
     );
   }

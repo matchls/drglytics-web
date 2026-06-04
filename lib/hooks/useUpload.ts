@@ -23,6 +23,7 @@ interface UseUploadReturn {
   isLoading: boolean;
   progress: number;
   currentTip: string;
+  leaderboardFailed: boolean;
   handleSubmit: () => Promise<void>;
   handlePinSuccess: (pin: string) => Promise<void>;
   handleDemo: () => Promise<void>;
@@ -42,6 +43,7 @@ export function useUpload({
   const [progress, setProgress] = useState(0);
   const [currentTip, setCurrentTip] = useState(0);
   const [apiDone, setApiDone] = useState(false);
+  const [leaderboardFailed, setLeaderboardFailed] = useState(false);
 
   const tips = [t("tip1"), t("tip2"), t("tip3"), t("tip4"), t("tip5")];
 
@@ -61,16 +63,21 @@ export function useUpload({
   }, [isLoading]);
 
   // Quand l'API a répondu, force la barre à 100 % puis redirige.
+  // Délai supplémentaire si leaderboard a échoué : laisse l'avertissement visible.
   useEffect(() => {
     if (!apiDone) return;
     if (progress < 100) {
       setProgress(100);
       return;
     }
-    setDashboardSession(resultRef.current!, playerName, false);
-    setPrefs({ playerName });
-    router.push("/dashboard");
-  }, [apiDone, progress, router, playerName]);
+    const delay = leaderboardFailed ? 2500 : 0;
+    const timer = setTimeout(() => {
+      setDashboardSession(resultRef.current!, playerName, false);
+      setPrefs({ playerName });
+      router.push("/dashboard");
+    }, delay);
+    return () => clearTimeout(timer);
+  }, [apiDone, progress, leaderboardFailed, router, playerName]);
 
   // Rotation des tips pendant le chargement
   useEffect(() => {
@@ -116,7 +123,11 @@ export function useUpload({
         pin,
         buildPlayerRow(response.data),
       );
-      if (!result.ok) console.error("savePlayerStats:", result.error);
+      if (!result.ok) {
+        if (process.env.NODE_ENV !== "production")
+          console.warn("savePlayerStats:", result.error);
+        setLeaderboardFailed(true);
+      }
     }
 
     setApiDone(true);
@@ -139,6 +150,7 @@ export function useUpload({
     isLoading,
     progress,
     currentTip: tips[currentTip],
+    leaderboardFailed,
     handleSubmit,
     handlePinSuccess,
     handleDemo,

@@ -24,6 +24,8 @@ export const upload = {
     errMissingId: "⚠ ENTER YOUR OPERATIVE ID.",
     errMissingFile: "⚠ SELECT A SAVE FILE.",
     separator: "OR",
+    leaderboardSaveWarning:
+      "⚠ LEADERBOARD SYNC FAILED — LOCAL STATS DISPLAYED. YOUR RANKING MAY NOT BE UPDATED.",
   },
   fr: {
     tip1: "⛏ Forage du fichier de sauvegarde...",
@@ -51,5 +53,7 @@ export const upload = {
     errMissingId: "⚠ ENTREZ VOTRE IDENTIFIANT D'OPÉRATEUR.",
     errMissingFile: "⚠ SÉLECTIONNEZ UN FICHIER DE SAUVEGARDE.",
     separator: "OU",
+    leaderboardSaveWarning:
+      "⚠ SYNCHRONISATION LEADERBOARD ÉCHOUÉE — STATS LOCALES AFFICHÉES. VOTRE CLASSEMENT N'EST PEUT-ÊTRE PAS À JOUR.",
   },
 } as const;
