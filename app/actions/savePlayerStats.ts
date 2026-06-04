@@ -12,8 +12,14 @@
 // sur lower(player_name) (cf. sql/2026-05-31_player-name-case-insensitive.sql).
 
 import bcrypt from "bcryptjs";
+import { headers } from "next/headers";
 import { supabaseAdmin } from "@/lib/supabaseServer";
 import { findPlayerByName, type PlayerRecord } from "@/lib/playerLookup";
+import {
+  checkPinLock,
+  recordFailure,
+  clearAttempts,
+} from "@/lib/pinThrottle";
 
 // Résultat de la porte d'autorisation.
 // - "denied" : PIN incorrect → on refuse.
@@ -85,12 +91,36 @@ export async function savePlayerStats(
     return { ok: false, error: "PIN invalide." };
   }
 
+  // L'IP est extraite ici pour l'anti-brute-force. x-forwarded-for est posé par
+  // Vercel (reverse proxy) ; on replie sur "unknown" si absent (dev local).
+  const reqHeaders = await headers();
+  const ip = reqHeaders.get("x-forwarded-for")?.split(",")[0].trim() ?? "unknown";
+
+  // Vérification du verrou AVANT bcrypt : évite d'offrir un oracle de timing et
+  // évite une charge CPU inutile sur des tentatives verrouillées.
+  const locked = await checkPinLock(name, ip);
+  if (locked) {
+    return {
+      ok: false,
+      error: "Trop de tentatives incorrectes. Réessaie plus tard.",
+    };
+  }
+
   // La porte d'autorisation décide : écriture autorisée (avec ou sans pose du PIN),
   // ou refus.
   const decision = await authorizeWrite(name, pin);
   if (decision.kind === "denied") {
+    // On enregistre l'échec AVANT de retourner — le verrou peut se poser ici.
+    await recordFailure(name, ip);
     // Message volontairement vague : on ne dit pas POURQUOI (cf. anti-énumération).
     return { ok: false, error: "Identité non confirmée." };
+  }
+
+  // PIN vérifié avec succès (pas une prise de possession) → on efface le compteur.
+  // Pour une prise de possession (setPinHash === true), il n'y a pas eu de bcrypt
+  // à forcer, donc pas de compteur à effacer.
+  if (!decision.setPinHash) {
+    await clearAttempts(name, ip);
   }
 
   // On construit la ligne à écrire. Deux colonnes sont SOUS CONTRÔLE SERVEUR :
