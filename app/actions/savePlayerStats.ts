@@ -148,10 +148,52 @@ export async function savePlayerStats(
     return { ok: false, error: "Identité non confirmée." };
   }
 
-  // On construit la ligne à écrire. Deux colonnes sont SOUS CONTRÔLE SERVEUR :
-  const row: Record<string, unknown> = { ...stats };
-  delete row.pin_hash; // on jette tout pin_hash venu du client : il ne le contrôle jamais
-  delete row.player_name; // l'identité n'est jamais pilotée par le client
+  // Whitelist stricte des colonnes autorisées : on ne lit que ce qu'on connaît,
+  // jamais l'objet stats en entier. Cela empêche le client d'écrire une colonne
+  // arbitraire même s'il est authentifié (frontière d'intégrité, pas seulement d'autorisation).
+  const ALLOWED_COLUMNS = [
+    "perk_points",
+    "total_missions",
+    "total_kills",
+    "total_time_s",
+    "total_distance_cm",
+    "total_downs",
+    "total_minerals",
+    "driller_missions",
+    "driller_kills",
+    "driller_time_s",
+    "driller_distance_cm",
+    "driller_downs",
+    "gunner_missions",
+    "gunner_kills",
+    "gunner_time_s",
+    "gunner_distance_cm",
+    "gunner_downs",
+    "engineer_missions",
+    "engineer_kills",
+    "engineer_time_s",
+    "engineer_distance_cm",
+    "engineer_downs",
+    "scout_missions",
+    "scout_kills",
+    "scout_time_s",
+    "scout_distance_cm",
+    "scout_downs",
+    "forged_overclocks",
+    "unforged_overclocks",
+    "bartender_tips",
+    "beers_consumed",
+    "rounds_ordered",
+    "raw_data",
+  ];
+
+  // On construit la ligne uniquement à partir des colonnes whitelistées.
+  // pin_hash et player_name ne sont pas dans la whitelist : ils sont ajoutés plus bas
+  // sous contrôle exclusif du serveur.
+  const row: Record<string, unknown> = {};
+  for (const key of ALLOWED_COLUMNS) {
+    if (key in stats) row[key] = stats[key];
+  }
 
   // Pose du PIN : c'est le serveur qui hache, jamais le navigateur.
   if (decision.setPinHash) {
