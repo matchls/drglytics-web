@@ -1,8 +1,8 @@
 "use server";
 import bcrypt from "bcryptjs";
-import { headers } from "next/headers";
 import { findPlayerByName } from "@/lib/playerLookup";
 import { checkPinLock, recordFailure, clearAttempts } from "@/lib/pinThrottle";
+import { getClientIp } from "@/lib/getClientIp";
 
 // Toutes les lectures liées au PIN passent par le client serveur (service_role,
 // dans findPlayerByName) et sont INSENSIBLES À LA CASSE : un pseudo est une
@@ -28,8 +28,7 @@ export async function verifyPIN(
   pin: string,
 ): Promise<{ valid: boolean }> {
   const name = playerName.trim().toUpperCase();
-  const ip =
-    headers().get("x-forwarded-for")?.split(",")[0]?.trim() ?? "unknown";
+  const ip = await getClientIp();
 
   // 1) Verrou AVANT toute chose : on ne fait même pas bcrypt si c'est verrouillé.
   if (await checkPinLock(name, ip)) return { valid: false };

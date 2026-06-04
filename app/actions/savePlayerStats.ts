@@ -12,7 +12,6 @@
 // sur lower(player_name) (cf. sql/2026-05-31_player-name-case-insensitive.sql).
 
 import bcrypt from "bcryptjs";
-import { headers } from "next/headers";
 import { supabaseAdmin } from "@/lib/supabaseServer";
 import { findPlayerByName, type PlayerRecord } from "@/lib/playerLookup";
 import {
@@ -20,6 +19,7 @@ import {
   recordFailure,
   clearAttempts,
 } from "@/lib/pinThrottle";
+import { getClientIp } from "@/lib/getClientIp";
 
 // Résultat de la porte d'autorisation.
 // - "locked" : trop de tentatives récentes → on refuse sans bcrypt.
@@ -130,10 +130,9 @@ export async function savePlayerStats(
     return { ok: false, error: "PIN invalide." };
   }
 
-  // L'IP est extraite ici pour l'anti-brute-force. x-forwarded-for est posé par
-  // Vercel (reverse proxy) ; on replie sur "unknown" si absent (dev local).
-  const reqHeaders = await headers();
-  const ip = reqHeaders.get("x-forwarded-for")?.split(",")[0].trim() ?? "unknown";
+  // L'IP est extraite via le helper centralisé (dernier élément de x-forwarded-for,
+  // posé par Vercel — non contrôlable par le client).
+  const ip = await getClientIp();
 
   // La porte d'autorisation avec anti-brute-force intégré. Toute la logique de
   // throttle (checkPinLock / recordFailure / clearAttempts) vit dans ce wrapper.
