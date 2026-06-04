@@ -22,6 +22,7 @@ import {
 } from "@/lib/pinThrottle";
 
 // Résultat de la porte d'autorisation.
+// - "locked" : trop de tentatives récentes → on refuse sans bcrypt.
 // - "denied" : PIN incorrect → on refuse.
 // - "write"  : écriture autorisée. Deux infos l'accompagnent :
 //     • existing   : la ligne DÉJÀ présente (avec sa casse d'origine), ou null si
@@ -29,23 +30,24 @@ import {
 //     • setPinHash : faut-il hacher et stocker le PIN fourni ? Vrai pour un nouveau
 //                    joueur OU un ancien joueur "sans PIN" qui prend possession.
 type AuthDecision =
+  | { kind: "locked" }
   | { kind: "denied" }
   | { kind: "write"; existing: PlayerRecord | null; setPinHash: boolean };
 
 /**
- * La PORTE D'AUTORISATION.
+ * La PORTE D'AUTORISATION (logique pure, sans throttle).
  *
- * Décide si l'écriture sur le joueur `playerName` est permise, à partir du PIN fourni.
- * C'est le cœur de sécurité de l'issue #29.
+ * Vérifie si le PIN fourni autorise l'écriture sur playerName. Ne touche pas à
+ * pin_attempts — c'est authorizeWithThrottle qui orchestre cette couche.
  *
  * @param playerName - pseudo brut saisi (juste .trim() par l'appelant, casse conservée)
  * @param pin        - le PIN saisi par l'utilisateur (4–6 chiffres)
- * @returns AuthDecision
+ * @returns AuthDecision (hors "locked", géré par le wrapper)
  */
 async function authorizeWrite(
   playerName: string,
   pin: string,
-): Promise<AuthDecision> {
+): Promise<Exclude<AuthDecision, { kind: "locked" }>> {
   // Recherche INSENSIBLE À LA CASSE : on récupère la ligne existante quelle que
   // soit la casse stockée. C'est ce qui empêche de re-créer "POUSSIF" à côté de
   // "Poussif" (le bug de doublons).
@@ -63,6 +65,43 @@ async function authorizeWrite(
   return pinMatches
     ? { kind: "write", existing, setPinHash: false }
     : { kind: "denied" };
+}
+
+/**
+ * Point d'entrée unique pour toute vérification PIN.
+ *
+ * Encapsule le trio checkPinLock / authorizeWrite / recordFailure|clearAttempts
+ * pour qu'aucun futur appelant ne puisse invoquer authorizeWrite sans sa protection
+ * anti-brute-force. Toute nouvelle Server Action devant vérifier un PIN doit passer
+ * par cette fonction, pas par authorizeWrite directement.
+ *
+ * @param playerName - pseudo normalisé (trim déjà fait)
+ * @param ip         - IP du client (x-forwarded-for ou "unknown")
+ * @param pin        - le PIN saisi par l'utilisateur
+ * @returns AuthDecision — y compris "locked" si le seuil est atteint
+ */
+async function authorizeWithThrottle(
+  playerName: string,
+  ip: string,
+  pin: string,
+): Promise<AuthDecision> {
+  // Verrou AVANT bcrypt : évite un oracle de timing et épargne du CPU sur les
+  // tentatives déjà bloquées.
+  const locked = await checkPinLock(playerName, ip);
+  if (locked) return { kind: "locked" };
+
+  const decision = await authorizeWrite(playerName, pin);
+
+  if (decision.kind === "denied") {
+    await recordFailure(playerName, ip);
+  } else {
+    // On efface les tentatives dans tous les cas de succès — y compris la prise de
+    // possession (setPinHash === true) où des échecs fantômes auraient pu s'accumuler
+    // avant que le pseudo soit réclamé.
+    await clearAttempts(playerName, ip);
+  }
+
+  return decision;
 }
 
 /**
@@ -96,31 +135,18 @@ export async function savePlayerStats(
   const reqHeaders = await headers();
   const ip = reqHeaders.get("x-forwarded-for")?.split(",")[0].trim() ?? "unknown";
 
-  // Vérification du verrou AVANT bcrypt : évite d'offrir un oracle de timing et
-  // évite une charge CPU inutile sur des tentatives verrouillées.
-  const locked = await checkPinLock(name, ip);
-  if (locked) {
+  // La porte d'autorisation avec anti-brute-force intégré. Toute la logique de
+  // throttle (checkPinLock / recordFailure / clearAttempts) vit dans ce wrapper.
+  const decision = await authorizeWithThrottle(name, ip, pin);
+  if (decision.kind === "locked") {
     return {
       ok: false,
       error: "Trop de tentatives incorrectes. Réessaie plus tard.",
     };
   }
-
-  // La porte d'autorisation décide : écriture autorisée (avec ou sans pose du PIN),
-  // ou refus.
-  const decision = await authorizeWrite(name, pin);
   if (decision.kind === "denied") {
-    // On enregistre l'échec AVANT de retourner — le verrou peut se poser ici.
-    await recordFailure(name, ip);
     // Message volontairement vague : on ne dit pas POURQUOI (cf. anti-énumération).
     return { ok: false, error: "Identité non confirmée." };
-  }
-
-  // PIN vérifié avec succès (pas une prise de possession) → on efface le compteur.
-  // Pour une prise de possession (setPinHash === true), il n'y a pas eu de bcrypt
-  // à forcer, donc pas de compteur à effacer.
-  if (!decision.setPinHash) {
-    await clearAttempts(name, ip);
   }
 
   // On construit la ligne à écrire. Deux colonnes sont SOUS CONTRÔLE SERVEUR :
