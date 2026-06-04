@@ -1,6 +1,15 @@
 import "server-only";
 // pinThrottle.ts — Anti-brute-force DURABLE du PIN (#30).
 //
+// sanitizeForLog — remplace les caractères de contrôle par "?" et borne la
+// longueur pour éviter l'injection de fausses lignes de log via des données
+// utilisateur (retours ligne, tabulations, séquences d'échappement).
+function sanitizeForLog(value: string, maxLen = 80): string {
+  return value
+    .replace(/[\x00-\x1F\x7F]/g, "?")
+    .slice(0, maxLen);
+}
+//
 // Le PIN est l'unique facteur d'auth. Contrairement à lib/rateLimit.ts (en
 // mémoire, perdu à chaque instance froide Vercel), l'état vit ici dans deux tables
 // Supabase partagées entre toutes les instances serverless :
@@ -87,8 +96,9 @@ export async function recordFailure(
   } = result;
 
   // Journalisation serveur des deux niveaux (sans révéler quoi que ce soit au client).
+  // playerName et ip sont sanitisés pour éviter l'injection dans les logs.
   console.warn(
-    `[pin] échec #${failedCount} (global: ${globalCount}) pour "${playerName}" depuis ${ip}` +
+    `[pin] échec #${failedCount} (global: ${globalCount}) pour "${sanitizeForLog(playerName)}" depuis ${sanitizeForLog(ip)}` +
       (lockedUntil ? ` — verrou IP jusqu'à ${lockedUntil}` : "") +
       (globalLockedUntil ? ` — verrou global jusqu'à ${globalLockedUntil}` : ""),
   );
