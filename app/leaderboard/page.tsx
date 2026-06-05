@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import {
   fetchLeaderboard,
   fetchCommunityTotals,
@@ -35,7 +35,9 @@ export default function LeaderboardPage() {
     () => fetchLeaderboard({ sortKey, ascending: sortAsc, page, pageSize: LEADERBOARD_PAGE_SIZE }),
     [sortKey, sortAsc, page],
   );
-  const players = playersData ?? [];
+  // Référence stable : évite qu'un nouveau [] soit créé à chaque rendu pendant le chargement,
+  // ce qui invaliderait inutilement les useMemo qui dépendent de players.
+  const players = useMemo(() => playersData ?? [], [playersData]);
 
   // Agrégats communautaires — requête séparée, indépendante de la pagination
   const { data: totalsData } = useAsync(() => fetchCommunityTotals());
@@ -67,15 +69,22 @@ export default function LeaderboardPage() {
     setFriends(getFriends());
   }
 
-  // Filtre "amis seulement" côté client sur la page courante (option A)
-  const meKey = currentPlayerName ? normalizeName(currentPlayerName) : null;
-  const displayedPlayers = friendsOnly
-    ? players.filter(
-        (p) =>
-          normalizeName(p.player_name) === meKey ||
-          friends.includes(normalizeName(p.player_name)),
-      )
-    : players;
+  // Clé canonique du joueur courant — mémorisée pour ne pas appeler normalizeName à chaque rendu.
+  const meKey = useMemo(
+    () => (currentPlayerName ? normalizeName(currentPlayerName) : null),
+    [currentPlayerName],
+  );
+
+  // Filtre "amis seulement" côté client sur la page courante (option A).
+  // Mémorisé pour éviter de renormaliser chaque player_name à chaque rendu
+  // quand seul un état UI sans rapport a changé (ex: compteur de page, préférences).
+  const displayedPlayers = useMemo(() => {
+    if (!friendsOnly) return players;
+    return players.filter((p) => {
+      const key = normalizeName(p.player_name);
+      return key === meKey || friends.includes(key);
+    });
+  }, [players, friendsOnly, friends, meKey]);
 
   // hasMore : si la page est pleine on suppose qu'il y a une suivante
   const hasMore = players.length === LEADERBOARD_PAGE_SIZE;
