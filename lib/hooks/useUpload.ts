@@ -7,7 +7,6 @@ import { ApiResponse } from "@/lib/types";
 import { useTranslation } from "@/lib/i18n";
 import { checkPlayer } from "@/app/actions/pinActions";
 import { savePlayerStats } from "@/app/actions/savePlayerStats";
-import { buildPlayerRow } from "@/lib/buildPlayerRow";
 import { getPrefs, setPrefs } from "@/lib/preferences";
 import { setDashboardSession } from "@/lib/session";
 import { getPlayerProfile } from "@/app/actions/getPlayerProfile";
@@ -121,7 +120,7 @@ export function useUpload({
       const result = await savePlayerStats(
         playerName,
         pin,
-        buildPlayerRow(response.data),
+        response.data,
       );
       if (!result.ok) {
         if (process.env.NODE_ENV !== "production")
