@@ -122,6 +122,16 @@ export function useUpload({
       getPrefs().showOnLeaderboard,
     );
 
+    // Échec de parsing : on arrête le chargement et on affiche l'erreur.
+    // On ne stocke pas la réponse et on ne déclenche pas apiDone,
+    // pour éviter la redirection vers /dashboard avec une session vide.
+    if (!response.ok || !response.data) {
+      setIsLoading(false);
+      setProgress(0);
+      setFormError(t("errParseFailed"));
+      return;
+    }
+
     // On stocke uniquement la partie ApiResponse dans resultRef (pour setDashboardSession).
     resultRef.current = { ok: response.ok, data: response.data, error: response.error };
 
