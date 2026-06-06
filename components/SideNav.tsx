@@ -3,12 +3,15 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useTranslation } from "@/lib/i18n";
-import { getCurrentIdentity } from "@/lib/session";
+import { getDashboardSession } from "@/lib/session";
+import { usePrefs } from "@/lib/PrefsContext";
 
 export default function SideNav() {
   const pathname = usePathname();
   const t = useTranslation();
-  const [playerName, setPlayerName] = useState("DEEP ROCK GALACTIC");
+  const { prefs } = usePrefs();
+  // Nom porté par la session active (upload ou démo) — relu à chaque navigation
+  const [sessionName, setSessionName] = useState("");
 
   // navItems est défini ici car il utilise t() pour les labels traduits
   const navItems = [
@@ -18,12 +21,15 @@ export default function SideNav() {
     { label: t("navMemorial"), href: "/leaderboard", icon: "military_tech" },
   ];
 
+  // pathname change à chaque navigation → couvre upload → /dashboard et démo
   useEffect(() => {
-    // Source de vérité unique : on affiche le pseudo de l'identité courante
-    // (session puis préférence), aligné avec l'abyss-bar et le leaderboard.
-    const id = getCurrentIdentity();
-    if (id.displayName) setPlayerName(id.displayName);
-  }, []);
+    const session = getDashboardSession();
+    setSessionName(session?.name ?? "");
+  }, [pathname]);
+
+  // Priorité : session active > préférence persistante > défaut DRG
+  // prefs.playerName est réactif via PrefsContext → se met à jour dès Options
+  const playerName = sessionName || prefs.playerName || "DEEP ROCK GALACTIC";
 
   return (
     <aside className="w-64 min-h-screen bg-surface-container flex flex-col border-r-4 border-outline">
