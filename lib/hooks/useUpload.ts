@@ -2,11 +2,10 @@
 
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
-import { parseSaveFile } from "@/lib/api";
+import { uploadAndSave } from "@/lib/api";
 import { ApiResponse } from "@/lib/types";
 import { useTranslation } from "@/lib/i18n";
 import { checkPlayer } from "@/app/actions/pinActions";
-import { savePlayerStats } from "@/app/actions/savePlayerStats";
 import { getPrefs, setPrefs } from "@/lib/preferences";
 import { setDashboardSession } from "@/lib/session";
 import { getPlayerProfile } from "@/app/actions/getPlayerProfile";
@@ -113,20 +112,23 @@ export function useUpload({
   async function handlePinSuccess(pin: string) {
     setPinModalMode(null);
     setIsLoading(true);
-    const response = await parseSaveFile(selectedFile!, playerName);
-    resultRef.current = response;
 
-    if (response.ok && response.data && getPrefs().showOnLeaderboard) {
-      const result = await savePlayerStats(
-        playerName,
-        pin,
-        response.data,
-      );
-      if (!result.ok) {
-        if (process.env.NODE_ENV !== "production")
-          console.warn("savePlayerStats:", result.error);
-        setLeaderboardFailed(true);
-      }
+    // uploadAndSave orchestre parse + save côté serveur en un seul aller-retour.
+    // Le DashboardData complet ne transite plus deux fois par le navigateur.
+    const response = await uploadAndSave(
+      selectedFile!,
+      playerName,
+      pin,
+      getPrefs().showOnLeaderboard,
+    );
+
+    // On stocke uniquement la partie ApiResponse dans resultRef (pour setDashboardSession).
+    resultRef.current = { ok: response.ok, data: response.data, error: response.error };
+
+    if (response.leaderboardFailed) {
+      if (process.env.NODE_ENV !== "production")
+        console.warn("uploadAndSave: leaderboard save failed");
+      setLeaderboardFailed(true);
     }
 
     setApiDone(true);
