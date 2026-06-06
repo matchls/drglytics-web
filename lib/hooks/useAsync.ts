@@ -51,27 +51,44 @@ export function useAsync<T>(
   const fetcherRef = useRef(fetcher);
   fetcherRef.current = fetcher;
 
+  // Ref vers la fonction qui invalide le chargement en cours.
+  // Chaque appel à load() écrit ici une fonction qui positionne isCurrent=false
+  // pour la promesse précédente, empêchant ses setData/setError/setLoading.
+  const cancelRef = useRef<(() => void) | null>(null);
+
   // Fonction de chargement stable (ne change jamais de référence grâce au
   // useCallback sans dépendance + ref). En cas d'erreur, les données
   // précédentes sont conservées (pattern "stale-while-error" comme SWR) :
   // utile lors d'un reload, l'utilisateur ne perd pas la vue des données
   // juste parce qu'un refresh a échoué.
   const load = useCallback(async () => {
+    // Annule le chargement précédent s'il est encore en vol.
+    if (cancelRef.current) cancelRef.current();
+
+    // Ce flag appartient à cette invocation de load() uniquement.
+    // Si une nouvelle invocation démarre avant que celle-ci ne termine,
+    // isCurrent passera à false et les setState suivants seront ignorés.
+    let isCurrent = true;
+    cancelRef.current = () => { isCurrent = false; };
+
     setLoading(true);
     setError(null);
     try {
       const result = await fetcherRef.current();
-      setData(result);
+      if (isCurrent) setData(result);
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Erreur inconnue");
+      if (isCurrent) setError(err instanceof Error ? err.message : "Erreur inconnue");
     } finally {
-      setLoading(false);
+      if (isCurrent) setLoading(false);
     }
   }, []);
 
   // Exécute le fetch au montage et quand les dépendances changent.
+  // Le cleanup annule le chargement en cours avant chaque réexécution
+  // (dépendances changées) et au démontage du composant.
   useEffect(() => {
     load();
+    return () => { if (cancelRef.current) cancelRef.current(); };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, deps);
 
