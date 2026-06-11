@@ -27,6 +27,9 @@ const jetbrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   title: "DRG Dashboard",
   description: "Deep Rock Galactic stats dashboard",
+  icons: {
+    icon: "/icons/misc/drg_supporter.png",
+  },
 };
 
 export default function RootLayout({
