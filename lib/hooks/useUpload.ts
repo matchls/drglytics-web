@@ -106,7 +106,7 @@ export function useUpload({
     if (!response.ok || !response.data) {
       setIsLoading(false);
       setProgress(0);
-      setFormError(t("errParseFailed"));
+      setFormError(response.error ?? t("errParseFailed"));
       return;
     }
 
