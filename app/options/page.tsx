@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { usePrefs } from "@/lib/PrefsContext";
 import { useTranslation } from "@/lib/i18n";
 import { sendContactEmail } from "@/app/actions/sendContactEmail";
@@ -7,6 +7,15 @@ import { sendContactEmail } from "@/app/actions/sendContactEmail";
 export default function OptionsPage() {
   const { prefs, update } = usePrefs();
   const t = useTranslation();
+
+  // Champ pseudo contrôlé — initialisé vide (cohérent avec le rendu SSR de PrefsContext),
+  // puis synchronisé avec localStorage dès que PrefsProvider a hydraté ses valeurs.
+  // Sans cet useEffect, defaultValue resterait figé sur "" et le champ n'afficherait
+  // jamais le pseudo sauvegardé.
+  const [pseudoField, setPseudoField] = useState("");
+  useEffect(() => {
+    setPseudoField(prefs.playerName);
+  }, [prefs.playerName]);
 
   // État du formulaire de contact
   const [contactPseudo, setContactPseudo] = useState(prefs.playerName ?? "");
@@ -42,9 +51,14 @@ export default function OptionsPage() {
             <div className="flex gap-3">
               <input
                 type="text"
-                defaultValue={prefs.playerName}
+                value={pseudoField}
+                onChange={(e) => setPseudoField(e.target.value)}
+                onBlur={(e) => {
+                  const trimmed = e.target.value.trim();
+                  setPseudoField(trimmed);
+                  update({ playerName: trimmed });
+                }}
                 maxLength={32}
-                onBlur={(e) => update({ playerName: e.target.value.trim() })}
                 className="flex-1 bg-surface-container-highest border border-drg-border text-on-surface font-mono text-sm p-2 focus:outline-none focus:border-drg-orange"
               />
             </div>
