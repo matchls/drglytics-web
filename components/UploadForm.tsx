@@ -1,28 +1,24 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import { useTranslation } from "@/lib/i18n";
 import { getPrefs } from "@/lib/preferences";
 import { useUpload } from "@/lib/hooks/useUpload";
-import PinModal from "@/components/PinModal";
 
-export default function UploadForm() {
+interface UploadFormProps {
+  isLoggedIn: boolean;
+}
+
+export default function UploadForm({ isLoggedIn }: UploadFormProps) {
   const t = useTranslation();
   const [playerName, setPlayerName] = useState("");
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [showHelp, setShowHelp] = useState(false);
   const [formError, setFormError] = useState<string | null>(null);
-  const [pinModalMode, setPinModalMode] = useState<"create" | "verify" | null>(null);
 
-  const {
-    isLoading,
-    progress,
-    currentTip,
-    leaderboardFailed,
-    handleSubmit,
-    handlePinSuccess,
-    handleDemo,
-  } = useUpload({ playerName, selectedFile, setFormError, setPinModalMode });
+  const { isLoading, progress, currentTip, leaderboardFailed, handleSubmit, handleDemo } =
+    useUpload({ playerName, selectedFile, setFormError });
 
   // Synchro Options → upload : pré-remplit le pseudo avec la préférence persistante
   useEffect(() => {
@@ -58,15 +54,6 @@ export default function UploadForm() {
 
   return (
     <div className="min-h-screen bg-background industrial-grid flex items-center justify-center relative overflow-hidden">
-      {/* Modal PIN — s'affiche par-dessus le formulaire */}
-      {pinModalMode && (
-        <PinModal
-          mode={pinModalMode}
-          playerName={playerName.trim()}
-          onSuccess={handlePinSuccess}
-          onCancel={() => setPinModalMode(null)}
-        />
-      )}
       {/* Coins en rayures danger */}
       <div className="absolute top-0 left-0 w-24 h-24 hazard-stripes opacity-40" />
       <div className="absolute top-0 right-0 w-24 h-24 hazard-stripes opacity-40" />
@@ -77,15 +64,26 @@ export default function UploadForm() {
       <div className="industrial-panel pressed-metal w-full max-w-lg mx-4">
         {/* Header du panel */}
         <div className="p-6 border-b-4 border-outline flex items-center gap-3">
-          <span className="material-symbols-outlined text-primary">
-            terminal
-          </span>
+          <span className="material-symbols-outlined text-primary">terminal</span>
           <h1 className="font-display text-3xl text-on-surface tracking-widest">
             {t("formTitle")}
           </h1>
         </div>
 
         <div className="p-6 flex flex-col gap-6">
+          {/* Bannière connexion requise */}
+          {!isLoggedIn && (
+            <div className="bg-surface-dim border-l-4 border-primary px-4 py-3 flex items-center gap-3">
+              <span className="material-symbols-outlined text-primary">lock</span>
+              <p className="font-mono text-xs text-on-surface-variant">
+                <Link href="/auth/login" className="text-primary hover:text-primary-fixed transition-colors">
+                  Connecte-toi
+                </Link>{" "}
+                pour sauvegarder tes stats dans le leaderboard.
+              </p>
+            </div>
+          )}
+
           {/* Input pseudo */}
           <div className="relative">
             <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">

@@ -1,9 +1,15 @@
 import UploadForm from "@/components/UploadForm";
+import { createClient } from "@/lib/supabase/server";
 
-export default function Home() {
+export default async function Home() {
+  const supabase = createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
   return (
     <main>
-      <UploadForm />
+      <UploadForm isLoggedIn={!!user} />
     </main>
   );
 }

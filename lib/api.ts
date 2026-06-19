@@ -60,13 +60,11 @@ export async function parseSaveFile(
 export async function uploadAndSave(
   saveFile: File,
   playerName: string,
-  pin: string,
   saveToLeaderboard: boolean,
 ): Promise<UploadRouteResponse> {
   const formData = new FormData();
   formData.append("file", saveFile);
   formData.append("playerName", playerName);
-  formData.append("pin", pin);
   formData.append("saveToLeaderboard", String(saveToLeaderboard));
 
   try {
