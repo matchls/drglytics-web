@@ -5,6 +5,7 @@ import SideNav from "@/components/SideNav";
 import TopBar from "@/components/TopBar";
 import Footer from "@/components/Footer";
 import { PrefsProvider } from "@/lib/PrefsContext";
+import { createClient } from "@/lib/supabase/server";
 
 const barlowCondensed = Barlow_Condensed({
   subsets: ["latin"],
@@ -32,11 +33,17 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  // Lecture de l'utilisateur côté serveur — null si non connecté
+  const supabase = createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
   return (
     <html lang="en">
       <head>
@@ -52,7 +59,7 @@ export default function RootLayout({
         <PrefsProvider>
           <SideNav />
           <div className="flex flex-col flex-1 overflow-hidden">
-            <TopBar />
+            <TopBar userEmail={user?.email ?? null} />
             <main className="flex-1 overflow-y-auto">{children}</main>
             <Footer />
           </div>

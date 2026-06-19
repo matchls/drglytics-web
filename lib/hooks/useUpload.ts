@@ -5,7 +5,6 @@ import { useRouter } from "next/navigation";
 import { uploadAndSave } from "@/lib/api";
 import { ApiResponse } from "@/lib/types";
 import { useTranslation } from "@/lib/i18n";
-import { checkPlayer } from "@/app/actions/pinActions";
 import { getPrefs, setPrefs } from "@/lib/preferences";
 import { setDashboardSession } from "@/lib/session";
 import { getPlayerProfile } from "@/app/actions/getPlayerProfile";
@@ -14,7 +13,6 @@ interface UseUploadParams {
   playerName: string;
   selectedFile: File | null;
   setFormError: (error: string | null) => void;
-  setPinModalMode: (mode: "create" | "verify" | null) => void;
 }
 
 interface UseUploadReturn {
@@ -23,7 +21,6 @@ interface UseUploadReturn {
   currentTip: string;
   leaderboardFailed: boolean;
   handleSubmit: () => Promise<void>;
-  handlePinSuccess: (pin: string) => Promise<void>;
   handleDemo: () => Promise<void>;
 }
 
@@ -31,7 +28,6 @@ export function useUpload({
   playerName,
   selectedFile,
   setFormError,
-  setPinModalMode,
 }: UseUploadParams): UseUploadReturn {
   const t = useTranslation();
   const router = useRouter();
@@ -61,7 +57,6 @@ export function useUpload({
   }, [isLoading]);
 
   // Quand l'API a répondu, force la barre à 100 % puis redirige.
-  // Délai supplémentaire si leaderboard a échoué : laisse l'avertissement visible.
   useEffect(() => {
     if (!apiDone) return;
     if (progress < 100) {
@@ -100,31 +95,14 @@ export function useUpload({
       return;
     }
     setFormError(null);
-
-    const { exists, hasPIN } = await checkPlayer(playerName);
-    if (!exists || !hasPIN) {
-      setPinModalMode("create");
-    } else {
-      setPinModalMode("verify");
-    }
-  }
-
-  async function handlePinSuccess(pin: string) {
-    setPinModalMode(null);
     setIsLoading(true);
 
-    // uploadAndSave orchestre parse + save côté serveur en un seul aller-retour.
-    // Le DashboardData complet ne transite plus deux fois par le navigateur.
     const response = await uploadAndSave(
-      selectedFile!,
+      selectedFile,
       playerName,
-      pin,
       getPrefs().showOnLeaderboard,
     );
 
-    // Échec de parsing : on arrête le chargement et on affiche l'erreur.
-    // On ne stocke pas la réponse et on ne déclenche pas apiDone,
-    // pour éviter la redirection vers /dashboard avec une session vide.
     if (!response.ok || !response.data) {
       setIsLoading(false);
       setProgress(0);
@@ -132,7 +110,6 @@ export function useUpload({
       return;
     }
 
-    // On stocke uniquement la partie ApiResponse dans resultRef (pour setDashboardSession).
     resultRef.current = { ok: response.ok, data: response.data, error: response.error };
 
     if (response.leaderboardFailed) {
@@ -163,7 +140,6 @@ export function useUpload({
     currentTip: tips[currentTip],
     leaderboardFailed,
     handleSubmit,
-    handlePinSuccess,
     handleDemo,
   };
 }
