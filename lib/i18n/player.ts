@@ -23,6 +23,9 @@ export const player = {
     claimErrUnknown: "An error occurred. Please try again.",
     claimOwnerVerified: "VERIFIED OWNER",
     claimLoginToVerify: "Log in to claim this profile.",
+    shareCard: "SHARE CARD",
+    shareCardGenerating: "GENERATING...",
+    shareCardError: "Failed to generate card.",
   },
   fr: {
     playerLoading: "ACCÈS AU DOSSIER PERSONNEL...",
@@ -48,5 +51,8 @@ export const player = {
     claimErrUnknown: "Une erreur est survenue. Réessayez.",
     claimOwnerVerified: "PROPRIÉTAIRE VÉRIFIÉ",
     claimLoginToVerify: "Connectez-vous pour réclamer ce profil.",
+    shareCard: "PARTAGER",
+    shareCardGenerating: "GÉNÉRATION...",
+    shareCardError: "Impossible de générer la carte.",
   },
 } as const;
