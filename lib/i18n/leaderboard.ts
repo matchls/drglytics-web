@@ -24,6 +24,7 @@ export const leaderboard = {
     lbCommunityKills: "COMMUNITY KILLS",
     lbCommunityMissions: "COMMUNITY MISSIONS",
     lbMissions: "missions",
+    lbCompare: "VS",
   },
   fr: {
     lbRank: "RANG",
@@ -50,5 +51,6 @@ export const leaderboard = {
     lbCommunityKills: "ÉLIMINATIONS COMMUNAUTAIRES",
     lbCommunityMissions: "MISSIONS COMMUNAUTAIRES",
     lbMissions: "missions",
+    lbCompare: "VS",
   },
 } as const;
