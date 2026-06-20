@@ -12,7 +12,9 @@ export const options = {
     optPseudoHint: "Applied on next upload.",
     optShowOnLeaderboard: "APPEAR ON LEADERBOARD",
     optShowOnLeaderboardHint:
-      "If disabled, your stats will no longer be visible to other players.",
+      "Not logged in — preference applied on next upload.",
+    optShowOnLeaderboardHintConnected:
+      "Takes effect immediately. Your stats stay in the database.",
     optLanguageHint: "Français or English.",
     optDistanceHint: "Kilometers or miles.",
     optTimeFormatHint: "342h 15m — or — 14d 6h",
@@ -38,7 +40,9 @@ export const options = {
     optPseudoHint: "Modifié au prochain upload.",
     optShowOnLeaderboard: "APPARAÎTRE DANS LE LEADERBOARD",
     optShowOnLeaderboardHint:
-      "Si désactivé, vos stats ne seront plus visibles par les autres joueurs.",
+      "Non connecté — préférence appliquée au prochain upload.",
+    optShowOnLeaderboardHintConnected:
+      "Prise en compte immédiatement. Tes stats restent en base.",
     optLanguageHint: "Français ou English.",
     optDistanceHint: "Kilomètres ou miles.",
     optTimeFormatHint: "342h 15m — ou — 14j 6h",
