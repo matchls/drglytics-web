@@ -62,7 +62,7 @@ export default function OptionsPage() {
   const [contactError, setContactError] = useState("");
 
   return (
-    <div className="min-h-screen bg-background p-6 flex flex-col gap-6">
+    <div className="min-h-screen bg-background p-3 md:p-6 flex flex-col gap-4 md:gap-6">
       <div className="industrial-panel p-4 border-b-4 border-outline flex items-center gap-3">
         <span className="material-symbols-outlined text-primary">settings</span>
         <p className="font-display text-2xl text-on-surface tracking-widest">

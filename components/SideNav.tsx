@@ -32,43 +32,69 @@ export default function SideNav() {
   const playerName = sessionName || prefs.playerName || "DEEP ROCK GALACTIC";
 
   return (
-    <aside className="w-64 min-h-screen bg-surface-container flex flex-col border-r-4 border-outline">
-      {/* Header */}
-      <div className="p-6 border-b-4 border-outline">
-        <p className="text-s tracking-[0.3em] text-on-surface-variant uppercase">
-          {t("navSpaceRigProfile")}
-        </p>
-        <p className="font-display text-4xl text-primary truncate">
-          {playerName}
-        </p>
-      </div>
+    <>
+      {/* Sidebar desktop — cachée sur mobile */}
+      <aside className="hidden md:flex w-64 min-h-screen bg-surface-container flex-col border-r-4 border-outline">
+        {/* Header */}
+        <div className="p-6 border-b-4 border-outline">
+          <p className="text-s tracking-[0.3em] text-on-surface-variant uppercase">
+            {t("navSpaceRigProfile")}
+          </p>
+          <p className="font-display text-4xl text-primary truncate">
+            {playerName}
+          </p>
+        </div>
 
-      {/* Nav items */}
-      <nav className="flex-1 py-4">
+        {/* Nav items */}
+        <nav className="flex-1 py-4">
+          {navItems.map((item) => {
+            const isActive = pathname === item.href;
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={`flex items-center gap-3 px-6 py-3 transition-colors
+                  ${
+                    isActive
+                      ? "bg-primary-container border-l-4 border-primary text-primary"
+                      : "border-l-4 border-transparent text-on-surface hover:bg-surface-container-high"
+                  }
+                `}
+              >
+                <span className="material-symbols-outlined text-xl">
+                  {item.icon}
+                </span>
+                <span className="font-mono text-sm tracking-widest">
+                  {item.label}
+                </span>
+              </Link>
+            );
+          })}
+        </nav>
+      </aside>
+
+      {/* Bottom nav mobile — cachée sur desktop */}
+      <nav className="md:hidden fixed bottom-0 left-0 right-0 h-16 bg-surface-container border-t-4 border-outline flex items-center justify-around z-50">
         {navItems.map((item) => {
           const isActive = pathname === item.href;
           return (
             <Link
               key={item.href}
               href={item.href}
-              className={`flex items-center gap-3 px-6 py-3 transition-colors
-                ${
-                  isActive
-                    ? "bg-primary-container border-l-4 border-primary text-primary"
-                    : "border-l-4 border-transparent text-on-surface hover:bg-surface-container-high"
-                }
-              `}
+              className={`flex flex-col items-center gap-0.5 px-3 py-1 transition-colors ${
+                isActive ? "text-primary" : "text-on-surface-variant"
+              }`}
             >
-              <span className="material-symbols-outlined text-xl">
+              <span className="material-symbols-outlined text-2xl">
                 {item.icon}
               </span>
-              <span className="font-mono text-sm tracking-widest">
+              <span className="font-mono text-[9px] tracking-widest uppercase">
                 {item.label}
               </span>
             </Link>
           );
         })}
       </nav>
-    </aside>
+    </>
   );
 }
