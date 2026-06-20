@@ -3,14 +3,17 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { DashboardData } from "@/lib/types";
 import PlayerStatsLayout from "@/components/PlayerStatsLayout";
+import ProgressDeltaPanel from "@/components/ProgressDelta";
 import { getDashboardSession } from "@/lib/session";
 import { useTranslation } from "@/lib/i18n";
+import { getProgressDelta, type ProgressDelta } from "@/app/actions/getProgressDelta";
 
 export default function DashboardPage() {
   const t = useTranslation();
   const [data, setData] = useState<DashboardData | null>(null);
   const [isDemo, setIsDemo] = useState(false);
   const [sessionChecked, setSessionChecked] = useState(false);
+  const [delta, setDelta] = useState<ProgressDelta | null>(null);
 
   useEffect(() => {
     const session = getDashboardSession();
@@ -19,6 +22,11 @@ export default function DashboardPage() {
       setIsDemo(session.isDemo);
     }
     setSessionChecked(true);
+
+    // Récupère le delta de progression si l'utilisateur est connecté
+    if (!session?.isDemo) {
+      getProgressDelta().then(setDelta);
+    }
   }, []);
 
   if (!sessionChecked) return null;
@@ -65,14 +73,17 @@ export default function DashboardPage() {
       data={data}
       showPieChart
       header={
-        isDemo ? (
-          <div className="border-l-4 border-drg-orange px-4 py-2 font-mono text-xs text-on-surface-variant tracking-widest flex items-center gap-3 bg-surface-container">
-            <span className="material-symbols-outlined text-drg-orange text-sm">
-              info
-            </span>
-            {t("demoBanner").replace("{name}", data.player.name.toUpperCase())}
-          </div>
-        ) : undefined
+        <>
+          {isDemo && (
+            <div className="border-l-4 border-drg-orange px-4 py-2 font-mono text-xs text-on-surface-variant tracking-widest flex items-center gap-3 bg-surface-container">
+              <span className="material-symbols-outlined text-drg-orange text-sm">
+                info
+              </span>
+              {t("demoBanner").replace("{name}", data.player.name.toUpperCase())}
+            </div>
+          )}
+          {delta && <ProgressDeltaPanel delta={delta} />}
+        </>
       }
     />
   );
