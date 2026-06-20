@@ -93,7 +93,7 @@ export default function PlayerTable({
       </div>
 
       <div className="overflow-x-auto">
-        <table className="w-full">
+        <table className="w-full min-w-[700px]">
           <thead>
             <tr className="border-b-4 border-outline text-on-surface-variant font-mono text-xs tracking-widest uppercase">
               <th className="p-4 text-left">{t("lbRank")}</th>
