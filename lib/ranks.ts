@@ -37,5 +37,10 @@ export const ABYSS_BADGE_THRESHOLDS = {
   legend: 1_000, // heures de jeu
   gearHead: 10, // overclocks forgés
   fullArsenal: 50, // overclocks forgés
+  forgeMaster: 100, // overclocks forgés
   jackOfAllTrades: 50, // missions par classe (pour CHAQUE classe)
+  mainClassMinMissions: 100, // missions totales minimum pour les badges de classe
+  mainClassRatio: 0.4, // ratio minimum missions d'une classe / total
+  ironDwarfMinMissions: 50, // missions totales minimum pour Iron Dwarf
+  ironDwarfMaxRatio: 0.5, // downs / missions maximum pour Iron Dwarf
 } as const;
