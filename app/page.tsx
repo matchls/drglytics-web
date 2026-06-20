@@ -1,4 +1,5 @@
 import UploadForm from "@/components/UploadForm";
+import PrivacyBanner from "@/components/PrivacyBanner";
 import { createClient } from "@/lib/supabase/server";
 
 export default async function Home() {
@@ -8,7 +9,8 @@ export default async function Home() {
   } = await supabase.auth.getUser();
 
   return (
-    <main>
+    <main className="p-3 md:p-6 flex flex-col gap-4">
+      <PrivacyBanner />
       <UploadForm isLoggedIn={!!user} />
     </main>
   );
