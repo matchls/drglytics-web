@@ -5,6 +5,7 @@ import ClassCard from "@/components/ClassCard";
 import ClassPieChart from "@/components/ClassPieChart";
 import MissionStats from "@/components/MissionStats";
 import OverclockList from "@/components/OverclockList";
+import PlayerBadges from "@/components/PlayerBadges";
 import { DashboardData } from "@/lib/types";
 
 interface PlayerStatsLayoutProps {
@@ -47,6 +48,7 @@ export default function PlayerStatsLayout({
           ))}
         </div>
       )}
+      <PlayerBadges data={data} />
       <MissionStats missionStats={data.mission_stats} />
       <OverclockList overclocks={data.overclocks} />
     </div>
