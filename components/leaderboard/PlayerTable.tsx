@@ -1,5 +1,6 @@
 "use client";
 import Image from "next/image";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { type PlayerRow } from "@/lib/data/players";
 import { TranslationKey } from "@/lib/i18n";
@@ -138,6 +139,7 @@ export default function PlayerTable({
               <th className="p-4 text-left">{t("lbStatus")}</th>
               <th className="p-4 text-left">{t("lbBestClass")}</th>
               <th className="p-4 text-center">{t("lbFriend")}</th>
+              <th className="p-4 text-center">{t("lbCompare")}</th>
             </tr>
           </thead>
           <tbody>
@@ -231,13 +233,25 @@ export default function PlayerTable({
                       </button>
                     )}
                   </td>
+                  {/* Bouton VS — lien vers /compare?a=currentPlayer&b=thisPlayer */}
+                  <td className="p-4 text-center">
+                    {!isCurrentPlayer && (
+                      <Link
+                        href={`/compare?a=${encodeURIComponent(currentPlayerName ?? "")}&b=${encodeURIComponent(player.player_name)}`}
+                        onClick={(e) => e.stopPropagation()}
+                        className="font-mono text-[10px] tracking-widest border border-outline text-on-surface-variant hover:border-drg-orange hover:text-on-surface px-2 py-0.5 transition-colors"
+                      >
+                        VS
+                      </Link>
+                    )}
+                  </td>
                 </tr>
               );
             })}
             {/* Message si aucun ami en mode "amis seulement" */}
             {friendsOnly && safeRows.length === 0 && (
               <tr>
-                <td colSpan={10} className="p-8 font-mono text-xs text-on-surface-variant text-center tracking-widest">
+                <td colSpan={11} className="p-8 font-mono text-xs text-on-surface-variant text-center tracking-widest">
                   {t("lbNoFriends")}
                 </td>
               </tr>
@@ -245,7 +259,7 @@ export default function PlayerTable({
             {/* Message de fin de liste : page vide hors mode "amis" (ex: hasMore faux positif) */}
             {!friendsOnly && safeRows.length === 0 && (
               <tr>
-                <td colSpan={10} className="p-8 font-mono text-xs text-on-surface-variant text-center tracking-widest">
+                <td colSpan={11} className="p-8 font-mono text-xs text-on-surface-variant text-center tracking-widest">
                   {t("lbEndOfList")}
                 </td>
               </tr>
@@ -253,7 +267,7 @@ export default function PlayerTable({
             {/* Avertissement final */}
             <tr>
               <td
-                colSpan={10}
+                colSpan={11}
                 className="p-4 font-mono text-xs text-error text-center tracking-widest"
               >
                 {t("lbWarning")}
