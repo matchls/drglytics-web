@@ -20,7 +20,7 @@ export async function savePlayerStats(
 
   // Vérification de la session — getUser() fait un appel réseau à Supabase,
   // pas juste une lecture locale : on ne peut pas usurper cette vérification.
-  const supabase = createClient();
+  const supabase = await createClient();
   const {
     data: { user },
   } = await supabase.auth.getUser();

@@ -45,7 +45,7 @@ export async function sendContactEmail(
 
   // 3) Rate limiting par IP : 3 messages / heure. Best-effort (voir lib/rateLimit).
   const ip =
-    headers().get("x-forwarded-for")?.split(",")[0]?.trim() ?? "unknown";
+    (await headers()).get("x-forwarded-for")?.split(",")[0]?.trim() ?? "unknown";
   if (!checkRateLimit(`contact:${ip}`, RATE_LIMIT_MAX, RATE_LIMIT_WINDOW_MS)) {
     return { success: false, error: "Trop de messages. Réessaie plus tard." };
   }

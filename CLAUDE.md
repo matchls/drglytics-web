@@ -19,7 +19,7 @@ Frontend Next.js du dashboard DRG. Affiche les stats d'un joueur Deep Rock Galac
 
 ## Stack technique
 
-- **Framework :** Next.js 14 (App Router)
+- **Framework :** Next.js 15 / React 19 (App Router)
 - **Langage :** TypeScript
 - **Styling :** Tailwind CSS — couleurs DRG définies dans `tailwind.config.ts`
 - **Base de données :** Supabase (PostgreSQL) via `@supabase/supabase-js`

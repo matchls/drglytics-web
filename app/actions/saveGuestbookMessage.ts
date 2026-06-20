@@ -14,7 +14,7 @@ export async function saveGuestbookMessage(
   if (!text) return { ok: false, error: "Message vide." };
   if (text.length > MAX_MESSAGE_LENGTH) return { ok: false, error: "Message trop long." };
 
-  const supabase = createClient();
+  const supabase = await createClient();
   const {
     data: { user },
   } = await supabase.auth.getUser();
