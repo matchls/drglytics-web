@@ -12,6 +12,25 @@ interface Props {
   missionStats: DashboardData["mission_stats"];
 }
 
+// Icônes Material Symbols pour chaque onglet de catégorie
+const CATEGORY_ICONS: Record<string, string> = {
+  "Kills":       "skull",
+  "Missions":    "rocket_launch",
+  "Classes":     "groups",
+  "Biomes":      "terrain",
+  "Deep Dives":  "scuba_diving",
+  "Mining":      "diamond",
+  "Distance":    "route",
+  "Time":        "schedule",
+  "Deaths":      "dangerous",
+  "Bar":         "sports_bar",
+  "Forging":     "hardware",
+  "Warnings":    "warning",
+  "Seasons":     "auto_awesome",
+  "Assignments": "assignment",
+  "Purchases":   "shopping_cart",
+};
+
 // Mapping labels backend (produits par get_stat_category_name()) → clés i18n
 // Le backend renvoie stat.category = "Kills", "Missions", etc. (pas les clés MSC_*)
 const CATEGORY_KEYS: Record<string, TranslationKey> = {
@@ -75,13 +94,18 @@ export default function MissionStats({ missionStats }: Props) {
           <button
             key={cat}
             onClick={() => setActiveCategory(cat)}
-            className={`px-4 py-2 font-mono text-xs tracking-widest border-2 transition-colors
+            className={`flex items-center gap-1.5 px-3 py-2 font-mono text-xs tracking-widest border-2 transition-colors
               ${
                 activeCategory === cat
                   ? "bg-primary text-on-primary border-primary"
                   : "bg-surface-container text-on-surface-variant border-outline hover:bg-surface-container-high"
               }`}
           >
+            {CATEGORY_ICONS[cat] && (
+              <span className="material-symbols-outlined" style={{ fontSize: 14 }}>
+                {CATEGORY_ICONS[cat]}
+              </span>
+            )}
             {CATEGORY_KEYS[cat] ? t(CATEGORY_KEYS[cat]) : cat}
           </button>
         ))}
