@@ -16,12 +16,17 @@ import {
 } from "@/lib/friends";
 import { getCurrentIdentity } from "@/lib/session";
 import { type SortKey } from "@/lib/leaderboard";
+import { getMonthlyLeaderboard } from "@/app/actions/getMonthlyLeaderboard";
 import Podium from "@/components/leaderboard/Podium";
 import PlayerTable from "@/components/leaderboard/PlayerTable";
+import MonthlyTable from "@/components/leaderboard/MonthlyTable";
 import CompanyQuota from "@/components/leaderboard/CompanyQuota";
 import BountyTargets from "@/components/leaderboard/BountyTargets";
 
+type LeaderboardView = "global" | "monthly";
+
 export default function LeaderboardPage() {
+  const [view, setView] = useState<LeaderboardView>("global");
   const [currentPlayerName, setCurrentPlayerName] = useState<string | null>(null);
   const [sortKey, setSortKey] = useState<SortKey>("total_missions");
   const [sortAsc, setSortAsc] = useState(false);
@@ -47,6 +52,12 @@ export default function LeaderboardPage() {
 
   // Agrégats communautaires — requête séparée, indépendante de la pagination
   const { data: totalsData } = useAsync(() => fetchCommunityTotals());
+
+  // Classement mensuel — chargé une seule fois (pas de pagination, pas de tri)
+  const { data: monthlyData } = useAsync(
+    () => (view === "monthly" ? getMonthlyLeaderboard() : Promise.resolve(null)),
+    [view],
+  );
   const communityKills    = totalsData?.kills    ?? 0;
   const communityMissions = totalsData?.missions ?? 0;
 
@@ -94,25 +105,47 @@ export default function LeaderboardPage() {
 
   return (
     <div className="min-h-screen bg-background scanline-overlay p-3 md:p-6 flex flex-col gap-4 md:gap-6">
-      <Podium players={players} t={t} />
+      {/* Sélecteur de vue — All Time vs 30 Days */}
+      <div className="flex gap-2">
+        {(["global", "monthly"] as const).map((v) => (
+          <button
+            key={v}
+            onClick={() => setView(v)}
+            className={`font-mono text-xs tracking-widest px-4 py-2 border-2 transition-colors ${
+              view === v
+                ? "bg-primary text-on-primary border-primary"
+                : "border-outline text-on-surface-variant hover:border-drg-orange"
+            }`}
+          >
+            {v === "global" ? t("lbGlobal") : t("lbMonthly")}
+          </button>
+        ))}
+      </div>
 
-      <PlayerTable
-        players={displayedPlayers}
-        currentPlayerName={currentPlayerName}
-        sortKey={sortKey}
-        sortAsc={sortAsc}
-        friendsOnly={friendsOnly}
-        friends={friends}
-        t={t}
-        onSort={handleSort}
-        onToggleFriend={toggleFriend}
-        onFriendsOnlyChange={setFriendsOnly}
-        page={page}
-        pageSize={LEADERBOARD_PAGE_SIZE}
-        hasMore={hasMore}
-        onPrevPage={() => setPage((p) => Math.max(0, p - 1))}
-        onNextPage={() => setPage((p) => p + 1)}
-      />
+      {view === "global" ? (
+        <>
+          <Podium players={players} t={t} />
+          <PlayerTable
+            players={displayedPlayers}
+            currentPlayerName={currentPlayerName}
+            sortKey={sortKey}
+            sortAsc={sortAsc}
+            friendsOnly={friendsOnly}
+            friends={friends}
+            t={t}
+            onSort={handleSort}
+            onToggleFriend={toggleFriend}
+            onFriendsOnlyChange={setFriendsOnly}
+            page={page}
+            pageSize={LEADERBOARD_PAGE_SIZE}
+            hasMore={hasMore}
+            onPrevPage={() => setPage((p) => Math.max(0, p - 1))}
+            onNextPage={() => setPage((p) => p + 1)}
+          />
+        </>
+      ) : (
+        <MonthlyTable entries={monthlyData ?? []} t={t} />
+      )}
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <CompanyQuota players={players} sortKey={sortKey} t={t} />
