@@ -3,6 +3,10 @@ import { useState, useEffect } from "react";
 import { usePrefs } from "@/lib/PrefsContext";
 import { useTranslation } from "@/lib/i18n";
 import { sendContactEmail } from "@/app/actions/sendContactEmail";
+import {
+  getLeaderboardVisibility,
+  updateLeaderboardVisibility,
+} from "@/app/actions/leaderboardVisibility";
 
 export default function OptionsPage() {
   const { prefs, update } = usePrefs();
@@ -16,6 +20,36 @@ export default function OptionsPage() {
   useEffect(() => {
     setPseudoField(prefs.playerName);
   }, [prefs.playerName]);
+
+  // null = non connecté ou pas de ligne en base ; boolean = valeur serveur
+  const [dbVisibility, setDbVisibility] = useState<boolean | null>(null);
+  const [visibilitySyncing, setVisibilitySyncing] = useState(false);
+
+  // Au montage : récupère la valeur serveur et synchronise le toggle local
+  useEffect(() => {
+    getLeaderboardVisibility().then((v) => {
+      if (v === null) return; // non connecté ou pas encore de ligne
+      setDbVisibility(v);
+      if (prefs.showOnLeaderboard !== v) update({ showOnLeaderboard: v });
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  async function handleVisibilityToggle() {
+    const newValue = !prefs.showOnLeaderboard;
+    update({ showOnLeaderboard: newValue }); // mise à jour optimiste + localStorage
+    if (dbVisibility !== null) {
+      // Joueur connecté avec une ligne en base — mise à jour immédiate en DB
+      setVisibilitySyncing(true);
+      const result = await updateLeaderboardVisibility(newValue);
+      if (result.ok) {
+        setDbVisibility(newValue);
+      } else {
+        update({ showOnLeaderboard: !newValue }); // annule si erreur
+      }
+      setVisibilitySyncing(false);
+    }
+  }
 
   // État du formulaire de contact
   const [contactPseudo, setContactPseudo] = useState(prefs.playerName ?? "");
@@ -74,14 +108,15 @@ export default function OptionsPage() {
                 {t("optShowOnLeaderboard")}
               </p>
               <p className="font-mono text-xs text-on-surface-variant">
-                {t("optShowOnLeaderboardHint")}
+                {dbVisibility !== null
+                  ? t("optShowOnLeaderboardHintConnected")
+                  : t("optShowOnLeaderboardHint")}
               </p>
             </div>
             <button
-              onClick={() =>
-                update({ showOnLeaderboard: !prefs.showOnLeaderboard })
-              }
-              className="w-12 h-6 border-2 border-drg-border bg-surface-container relative overflow-hidden p-0"
+              onClick={handleVisibilityToggle}
+              disabled={visibilitySyncing}
+              className="w-12 h-6 border-2 border-drg-border bg-surface-container relative overflow-hidden p-0 disabled:opacity-50"
             >
               {/* Curseur : gris à gauche = off, orange à droite = on */}
               <span

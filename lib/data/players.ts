@@ -59,6 +59,7 @@ export async function fetchLeaderboard(params: LeaderboardParams = {}): Promise<
   const { data, error } = await supabase
     .from("players")
     .select(LEADERBOARD_COLUMNS)
+    .eq("visible_on_leaderboard", true)
     .order(safeKey, { ascending })
     .range(from, to);
 
@@ -79,7 +80,8 @@ export interface CommunityTotals {
 export async function fetchCommunityTotals(): Promise<CommunityTotals> {
   const { data, error } = await supabase
     .from("players")
-    .select("total_kills, total_missions");
+    .select("total_kills, total_missions")
+    .eq("visible_on_leaderboard", true);
 
   if (error) {
     console.error(error);
@@ -112,18 +114,21 @@ export async function fetchHonorRoll(): Promise<HonorRoll> {
     supabase
       .from("players")
       .select("player_name, bartender_tips")
+      .eq("visible_on_leaderboard", true)
       .order("bartender_tips", { ascending: false })
       .limit(1)
       .single(),
     supabase
       .from("players")
       .select("player_name, beers_consumed")
+      .eq("visible_on_leaderboard", true)
       .order("beers_consumed", { ascending: false })
       .limit(1)
       .single(),
     supabase
       .from("players")
       .select("player_name, rounds_ordered")
+      .eq("visible_on_leaderboard", true)
       .order("rounds_ordered", { ascending: false })
       .limit(1)
       .single(),
