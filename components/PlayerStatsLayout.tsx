@@ -6,6 +6,7 @@ import ClassPieChart from "@/components/ClassPieChart";
 import MissionStats from "@/components/MissionStats";
 import OverclockList from "@/components/OverclockList";
 import PlayerBadges from "@/components/PlayerBadges";
+import ProfileCard from "@/components/ProfileCard";
 import { DashboardData } from "@/lib/types";
 
 interface PlayerStatsLayoutProps {
@@ -24,6 +25,7 @@ export default function PlayerStatsLayout({
   return (
     <div className="min-h-screen bg-background p-3 md:p-6 flex flex-col gap-4 md:gap-6">
       {header}
+      <ProfileCard data={data} />
       <HeroStats
         heroStats={data.hero_stats}
         selectedStatKey={selectedStatKey}
