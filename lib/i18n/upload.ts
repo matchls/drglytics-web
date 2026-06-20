@@ -23,6 +23,7 @@ export const upload = {
     errMissingBoth: "⚠ ENTER YOUR OPERATIVE ID AND SELECT A SAVE FILE.",
     errMissingId: "⚠ ENTER YOUR OPERATIVE ID.",
     errMissingFile: "⚠ SELECT A SAVE FILE.",
+    errNotSav: "⚠ INVALID FILE TYPE — .SAV FILES ONLY.",
     errParseFailed: "⚠ SAVE FILE ANALYSIS FAILED. CHECK YOUR FILE AND TRY AGAIN.",
     separator: "OR",
     leaderboardSaveWarning:
@@ -53,6 +54,7 @@ export const upload = {
       "⚠ ENTREZ VOTRE IDENTIFIANT D'OPÉRATEUR ET SÉLECTIONNEZ UN FICHIER DE SAUVEGARDE.",
     errMissingId: "⚠ ENTREZ VOTRE IDENTIFIANT D'OPÉRATEUR.",
     errMissingFile: "⚠ SÉLECTIONNEZ UN FICHIER DE SAUVEGARDE.",
+    errNotSav: "⚠ TYPE DE FICHIER INVALIDE — FICHIERS .SAV UNIQUEMENT.",
     errParseFailed: "⚠ ANALYSE DU FICHIER DE SAUVEGARDE ÉCHOUÉE. VÉRIFIEZ VOTRE FICHIER ET RÉESSAYEZ.",
     separator: "OU",
     leaderboardSaveWarning:
