@@ -55,5 +55,19 @@ export async function savePlayerStats(
     return { ok: false, error: "Échec de l'enregistrement." };
   }
 
+  // Snapshot de progression — échec silencieux pour ne pas bloquer l'upload
+  await supabaseAdmin.from("player_snapshots").insert({
+    user_id: user.id,
+    player_name: name,
+    total_missions: row.total_missions,
+    total_kills: row.total_kills,
+    total_time_s: row.total_time_s,
+    driller_missions: row.driller_missions,
+    gunner_missions: row.gunner_missions,
+    engineer_missions: row.engineer_missions,
+    scout_missions: row.scout_missions,
+    forged_overclocks: row.forged_overclocks,
+  });
+
   return { ok: true };
 }
