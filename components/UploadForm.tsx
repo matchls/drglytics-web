@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useTranslation } from "@/lib/i18n";
 import { getPrefs } from "@/lib/preferences";
@@ -16,6 +16,10 @@ export default function UploadForm({ isLoggedIn }: UploadFormProps) {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [showHelp, setShowHelp] = useState(false);
   const [formError, setFormError] = useState<string | null>(null);
+  const [isDragging, setIsDragging] = useState(false);
+  const [dragError, setDragError] = useState<string | null>(null);
+  // Compteur d'entrées/sorties pour éviter le flickering sur les éléments enfants
+  const dragCounter = useRef(0);
 
   const { isLoading, progress, currentTip, leaderboardFailed, handleSubmit, handleDemo } =
     useUpload({ playerName, selectedFile, setFormError });
@@ -99,9 +103,44 @@ export default function UploadForm({ isLoggedIn }: UploadFormProps) {
           </div>
 
           {/* Dropzone */}
-          <div className="scan-line border-2 border-dashed border-outline-variant p-8 flex flex-col items-center gap-3 text-center">
-            <span className="material-symbols-outlined text-4xl text-on-surface-variant">
-              architecture
+          <div
+            onDragEnter={(e) => {
+              e.preventDefault();
+              dragCounter.current++;
+              setIsDragging(true);
+            }}
+            onDragLeave={(e) => {
+              e.preventDefault();
+              dragCounter.current--;
+              if (dragCounter.current === 0) setIsDragging(false);
+            }}
+            onDragOver={(e) => e.preventDefault()}
+            onDrop={(e) => {
+              e.preventDefault();
+              dragCounter.current = 0;
+              setIsDragging(false);
+              const file = e.dataTransfer.files[0];
+              if (!file) return;
+              if (!file.name.toLowerCase().endsWith(".sav")) {
+                setDragError(t("errNotSav"));
+                return;
+              }
+              setDragError(null);
+              setFormError(null);
+              setSelectedFile(file);
+            }}
+            className={`scan-line border-2 border-dashed p-8 flex flex-col items-center gap-3 text-center transition-colors ${
+              isDragging
+                ? "border-primary bg-primary/5"
+                : "border-outline-variant"
+            }`}
+          >
+            <span
+              className={`material-symbols-outlined text-4xl transition-colors ${
+                isDragging ? "text-primary" : "text-on-surface-variant"
+              }`}
+            >
+              {isDragging ? "download" : "architecture"}
             </span>
             <p className="font-mono text-sm text-on-surface-variant tracking-widest">
               {t("dragDrop")}
@@ -109,10 +148,18 @@ export default function UploadForm({ isLoggedIn }: UploadFormProps) {
             <input
               type="file"
               accept=".sav"
-              onChange={(e) => setSelectedFile(e.target.files?.[0] ?? null)}
+              onChange={(e) => {
+                setDragError(null);
+                setSelectedFile(e.target.files?.[0] ?? null);
+              }}
               className="text-on-surface-variant font-mono text-xs"
             />
-            {selectedFile && (
+            {dragError && (
+              <p className="text-error font-mono text-xs tracking-widest">
+                {dragError}
+              </p>
+            )}
+            {!dragError && selectedFile && (
               <p className="text-primary font-mono text-xs tracking-widest">
                 ✓ {selectedFile.name}
               </p>
