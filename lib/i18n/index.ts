@@ -7,6 +7,7 @@ import { nav } from "./nav";
 import { player } from "./player";
 import { footer } from "./footer";
 import { abyssBar } from "./abyss-bar";
+import { privacy } from "./privacy";
 
 const translations = {
   en: {
@@ -18,6 +19,7 @@ const translations = {
     ...player.en,
     ...footer.en,
     ...abyssBar.en,
+    ...privacy.en,
   },
   fr: {
     ...upload.fr,
@@ -28,6 +30,7 @@ const translations = {
     ...player.fr,
     ...footer.fr,
     ...abyssBar.fr,
+    ...privacy.fr,
   },
 } as const;
 
