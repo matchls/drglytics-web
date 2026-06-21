@@ -2,6 +2,7 @@
 
 import { NextRequest, NextResponse } from "next/server";
 import { savePlayerStats } from "@/app/actions/savePlayerStats";
+import { checkRateLimit } from "@/lib/rateLimit";
 import { ApiResponse } from "@/lib/types";
 
 const BACKEND_URL =
@@ -26,9 +27,22 @@ export interface UploadRouteResponse {
   leaderboardFailed?: boolean;
 }
 
+// 10 uploads / heure par IP — protège Flask et Supabase contre le flood
+const UPLOAD_RATE_LIMIT_MAX = 10;
+const UPLOAD_RATE_LIMIT_WINDOW_MS = 60 * 60 * 1000;
+
 export async function POST(
   request: NextRequest,
 ): Promise<NextResponse<UploadRouteResponse>> {
+  const ip =
+    request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "unknown";
+  if (!(await checkRateLimit(`upload:${ip}`, UPLOAD_RATE_LIMIT_MAX, UPLOAD_RATE_LIMIT_WINDOW_MS))) {
+    return NextResponse.json(
+      { ok: false, error: "Trop d'uploads. Réessaie dans une heure." },
+      { status: 429 },
+    );
+  }
+
   let formData: FormData;
   try {
     formData = await request.formData();

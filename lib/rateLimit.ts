@@ -1,36 +1,29 @@
 import "server-only";
-// rateLimit.ts — Limiteur de débit EN MÉMOIRE (best-effort).
-//
-// Analogie : un videur qui compte les entrées par personne sur une fenêtre de temps.
-//
-// ⚠️ LIMITE IMPORTANTE : l'état vit dans la mémoire du processus. Sur Vercel
-// (serverless), chaque instance a sa propre mémoire → ça bloque les floods naïfs
-// (depuis une même instance "chaude") mais PAS une attaque distribuée.
-// Une version durable (compteurs en base) viendra avec l'issue #30.
-
-type Bucket = { count: number; resetAt: number };
-const buckets = new Map<string, Bucket>();
+import { supabaseAdmin } from "@/lib/supabaseServer";
 
 /**
+ * Vérifie le rate limit via la table Supabase `rate_limits`.
+ * Atomique : fonctionne en environnement serverless multi-instances.
+ *
  * @returns true si l'action est autorisée, false si la limite est dépassée.
  */
-export function checkRateLimit(
+export async function checkRateLimit(
   key: string,
   max: number,
   windowMs: number,
-): boolean {
-  const now = Date.now();
-  const bucket = buckets.get(key);
+): Promise<boolean> {
+  const { data, error } = await supabaseAdmin.rpc("check_rate_limit", {
+    p_key: key,
+    p_max: max,
+    p_window_ms: windowMs,
+  });
 
-  // Pas de compteur, ou fenêtre expirée → on (re)démarre à 1.
-  if (!bucket || now > bucket.resetAt) {
-    buckets.set(key, { count: 1, resetAt: now + windowMs });
+  if (error) {
+    // Fail open : en cas d'erreur DB, on ne bloque pas les utilisateurs légitimes.
+    // L'erreur est loggée pour alerte.
+    console.error("[rate-limit] DB error:", error.message);
     return true;
   }
 
-  // Limite atteinte → refus.
-  if (bucket.count >= max) return false;
-
-  bucket.count++;
-  return true;
+  return data as boolean;
 }
