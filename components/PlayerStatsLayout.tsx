@@ -22,10 +22,20 @@ export default function PlayerStatsLayout({
 }: PlayerStatsLayoutProps) {
   const [selectedStatKey, setSelectedStatKey] = useState<string | null>(null);
 
+  // Séparateur horizontal orange entre les sections
+  const Sep = () => (
+    <div className="flex items-center gap-3 opacity-40">
+      <div className="flex-1 h-px bg-primary" />
+      <span className="material-symbols-outlined text-primary" style={{ fontSize: 10 }}>diamond</span>
+      <div className="flex-1 h-px bg-primary" />
+    </div>
+  );
+
   return (
     <div className="min-h-screen bg-background p-3 md:p-6 flex flex-col gap-4 md:gap-6">
       {header}
       <ProfileCard data={data} />
+      <Sep />
       <HeroStats
         heroStats={data.hero_stats}
         selectedStatKey={selectedStatKey}
@@ -50,6 +60,7 @@ export default function PlayerStatsLayout({
           ))}
         </div>
       )}
+      <Sep />
       <PlayerBadges data={data} />
       <MissionStats missionStats={data.mission_stats} />
       <OverclockList overclocks={data.overclocks} />

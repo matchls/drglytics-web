@@ -27,6 +27,23 @@ export const MISSION_STAT_ICONS: Record<string, string> = {
   Fossils: "/icons/resources/fossil_icon.png",
   Holomite: "/icons/resources/hollomite_icon.png",
   Dystrum: "/icons/resources/dystrum_icon.png",
+
+  // --- Minéraux (catégorie Mining) ---
+  "Bismor": "/icons/resources/bismor_icon.png",
+  "Morkite": "/icons/resources/morkite_icon.png",
+  "Jadiz": "/icons/resources/jadiz_icon.png",
+  "Croppa": "/icons/resources/croppa_icon.png",
+  "Magnite": "/icons/resources/magnite_icon.png",
+  "Enor Pearl": "/icons/resources/enor_pearl_icon.png",
+  "Umanite": "/icons/resources/umanite_icon.png",
+  "Gold": "/icons/resources/gold_icon.png",
+  "Nitra": "/icons/resources/nitra_icon.png",
+  "Compressed Gold": "/icons/resources/compressed_gold_icon.png",
+
+  // --- Divers ---
+  "Deep Dive": "/icons/misc/deep_dive_icon.png",
+  "Industrial Sabotage": "/icons/missions/industrial_sabotage_icon.png",
+  "Search And Destroy": "/icons/missions/search_and_extract_icon.png",
 };
 
 // Stats à masquer (données peu pertinentes pour l'affichage)

@@ -74,7 +74,10 @@ export default function ClassCard({ classData }: Props) {
   ];
 
   return (
-    <div className="industrial-panel pressed-metal overflow-hidden relative">
+    <div
+      className="industrial-panel pressed-metal overflow-hidden relative"
+      style={{ clipPath: "polygon(0 0, calc(100% - 24px) 0, 100% 24px, 100% 100%, 0 100%)" }}
+    >
       {/* Image de fond semi-transparente — centrée dans la card */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
         <Image
