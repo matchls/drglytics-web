@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { usePrefs } from "@/lib/PrefsContext";
 import { auth } from "./auth";
 import { upload } from "./upload";
@@ -41,5 +42,8 @@ export type TranslationKey = keyof (typeof translations)["en"];
 
 export function useTranslation() {
   const { prefs } = usePrefs();
-  return (key: TranslationKey): string => translations[prefs.language][key];
+  return useMemo(
+    () => (key: TranslationKey): string => translations[prefs.language][key],
+    [prefs.language]
+  );
 }

@@ -37,3 +37,13 @@ next-env.d.ts
 
 # fichiers temporaires des skills Claude
 /tmp
+
+# graphify — visualisation HTML régénérable + cache + fichiers système locaux
+graphify-out/graph.html
+graphify-out/cache/
+graphify-out/.graphify_python
+graphify-out/.graphify_root
+graphify-out/.graphify_uncached.txt
+
+# Claude Code — config locale (chemins système, settings)
+.claude/
