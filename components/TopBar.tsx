@@ -2,12 +2,14 @@
 import Link from "next/link";
 import QuoteTypewriter from "@/components/QuoteTypewriter";
 import { logout } from "@/app/actions/logout";
+import { useTranslation } from "@/lib/i18n";
 
 interface TopBarProps {
   userEmail: string | null;
 }
 
 export default function TopBar({ userEmail }: TopBarProps) {
+  const t = useTranslation();
   return (
     <header className="h-14 bg-surface-container-high border-b-4 border-outline flex items-center px-6 gap-4">
       {/* Citation animée — prend tout l'espace central */}
@@ -25,9 +27,9 @@ export default function TopBar({ userEmail }: TopBarProps) {
               <button
                 type="submit"
                 className="text-on-surface-variant hover:text-drg-orange transition-colors"
-                title="Se déconnecter"
+                aria-label={t("authLogout")}
               >
-                <span className="material-symbols-outlined">logout</span>
+                <span className="material-symbols-outlined" aria-hidden="true">logout</span>
               </button>
             </form>
           </>
@@ -35,9 +37,9 @@ export default function TopBar({ userEmail }: TopBarProps) {
           <Link
             href="/auth/login"
             className="text-on-surface-variant hover:text-drg-orange transition-colors"
-            title="Se connecter"
+            aria-label={t("authSignIn")}
           >
-            <span className="material-symbols-outlined">login</span>
+            <span className="material-symbols-outlined" aria-hidden="true">login</span>
           </Link>
         )}
       </div>
@@ -47,8 +49,9 @@ export default function TopBar({ userEmail }: TopBarProps) {
         <Link
           href="/options"
           className="text-on-surface-variant hover:text-drg-orange transition-colors"
+          aria-label="Settings"
         >
-          <span className="material-symbols-outlined">settings</span>
+          <span className="material-symbols-outlined" aria-hidden="true">settings</span>
         </Link>
       </div>
     </header>

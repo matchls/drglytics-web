@@ -1,4 +1,5 @@
 import { usePrefs } from "@/lib/PrefsContext";
+import { auth } from "./auth";
 import { upload } from "./upload";
 import { dashboard } from "./dashboard";
 import { leaderboard } from "./leaderboard";
@@ -11,6 +12,7 @@ import { privacy } from "./privacy";
 
 const translations = {
   en: {
+    ...auth.en,
     ...upload.en,
     ...dashboard.en,
     ...leaderboard.en,
@@ -22,6 +24,7 @@ const translations = {
     ...privacy.en,
   },
   fr: {
+    ...auth.fr,
     ...upload.fr,
     ...dashboard.fr,
     ...leaderboard.fr,

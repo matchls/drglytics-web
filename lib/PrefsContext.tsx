@@ -16,12 +16,18 @@ export function PrefsProvider({ children }: { children: ReactNode }) {
 
   // Après hydration, on lit les vraies prefs depuis localStorage
   useEffect(() => {
-    setPrefsState(getPrefs());
+    const p = getPrefs();
+    setPrefsState(p);
+    document.documentElement.lang = p.language;
   }, []);
 
   function update(partial: Partial<Preferences>) {
-    setPrefs(partial); // sauvegarde dans localStorage
-    setPrefsState((prev) => ({ ...prev, ...partial })); // met à jour le state React → re-render
+    setPrefs(partial);
+    setPrefsState((prev) => {
+      const next = { ...prev, ...partial };
+      if (partial.language) document.documentElement.lang = partial.language;
+      return next;
+    });
   }
 
   return (
