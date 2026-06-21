@@ -1,0 +1,1467 @@
+{
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\.claude\\settings.json": {
+    "mtime": 1782040659.2826002,
+    "ast_hash": "7bf81dca0376bde3a32244b82bc7cbc0",
+    "semantic_hash": "7bf81dca0376bde3a32244b82bc7cbc0"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\.eslintrc.json": {
+    "mtime": 1779204880.7073827,
+    "ast_hash": "5cc89077d438e3d0d0a8308ab7e06a5a",
+    "semantic_hash": "5cc89077d438e3d0d0a8308ab7e06a5a"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\app\\abyss-bar\\page.tsx": {
+    "mtime": 1781966116.9222305,
+    "ast_hash": "1e2590815b44a7988dc9efc481aa0798",
+    "semantic_hash": "1e2590815b44a7988dc9efc481aa0798"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\app\\actions\\claimProfile.ts": {
+    "mtime": 1781982098.3788157,
+    "ast_hash": "eca1d5b3dba1cbbbdedbd15ecf70fbf2",
+    "semantic_hash": "eca1d5b3dba1cbbbdedbd15ecf70fbf2"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\app\\actions\\getMonthlyLeaderboard.ts": {
+    "mtime": 1781977655.0623696,
+    "ast_hash": "0d339bcef9c33a3c4be6431208c315b3",
+    "semantic_hash": "0d339bcef9c33a3c4be6431208c315b3"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\app\\actions\\getPlayerProfile.ts": {
+    "mtime": 1780768329.9532573,
+    "ast_hash": "ccfc3a80e606bdbbd644e488470b738c",
+    "semantic_hash": "ccfc3a80e606bdbbd644e488470b738c"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\app\\actions\\getProgressDelta.ts": {
+    "mtime": 1781970721.4917035,
+    "ast_hash": "dd6ee935cf79c0a8597460ff17e94b14",
+    "semantic_hash": "dd6ee935cf79c0a8597460ff17e94b14"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\app\\actions\\leaderboardVisibility.ts": {
+    "mtime": 1781961123.1579921,
+    "ast_hash": "4380e84c6739cbdce2ddd5a74f4b2e9e",
+    "semantic_hash": "4380e84c6739cbdce2ddd5a74f4b2e9e"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\app\\actions\\logout.ts": {
+    "mtime": 1781961123.1590862,
+    "ast_hash": "0f47acef377fb321ecf173f84805c72a",
+    "semantic_hash": "0f47acef377fb321ecf173f84805c72a"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\app\\actions\\saveGuestbookMessage.ts": {
+    "mtime": 1782039843.9831913,
+    "ast_hash": "ac151568706894b1528ae9153bca3108",
+    "semantic_hash": "ac151568706894b1528ae9153bca3108"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\app\\actions\\savePlayerStats.ts": {
+    "mtime": 1781970721.4917035,
+    "ast_hash": "04e85e9ab2933f071917ac016c5d6b2b",
+    "semantic_hash": "04e85e9ab2933f071917ac016c5d6b2b"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\app\\actions\\sendContactEmail.ts": {
+    "mtime": 1782039843.9831913,
+    "ast_hash": "b0b181f5dbaee0d22561e6672934c355",
+    "semantic_hash": "b0b181f5dbaee0d22561e6672934c355"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\app\\api\\parse-only\\route.ts": {
+    "mtime": 1781982098.3803222,
+    "ast_hash": "3b4db70ecb5f89a1a7834b2c39c22973",
+    "semantic_hash": "3b4db70ecb5f89a1a7834b2c39c22973"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\app\\api\\upload\\route.ts": {
+    "mtime": 1782039843.9841914,
+    "ast_hash": "4163ee26da01e0f1c5b72d4821da44f1",
+    "semantic_hash": "4163ee26da01e0f1c5b72d4821da44f1"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\app\\auth\\callback\\route.ts": {
+    "mtime": 1781961123.1610856,
+    "ast_hash": "9d3b25a92c9a7e9cf9ea61b3395df98b",
+    "semantic_hash": "9d3b25a92c9a7e9cf9ea61b3395df98b"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\app\\auth\\login\\page.tsx": {
+    "mtime": 1782024498.073844,
+    "ast_hash": "9d5395807fb4ec080eac6740bfa72eaa",
+    "semantic_hash": "9d5395807fb4ec080eac6740bfa72eaa"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\app\\auth\\signup\\page.tsx": {
+    "mtime": 1782024498.074844,
+    "ast_hash": "b2573f682dbfe1ddf402172a4201dc49",
+    "semantic_hash": "b2573f682dbfe1ddf402172a4201dc49"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\app\\compare\\page.tsx": {
+    "mtime": 1781974478.0325792,
+    "ast_hash": "b56720a635126eb38c05044af31bc675",
+    "semantic_hash": "b56720a635126eb38c05044af31bc675"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\app\\dashboard\\page.tsx": {
+    "mtime": 1781970721.4927113,
+    "ast_hash": "2a6a0e96d9e5703e4e7aef154cc8e330",
+    "semantic_hash": "2a6a0e96d9e5703e4e7aef154cc8e330"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\app\\layout.tsx": {
+    "mtime": 1781966116.9222305,
+    "ast_hash": "b99d0149d201f2de032e3aa597eae27b",
+    "semantic_hash": "b99d0149d201f2de032e3aa597eae27b"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\app\\leaderboard\\page.tsx": {
+    "mtime": 1781977655.0633671,
+    "ast_hash": "eddd6a7ce1b85a990c11311ef12ce2ff",
+    "semantic_hash": "eddd6a7ce1b85a990c11311ef12ce2ff"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\app\\options\\page.tsx": {
+    "mtime": 1781966116.9252403,
+    "ast_hash": "62e493a6935fb44c8a5cee33f2964c29",
+    "semantic_hash": "62e493a6935fb44c8a5cee33f2964c29"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\app\\page.tsx": {
+    "mtime": 1781966116.9267983,
+    "ast_hash": "14a0fa613bea8ab426430f396a2bf8c5",
+    "semantic_hash": "14a0fa613bea8ab426430f396a2bf8c5"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\app\\player\\[name]\\page.tsx": {
+    "mtime": 1781982098.3823292,
+    "ast_hash": "6ae382cd52289384646c5e927b78b81e",
+    "semantic_hash": "6ae382cd52289384646c5e927b78b81e"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\app\\privacy\\page.tsx": {
+    "mtime": 1781966116.9273634,
+    "ast_hash": "a00a034493f954ef1eb8f95b195fe815",
+    "semantic_hash": "a00a034493f954ef1eb8f95b195fe815"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\components\\AbyssBarBadges.tsx": {
+    "mtime": 1781975832.3184185,
+    "ast_hash": "62a5456ef4746b3ceaa5473cdb531121",
+    "semantic_hash": "62a5456ef4746b3ceaa5473cdb531121"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\components\\AbyssBarGuestbook.tsx": {
+    "mtime": 1781885844.5886333,
+    "ast_hash": "ce8ea0867b273f300e6cb70f7d53fe04",
+    "semantic_hash": "ce8ea0867b273f300e6cb70f7d53fe04"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\components\\AbyssBarHonorRoll.tsx": {
+    "mtime": 1780504453.2582884,
+    "ast_hash": "69ce638995c8bf61fe964784f4fc30da",
+    "semantic_hash": "69ce638995c8bf61fe964784f4fc30da"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\components\\ClaimProfilePanel.tsx": {
+    "mtime": 1781982098.3833292,
+    "ast_hash": "2eddcdabe314963970f2a40fd3c61090",
+    "semantic_hash": "2eddcdabe314963970f2a40fd3c61090"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\components\\ClassCard.tsx": {
+    "mtime": 1782022230.2323077,
+    "ast_hash": "d9e76f79b31b2da549571f68a4edfce4",
+    "semantic_hash": "d9e76f79b31b2da549571f68a4edfce4"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\components\\ClassPieChart.tsx": {
+    "mtime": 1780434741.6696193,
+    "ast_hash": "095dfb0d1ad260ddf7c9d293accf75b0",
+    "semantic_hash": "095dfb0d1ad260ddf7c9d293accf75b0"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\components\\CompareView.tsx": {
+    "mtime": 1781974478.033584,
+    "ast_hash": "004b1f3dae6378cf3c604c90b24894c9",
+    "semantic_hash": "004b1f3dae6378cf3c604c90b24894c9"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\components\\Footer.tsx": {
+    "mtime": 1780478182.3014667,
+    "ast_hash": "422bed14ce3960e48556e6c21f040ba6",
+    "semantic_hash": "422bed14ce3960e48556e6c21f040ba6"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\components\\HeroStats.tsx": {
+    "mtime": 1781966116.9273634,
+    "ast_hash": "282bb9ac652530dc1c2e00f4d584ca35",
+    "semantic_hash": "282bb9ac652530dc1c2e00f4d584ca35"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\components\\MissionStats.tsx": {
+    "mtime": 1782022230.2333162,
+    "ast_hash": "74304bfe226fb3d13c18826cbdaaec24",
+    "semantic_hash": "74304bfe226fb3d13c18826cbdaaec24"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\components\\OverclockList.tsx": {
+    "mtime": 1781971240.0193691,
+    "ast_hash": "7b5caec31514f41ec4f24127edff63d9",
+    "semantic_hash": "7b5caec31514f41ec4f24127edff63d9"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\components\\PlayerBadges.tsx": {
+    "mtime": 1781975832.3194249,
+    "ast_hash": "cd7bac672c2eb244a59b3267035b176d",
+    "semantic_hash": "cd7bac672c2eb244a59b3267035b176d"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\components\\PlayerStatsLayout.tsx": {
+    "mtime": 1782022230.234316,
+    "ast_hash": "d7970cb249a35fc6dbc9f5eb7cc53fb6",
+    "semantic_hash": "d7970cb249a35fc6dbc9f5eb7cc53fb6"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\components\\PrivacyBanner.tsx": {
+    "mtime": 1781966116.929953,
+    "ast_hash": "cc24f64f8ea46f682729d8e8e3ce613f",
+    "semantic_hash": "cc24f64f8ea46f682729d8e8e3ce613f"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\components\\ProfileCard.tsx": {
+    "mtime": 1782022230.234316,
+    "ast_hash": "c9e07d2234a0719ce6ce15b15893000c",
+    "semantic_hash": "c9e07d2234a0719ce6ce15b15893000c"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\components\\ProgressDelta.tsx": {
+    "mtime": 1781970721.4927113,
+    "ast_hash": "ea3cea06e2750774ff76c5f7713d9df9",
+    "semantic_hash": "ea3cea06e2750774ff76c5f7713d9df9"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\components\\QuoteTypewriter.tsx": {
+    "mtime": 1780123916.9860673,
+    "ast_hash": "9655e480552f8871c03afb39e9c2645e",
+    "semantic_hash": "9655e480552f8871c03afb39e9c2645e"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\components\\SideNav.tsx": {
+    "mtime": 1781966116.929953,
+    "ast_hash": "90e2fffe49eb2072e88578a956093991",
+    "semantic_hash": "90e2fffe49eb2072e88578a956093991"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\components\\TopBar.tsx": {
+    "mtime": 1782024498.0758443,
+    "ast_hash": "9dfecdfd7b4b0048c2eb951d6936565b",
+    "semantic_hash": "9dfecdfd7b4b0048c2eb951d6936565b"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\components\\UploadForm.tsx": {
+    "mtime": 1781963352.1303673,
+    "ast_hash": "a9e2e3a640ecc0df0a9a5475629715fc",
+    "semantic_hash": "a9e2e3a640ecc0df0a9a5475629715fc"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\components\\leaderboard\\BountyTargets.tsx": {
+    "mtime": 1780665289.7760522,
+    "ast_hash": "d972df5f246bb5c432673dded371d951",
+    "semantic_hash": "d972df5f246bb5c432673dded371d951"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\components\\leaderboard\\CompanyQuota.tsx": {
+    "mtime": 1781894174.8843138,
+    "ast_hash": "49e481c1e8dc1f5e05581881ba740b75",
+    "semantic_hash": "49e481c1e8dc1f5e05581881ba740b75"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\components\\leaderboard\\MonthlyTable.tsx": {
+    "mtime": 1781977655.064369,
+    "ast_hash": "748628e57c2cbcbfd5852c4471a1579a",
+    "semantic_hash": "748628e57c2cbcbfd5852c4471a1579a"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\components\\leaderboard\\PlayerTable.tsx": {
+    "mtime": 1781974478.033584,
+    "ast_hash": "0a8afa909838b6f697ac76ee14762c93",
+    "semantic_hash": "0a8afa909838b6f697ac76ee14762c93"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\components\\leaderboard\\Podium.tsx": {
+    "mtime": 1780478182.3045928,
+    "ast_hash": "b649fa2776794e11ce0fc610ff8e725b",
+    "semantic_hash": "b649fa2776794e11ce0fc610ff8e725b"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\global.d.ts": {
+    "mtime": 1779869490.0536597,
+    "ast_hash": "0ed79c85de5bb2f1af5976079d448b19",
+    "semantic_hash": "0ed79c85de5bb2f1af5976079d448b19"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\lib\\PrefsContext.tsx": {
+    "mtime": 1782024498.0768442,
+    "ast_hash": "a19574400d5bd7cc31c8c7cfd6e689a4",
+    "semantic_hash": "a19574400d5bd7cc31c8c7cfd6e689a4"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\lib\\__tests__\\badges.test.ts": {
+    "mtime": 1781975832.320425,
+    "ast_hash": "31c6df1c8f74a0f198eda6c3167f3eb3",
+    "semantic_hash": "31c6df1c8f74a0f198eda6c3167f3eb3"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\lib\\__tests__\\formatters.test.ts": {
+    "mtime": 1781967435.4844265,
+    "ast_hash": "fdaaea340effa8d40bd52a0dfa85e94b",
+    "semantic_hash": "fdaaea340effa8d40bd52a0dfa85e94b"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\lib\\__tests__\\friends.test.ts": {
+    "mtime": 1781967435.485427,
+    "ast_hash": "83f91d1b5ea281042a73b4212672f276",
+    "semantic_hash": "83f91d1b5ea281042a73b4212672f276"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\lib\\__tests__\\leaderboard.test.ts": {
+    "mtime": 1781967435.4864268,
+    "ast_hash": "a8fc6baf5e9f9b720c7c6d3dac5b6d58",
+    "semantic_hash": "a8fc6baf5e9f9b720c7c6d3dac5b6d58"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\lib\\api.ts": {
+    "mtime": 1781885844.591764,
+    "ast_hash": "acb15ed756e3d11746e418cb1dc4c1e1",
+    "semantic_hash": "acb15ed756e3d11746e418cb1dc4c1e1"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\lib\\badges.ts": {
+    "mtime": 1781975832.3214242,
+    "ast_hash": "589d229d5a8394cec75185c4c5177094",
+    "semantic_hash": "589d229d5a8394cec75185c4c5177094"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\lib\\buildPlayerRow.ts": {
+    "mtime": 1780312305.4879973,
+    "ast_hash": "0e26d0c7d12ce0bf234719d9abafc2f2",
+    "semantic_hash": "0e26d0c7d12ce0bf234719d9abafc2f2"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\lib\\data\\guestbook.ts": {
+    "mtime": 1780332087.995436,
+    "ast_hash": "73817095fb4310716b09472478a056e2",
+    "semantic_hash": "73817095fb4310716b09472478a056e2"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\lib\\data\\players.ts": {
+    "mtime": 1781961123.1659346,
+    "ast_hash": "e41d13cec60e07bb4ae998eaec603f91",
+    "semantic_hash": "e41d13cec60e07bb4ae998eaec603f91"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\lib\\formatters.ts": {
+    "mtime": 1780475807.3199322,
+    "ast_hash": "87b119666e59a386d035ba0b2c865e9b",
+    "semantic_hash": "87b119666e59a386d035ba0b2c865e9b"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\lib\\friends.ts": {
+    "mtime": 1780416586.7092266,
+    "ast_hash": "649a754a6b7d4c86da51f83e55ca1394",
+    "semantic_hash": "649a754a6b7d4c86da51f83e55ca1394"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\lib\\getClientIp.ts": {
+    "mtime": 1780585443.2743902,
+    "ast_hash": "165b8a6b0a6892ba1f3f0741c70ee378",
+    "semantic_hash": "165b8a6b0a6892ba1f3f0741c70ee378"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\lib\\hooks\\useAsync.ts": {
+    "mtime": 1780768329.9572966,
+    "ast_hash": "00389d19211ec5bcc190efab49940faa",
+    "semantic_hash": "00389d19211ec5bcc190efab49940faa"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\lib\\hooks\\useUpload.ts": {
+    "mtime": 1781887089.6064298,
+    "ast_hash": "e8e72939f3b6981dfacd334a7a752177",
+    "semantic_hash": "e8e72939f3b6981dfacd334a7a752177"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\lib\\i18n\\abyss-bar.ts": {
+    "mtime": 1781975832.3224235,
+    "ast_hash": "ec7d7a7b2e3d0a3730d1d65bec729950",
+    "semantic_hash": "ec7d7a7b2e3d0a3730d1d65bec729950"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\lib\\i18n\\auth.ts": {
+    "mtime": 1782024498.0768442,
+    "ast_hash": "4be97d86da43a0208820dcbb112f501e",
+    "semantic_hash": "4be97d86da43a0208820dcbb112f501e"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\lib\\i18n\\dashboard.ts": {
+    "mtime": 1781971240.0203748,
+    "ast_hash": "94e1cda186b5f57bc7f831fcae543ed0",
+    "semantic_hash": "94e1cda186b5f57bc7f831fcae543ed0"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\lib\\i18n\\data-translations.ts": {
+    "mtime": 1780434741.673321,
+    "ast_hash": "0233a3e93e5f0939b7ce336e5e7e7ac5",
+    "semantic_hash": "0233a3e93e5f0939b7ce336e5e7e7ac5"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\lib\\i18n\\footer.ts": {
+    "mtime": 1780478182.306592,
+    "ast_hash": "30233ff691bc6f94ec0a3e2b7361a11b",
+    "semantic_hash": "30233ff691bc6f94ec0a3e2b7361a11b"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\lib\\i18n\\index.ts": {
+    "mtime": 1782024498.0778441,
+    "ast_hash": "b5bdbf89a5916654b221dc0a8e0db737",
+    "semantic_hash": "b5bdbf89a5916654b221dc0a8e0db737"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\lib\\i18n\\leaderboard.ts": {
+    "mtime": 1781977655.065367,
+    "ast_hash": "c73e8438d911f41850e9f4d459942ab8",
+    "semantic_hash": "c73e8438d911f41850e9f4d459942ab8"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\lib\\i18n\\nav.ts": {
+    "mtime": 1780434741.6763277,
+    "ast_hash": "02f489aad0506f368f14c80cfaafb8ac",
+    "semantic_hash": "02f489aad0506f368f14c80cfaafb8ac"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\lib\\i18n\\options.ts": {
+    "mtime": 1781961123.1669352,
+    "ast_hash": "5ffff1834fe6e54c9c863ab665bbc38f",
+    "semantic_hash": "5ffff1834fe6e54c9c863ab665bbc38f"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\lib\\i18n\\player.ts": {
+    "mtime": 1782022230.2353158,
+    "ast_hash": "a49d958250c53ca3cdcee29c13e13894",
+    "semantic_hash": "a49d958250c53ca3cdcee29c13e13894"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\lib\\i18n\\privacy.ts": {
+    "mtime": 1781966116.929953,
+    "ast_hash": "7476ae7211cc079e3012b58c5eeecd8d",
+    "semantic_hash": "7476ae7211cc079e3012b58c5eeecd8d"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\lib\\i18n\\upload.ts": {
+    "mtime": 1781963352.1303673,
+    "ast_hash": "d335e1b28066951f87d39e62799bd92d",
+    "semantic_hash": "d335e1b28066951f87d39e62799bd92d"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\lib\\leaderboard.ts": {
+    "mtime": 1780665289.7810564,
+    "ast_hash": "1958382b90a7837dbca08cf7475124f3",
+    "semantic_hash": "1958382b90a7837dbca08cf7475124f3"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\lib\\missionIcons.ts": {
+    "mtime": 1782022230.236316,
+    "ast_hash": "1b7f5913473cccf848f091607aae50fa",
+    "semantic_hash": "1b7f5913473cccf848f091607aae50fa"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\lib\\preferences.ts": {
+    "mtime": 1780091596.541386,
+    "ast_hash": "ce509ae529253863b9c0e8486caa877b",
+    "semantic_hash": "ce509ae529253863b9c0e8486caa877b"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\lib\\ranks.ts": {
+    "mtime": 1781975832.3224235,
+    "ast_hash": "6f860b34e176426adb0f70d0dc019dcd",
+    "semantic_hash": "6f860b34e176426adb0f70d0dc019dcd"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\lib\\rateLimit.ts": {
+    "mtime": 1782039843.9851892,
+    "ast_hash": "b494f1fc4b6437f3b8f487590e4b9e55",
+    "semantic_hash": "b494f1fc4b6437f3b8f487590e4b9e55"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\lib\\session.ts": {
+    "mtime": 1780416586.7117376,
+    "ast_hash": "46784c76c9df946e93e6d2f1a478d91c",
+    "semantic_hash": "46784c76c9df946e93e6d2f1a478d91c"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\lib\\supabase.ts": {
+    "mtime": 1779376597.7917347,
+    "ast_hash": "c64686f7bc73af312233345c4aabb0cb",
+    "semantic_hash": "c64686f7bc73af312233345c4aabb0cb"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\lib\\supabaseServer.ts": {
+    "mtime": 1780312305.493509,
+    "ast_hash": "b86f748b7b7c1a3a271cf5dc3282539b",
+    "semantic_hash": "b86f748b7b7c1a3a271cf5dc3282539b"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\lib\\supabase\\client.ts": {
+    "mtime": 1781885844.5949018,
+    "ast_hash": "e300aea27faba9adaa8e48f2afd3f003",
+    "semantic_hash": "e300aea27faba9adaa8e48f2afd3f003"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\lib\\supabase\\server.ts": {
+    "mtime": 1781961123.1669352,
+    "ast_hash": "82f1ed2fbb7f041837a60897226c6738",
+    "semantic_hash": "82f1ed2fbb7f041837a60897226c6738"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\lib\\types.ts": {
+    "mtime": 1780332955.9543822,
+    "ast_hash": "86534df22d6b44c1579bc3e4c8e8f96f",
+    "semantic_hash": "86534df22d6b44c1579bc3e4c8e8f96f"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\lib\\weaponIcons.ts": {
+    "mtime": 1779388994.1052532,
+    "ast_hash": "e29d483ea05aeb740e599460e8a55aa7",
+    "semantic_hash": "e29d483ea05aeb740e599460e8a55aa7"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\middleware.ts": {
+    "mtime": 1781885844.596994,
+    "ast_hash": "c0f755359636316eb110a8ca7289e9fe",
+    "semantic_hash": "c0f755359636316eb110a8ca7289e9fe"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\next.config.mjs": {
+    "mtime": 1780329515.535259,
+    "ast_hash": "b807b63ca639e9bb3fd64b2b23894fdd",
+    "semantic_hash": "b807b63ca639e9bb3fd64b2b23894fdd"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\package.json": {
+    "mtime": 1782022230.2393148,
+    "ast_hash": "a758f1f41662d6fa8bd52cbcb3fd063d",
+    "semantic_hash": "a758f1f41662d6fa8bd52cbcb3fd063d"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\postcss.config.mjs": {
+    "mtime": 1779204880.7316306,
+    "ast_hash": "b7941c02b947e17ae32f67ae7e664ec8",
+    "semantic_hash": "b7941c02b947e17ae32f67ae7e664ec8"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\manifest.json": {
+    "mtime": 1779191536.859732,
+    "ast_hash": "7be9d3aab67fba79b10726240db57382",
+    "semantic_hash": "7be9d3aab67fba79b10726240db57382"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\sql\\2026-05-31_player-name-case-insensitive.sql": {
+    "mtime": 1780312305.4995348,
+    "ast_hash": "3f3bd627c7856ec03154f19e2f0441fe",
+    "semantic_hash": "3f3bd627c7856ec03154f19e2f0441fe"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\sql\\2026-06-01_lock-raw-data-pin-hash.sql": {
+    "mtime": 1780329515.5367653,
+    "ast_hash": "3e94219608e0e315a57ddc26b7f6512d",
+    "semantic_hash": "3e94219608e0e315a57ddc26b7f6512d"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\sql\\2026-06-01_pin-attempts-rate-limit.sql": {
+    "mtime": 1780590129.138626,
+    "ast_hash": "7fdc48c398d9b510e888448da5999f54",
+    "semantic_hash": "7fdc48c398d9b510e888448da5999f54"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\sql\\2026-06-04_pin-global-throttle.sql": {
+    "mtime": 1780590129.1396313,
+    "ast_hash": "cc86dd70e3984fd782de2a104349fcf3",
+    "semantic_hash": "cc86dd70e3984fd782de2a104349fcf3"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\sql\\2026-06-18_add-user-id-to-players.sql": {
+    "mtime": 1781885844.6005607,
+    "ast_hash": "b38c88ebd80c5ccd8803a344d186195f",
+    "semantic_hash": "b38c88ebd80c5ccd8803a344d186195f"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\sql\\2026-06-19_remove-pin-system.sql": {
+    "mtime": 1781885844.602066,
+    "ast_hash": "2ef35425eec944e1e9b501a34abad547",
+    "semantic_hash": "2ef35425eec944e1e9b501a34abad547"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\supabase\\migrations\\20260620_add_player_snapshots.sql": {
+    "mtime": 1781970721.4952211,
+    "ast_hash": "f7f0cc4264fd7cf579dfedaea35186a3",
+    "semantic_hash": "f7f0cc4264fd7cf579dfedaea35186a3"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\supabase\\migrations\\20260620_add_visible_on_leaderboard.sql": {
+    "mtime": 1781961123.1712885,
+    "ast_hash": "71719f89b64351804ba01bd91e3e30cb",
+    "semantic_hash": "71719f89b64351804ba01bd91e3e30cb"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\supabase\\migrations\\20260621_rate_limits.sql": {
+    "mtime": 1782039843.9861915,
+    "ast_hash": "0f89549999723bf02f5ab1faecb41d49",
+    "semantic_hash": "0f89549999723bf02f5ab1faecb41d49"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\tailwind.config.ts": {
+    "mtime": 1779868658.8329084,
+    "ast_hash": "6fcbeb5628dafa3fe6e5d401da554c0c",
+    "semantic_hash": "6fcbeb5628dafa3fe6e5d401da554c0c"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\tsconfig.json": {
+    "mtime": 1781961123.1717932,
+    "ast_hash": "bde45d8a101840988e61cc06cd573a6e",
+    "semantic_hash": "bde45d8a101840988e61cc06cd573a6e"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\vitest.config.ts": {
+    "mtime": 1781967435.4894254,
+    "ast_hash": "9141e426b35978eb4a28ff1976ad8b83",
+    "semantic_hash": "9141e426b35978eb4a28ff1976ad8b83"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\.github\\workflows\\ci.yml": {
+    "mtime": 1781967435.4834268,
+    "ast_hash": "743ca6a6bfb5046984e17f7e59ed43f6",
+    "semantic_hash": "743ca6a6bfb5046984e17f7e59ed43f6"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\CLAUDE.md": {
+    "mtime": 1782040659.2816002,
+    "ast_hash": "1492453ec56f8ac2d000771b8bb7b40f",
+    "semantic_hash": "1492453ec56f8ac2d000771b8bb7b40f"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\README.md": {
+    "mtime": 1779204880.71992,
+    "ast_hash": "f15aaa42d5d299d091b1171097ea56ad",
+    "semantic_hash": "f15aaa42d5d299d091b1171097ea56ad"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\design_sample.png": {
+    "mtime": 1779303104.338971,
+    "ast_hash": "13f3b8a03f78815f92fd6b0c272e973f",
+    "semantic_hash": "13f3b8a03f78815f92fd6b0c272e973f"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\1920px-Abyss_Bar_Front.png": {
+    "mtime": 1780002852.8920696,
+    "ast_hash": "772f6bd3baf34b149185a3908033c979",
+    "semantic_hash": "772f6bd3baf34b149185a3908033c979"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\classes\\driller_icon.png": {
+    "mtime": 1779191426.0635612,
+    "ast_hash": "da09aa60f1abf4140a7809a96f36d6d3",
+    "semantic_hash": "da09aa60f1abf4140a7809a96f36d6d3"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\classes\\driller_img.png": {
+    "mtime": 1780001679.0072162,
+    "ast_hash": "cb5b1204d6764faf1fa6b6f3243bd224",
+    "semantic_hash": "cb5b1204d6764faf1fa6b6f3243bd224"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\classes\\engineer_icon.png": {
+    "mtime": 1779191426.655558,
+    "ast_hash": "c5673ed59c443db34e4713b874b1138b",
+    "semantic_hash": "c5673ed59c443db34e4713b874b1138b"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\classes\\engineer_img.png": {
+    "mtime": 1780001690.6099436,
+    "ast_hash": "8fdd37d9ab7920a0e9e64e7997e3453c",
+    "semantic_hash": "8fdd37d9ab7920a0e9e64e7997e3453c"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\classes\\gunner_icon.png": {
+    "mtime": 1779191427.2963343,
+    "ast_hash": "79db1628ee432e127f97de73838064a3",
+    "semantic_hash": "79db1628ee432e127f97de73838064a3"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\classes\\gunner_img.png": {
+    "mtime": 1780001709.6812465,
+    "ast_hash": "348950071d8e6b9a5cd0438a3af6dd35",
+    "semantic_hash": "348950071d8e6b9a5cd0438a3af6dd35"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\classes\\scout_icon.png": {
+    "mtime": 1779191427.937485,
+    "ast_hash": "d4132b6561ae1a8fe2a417d73ba70ba0",
+    "semantic_hash": "d4132b6561ae1a8fe2a417d73ba70ba0"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\classes\\scout_img.png": {
+    "mtime": 1780001718.490718,
+    "ast_hash": "41ec10ba3cba105827200c5293421a9a",
+    "semantic_hash": "41ec10ba3cba105827200c5293421a9a"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\misc\\assignment_icon.png": {
+    "mtime": 1779191518.1481764,
+    "ast_hash": "0f64fb829718c0e6404930cfbb806b5a",
+    "semantic_hash": "0f64fb829718c0e6404930cfbb806b5a"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\misc\\blankpixel.png": {
+    "mtime": 1779191518.7246776,
+    "ast_hash": "46a929495b706150830fddeaf6ddb3b0",
+    "semantic_hash": "46a929495b706150830fddeaf6ddb3b0"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\misc\\class_level_icon.png": {
+    "mtime": 1779191519.3524978,
+    "ast_hash": "f5cca9c499a77d6bd942ba727b99b226",
+    "semantic_hash": "f5cca9c499a77d6bd942ba727b99b226"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\misc\\credit.png": {
+    "mtime": 1779191519.8236763,
+    "ast_hash": "af0a39bb975fdaaed5d54b5c6fc6cdd5",
+    "semantic_hash": "af0a39bb975fdaaed5d54b5c6fc6cdd5"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\misc\\deep_dive_icon.png": {
+    "mtime": 1779191521.4568062,
+    "ast_hash": "7a388e00171a9054f41253a686c425da",
+    "semantic_hash": "7a388e00171a9054f41253a686c425da"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\misc\\drg_logo.png": {
+    "mtime": 1779191522.1822734,
+    "ast_hash": "4e765f9ec409d6d193e1413dae325f8d",
+    "semantic_hash": "4e765f9ec409d6d193e1413dae325f8d"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\misc\\drg_streamer.png": {
+    "mtime": 1779191522.8168106,
+    "ast_hash": "f64c4fa117be3fc2b872851aa7d9b0a3",
+    "semantic_hash": "f64c4fa117be3fc2b872851aa7d9b0a3"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\misc\\drg_supporter.png": {
+    "mtime": 1779191523.4034667,
+    "ast_hash": "5caa6aed3054bf1de60ae7d831e6c2ba",
+    "semantic_hash": "5caa6aed3054bf1de60ae7d831e6c2ba"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\misc\\health_icon.png": {
+    "mtime": 1779191524.054532,
+    "ast_hash": "0cd73e71bdf61623dae6e3bda7439216",
+    "semantic_hash": "0cd73e71bdf61623dae6e3bda7439216"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\misc\\icon_accessory.png": {
+    "mtime": 1779191524.6564393,
+    "ast_hash": "8d53e561bccab8084774234ca5c8aa96",
+    "semantic_hash": "8d53e561bccab8084774234ca5c8aa96"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\misc\\icon_armor_type_heavy.png": {
+    "mtime": 1779191525.3076904,
+    "ast_hash": "09af92de410d7a5533e21ee7b891aa3e",
+    "semantic_hash": "09af92de410d7a5533e21ee7b891aa3e"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\misc\\icon_armor_type_light.png": {
+    "mtime": 1779191525.9173238,
+    "ast_hash": "cb06eeeff806ef17d4e5cf07a5361bf8",
+    "semantic_hash": "cb06eeeff806ef17d4e5cf07a5361bf8"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\misc\\icon_armor_type_unbreakable.png": {
+    "mtime": 1779191526.5867374,
+    "ast_hash": "a87dd6bd0206d9f32925362a345bb808",
+    "semantic_hash": "a87dd6bd0206d9f32925362a345bb808"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\misc\\icon_beer_license.png": {
+    "mtime": 1779191527.256292,
+    "ast_hash": "a1973ca01c1c214ad90d9eb2fe7d9491",
+    "semantic_hash": "a1973ca01c1c214ad90d9eb2fe7d9491"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\misc\\icon_damage_type_explosion.png": {
+    "mtime": 1779191527.877101,
+    "ast_hash": "e39aafbcf3853bedd7bdb6c8ef1e17c3",
+    "semantic_hash": "e39aafbcf3853bedd7bdb6c8ef1e17c3"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\misc\\icon_damage_type_grabbed.png": {
+    "mtime": 1779191528.519906,
+    "ast_hash": "9b3adaa29eb1e9518fdee54d3979b9bc",
+    "semantic_hash": "9b3adaa29eb1e9518fdee54d3979b9bc"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\misc\\icon_damage_type_kinetic.png": {
+    "mtime": 1779191529.182574,
+    "ast_hash": "16a0f6cb6fc9a67886f673540c6a8ed0",
+    "semantic_hash": "16a0f6cb6fc9a67886f673540c6a8ed0"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\misc\\icon_damage_type_push.png": {
+    "mtime": 1779191529.8162663,
+    "ast_hash": "8544d7b487587b61042b21cfca96bbf6",
+    "semantic_hash": "8544d7b487587b61042b21cfca96bbf6"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\misc\\icon_dig.png": {
+    "mtime": 1779191532.680054,
+    "ast_hash": "af1cc27b257d5fb57a385a1cd5b28d26",
+    "semantic_hash": "af1cc27b257d5fb57a385a1cd5b28d26"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\misc\\icon_revive.png": {
+    "mtime": 1779191530.4174132,
+    "ast_hash": "6579dd38dd98848d2ea620743ad8a610",
+    "semantic_hash": "6579dd38dd98848d2ea620743ad8a610"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\misc\\icon_sleeves_off.png": {
+    "mtime": 1779191530.8747606,
+    "ast_hash": "54c94f924dcecb2d58a7e0a8c257136c",
+    "semantic_hash": "54c94f924dcecb2d58a7e0a8c257136c"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\misc\\icon_sleeves_on.png": {
+    "mtime": 1779191531.4143076,
+    "ast_hash": "c12f936b9fcf91df967ec4ef11727f88",
+    "semantic_hash": "c12f936b9fcf91df967ec4ef11727f88"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\misc\\icon_sleeves_unavailable.png": {
+    "mtime": 1779191532.1067307,
+    "ast_hash": "4f34ea8ecb48429f8bea895a7feb9fea",
+    "semantic_hash": "4f34ea8ecb48429f8bea895a7feb9fea"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\misc\\icons_campaign.png": {
+    "mtime": 1779191533.2974918,
+    "ast_hash": "fa8b8174cf68d437cbe016e7be9c28d4",
+    "semantic_hash": "fa8b8174cf68d437cbe016e7be9c28d4"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\misc\\logo_gsg.png": {
+    "mtime": 1779191534.714254,
+    "ast_hash": "6bbf9d4a2f5978bf02dd2e5f5f66da79",
+    "semantic_hash": "6bbf9d4a2f5978bf02dd2e5f5f66da79"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\misc\\logo_gsg_white.png": {
+    "mtime": 1779191534.0214944,
+    "ast_hash": "22b3f21fe67f0ef32cf688161b21c9c4",
+    "semantic_hash": "22b3f21fe67f0ef32cf688161b21c9c4"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\misc\\lost_pack.png": {
+    "mtime": 1779191535.2788756,
+    "ast_hash": "0bdc9f2781722bf72e1b654f6b4d0c0a",
+    "semantic_hash": "0bdc9f2781722bf72e1b654f6b4d0c0a"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\misc\\player_rank_icon.png": {
+    "mtime": 1779191535.9034054,
+    "ast_hash": "f154160ed5b0faad286ce1df8b5f8ca6",
+    "semantic_hash": "f154160ed5b0faad286ce1df8b5f8ca6"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\misc\\xp_icon.png": {
+    "mtime": 1779191536.4571328,
+    "ast_hash": "4a1f94ecea3283b0b4ab4761a9603520",
+    "semantic_hash": "4a1f94ecea3283b0b4ab4761a9603520"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\missions\\all_mission_icon_gif.gif": {
+    "mtime": 1779191510.4525962,
+    "ast_hash": "d52843161857cc1cc52ea02bd6773423",
+    "semantic_hash": "d52843161857cc1cc52ea02bd6773423"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\missions\\blackbox_icon.png": {
+    "mtime": 1779191511.0111363,
+    "ast_hash": "721b23b1639e2b0c3129666332b64e93",
+    "semantic_hash": "721b23b1639e2b0c3129666332b64e93"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\missions\\deep_scan_icon.png": {
+    "mtime": 1779191511.5461428,
+    "ast_hash": "88845210c8e83d69e075a7824a47ed91",
+    "semantic_hash": "88845210c8e83d69e075a7824a47ed91"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\missions\\egg_hunt_icon.png": {
+    "mtime": 1779191512.1142228,
+    "ast_hash": "6dfd924aba7ef47b815619fcb66aba1b",
+    "semantic_hash": "6dfd924aba7ef47b815619fcb66aba1b"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\missions\\elimination_icon.png": {
+    "mtime": 1779191512.658127,
+    "ast_hash": "fe2f30959958132cf56666487d4504ad",
+    "semantic_hash": "fe2f30959958132cf56666487d4504ad"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\missions\\escort_duty_icon.png": {
+    "mtime": 1779191513.2922547,
+    "ast_hash": "e2625627a3aea0187f190432d14eeb11",
+    "semantic_hash": "e2625627a3aea0187f190432d14eeb11"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\missions\\heavy_extraction_icon.png": {
+    "mtime": 1779191513.855579,
+    "ast_hash": "30d85e2c89b1c076c265e3f68e2e6233",
+    "semantic_hash": "30d85e2c89b1c076c265e3f68e2e6233"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\missions\\industrial_sabotage_icon.png": {
+    "mtime": 1779191514.4186442,
+    "ast_hash": "2343d8881c516b392f7ad8c547346101",
+    "semantic_hash": "2343d8881c516b392f7ad8c547346101"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\missions\\mining_expedition_icon.png": {
+    "mtime": 1779191514.9670093,
+    "ast_hash": "bed2f7013693e26080a730183a7a9eb2",
+    "semantic_hash": "bed2f7013693e26080a730183a7a9eb2"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\missions\\on_site_refining_icon.png": {
+    "mtime": 1779191515.6120303,
+    "ast_hash": "999c56ff157b7961a1c8443616bc25f6",
+    "semantic_hash": "999c56ff157b7961a1c8443616bc25f6"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\missions\\point_extraction_icon.png": {
+    "mtime": 1779191516.0828342,
+    "ast_hash": "d7bc5f39d9c9860acbc95c2f36b67500",
+    "semantic_hash": "d7bc5f39d9c9860acbc95c2f36b67500"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\missions\\salvage_icon.png": {
+    "mtime": 1779191516.626238,
+    "ast_hash": "24a1fe0e98af4c963d9dfdfd7699b2ad",
+    "semantic_hash": "24a1fe0e98af4c963d9dfdfd7699b2ad"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\missions\\search_and_extract_icon.png": {
+    "mtime": 1779191517.1078854,
+    "ast_hash": "041b4d30a71c109a617e9770fa9e648c",
+    "semantic_hash": "041b4d30a71c109a617e9770fa9e648c"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\perks\\beast_master_perk_icon.png": {
+    "mtime": 1779191429.0282145,
+    "ast_hash": "69c378d6937ef01f51461ce01104a65b",
+    "semantic_hash": "69c378d6937ef01f51461ce01104a65b"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\perks\\berzerker_perk_icon.png": {
+    "mtime": 1779191429.6862776,
+    "ast_hash": "d1a0a5379fbafa80e180e6551c117655",
+    "semantic_hash": "d1a0a5379fbafa80e180e6551c117655"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\perks\\born_ready_perk_icon.png": {
+    "mtime": 1779191430.3741093,
+    "ast_hash": "e86ffe12012190fc2ada66101514f637",
+    "semantic_hash": "e86ffe12012190fc2ada66101514f637"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\perks\\bug_thing_perk_icon.png": {
+    "mtime": 1779191430.972477,
+    "ast_hash": "8670c36e17fbbb78c0066e86e0ac5772",
+    "semantic_hash": "8670c36e17fbbb78c0066e86e0ac5772"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\perks\\dash_perk_icon.png": {
+    "mtime": 1779191431.6637852,
+    "ast_hash": "93deb931edcdb4b8e38071ce24df7569",
+    "semantic_hash": "93deb931edcdb4b8e38071ce24df7569"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\perks\\deep_pockets_perk_icon.png": {
+    "mtime": 1779191432.319848,
+    "ast_hash": "0d82150d3ac902edcf81d706393d6748",
+    "semantic_hash": "0d82150d3ac902edcf81d706393d6748"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\perks\\elemental_insulation_perk_icon.png": {
+    "mtime": 1779191432.9935677,
+    "ast_hash": "a87dd6bd0206d9f32925362a345bb808",
+    "semantic_hash": "a87dd6bd0206d9f32925362a345bb808"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\perks\\expert_depositor_perk_icon.png": {
+    "mtime": 1779191433.6369321,
+    "ast_hash": "24c96862e346906ae51525765bd9c2cc",
+    "semantic_hash": "24c96862e346906ae51525765bd9c2cc"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\perks\\field_medic_perk_icon.png": {
+    "mtime": 1779191434.2020712,
+    "ast_hash": "70074b04bcc3a7a0e02a1143f92bf331",
+    "semantic_hash": "70074b04bcc3a7a0e02a1143f92bf331"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\perks\\icon_extract_ore.png": {
+    "mtime": 1779191434.8407328,
+    "ast_hash": "4cbe1c9749866aeb8af13b1bc72f10df",
+    "semantic_hash": "4cbe1c9749866aeb8af13b1bc72f10df"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\perks\\iron_will_perk_icon.png": {
+    "mtime": 1779191435.4462047,
+    "ast_hash": "c0bdbe1d559ffda5e298476bd3704d65",
+    "semantic_hash": "c0bdbe1d559ffda5e298476bd3704d65"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\perks\\jump_boots_perk_icon.png": {
+    "mtime": 1779191436.0621946,
+    "ast_hash": "9bebc6eea6d068d9c47abf0ef40f73d3",
+    "semantic_hash": "9bebc6eea6d068d9c47abf0ef40f73d3"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\perks\\leech_sense_perk_icon.png": {
+    "mtime": 1779191436.6678154,
+    "ast_hash": "a09baa77ef66a4c06ebf6ef163200e31",
+    "semantic_hash": "a09baa77ef66a4c06ebf6ef163200e31"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\perks\\loveable_perk_icon.png": {
+    "mtime": 1779191437.3190372,
+    "ast_hash": "1bf33282eb91bd51c99227a1c047062c",
+    "semantic_hash": "1bf33282eb91bd51c99227a1c047062c"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\perks\\more_perks_perk_icon.png": {
+    "mtime": 1779191437.9333007,
+    "ast_hash": "a43477ec9eca411f741a9a4f14da0996",
+    "semantic_hash": "a43477ec9eca411f741a9a4f14da0996"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\perks\\perk_active_icon.png": {
+    "mtime": 1779191438.3884656,
+    "ast_hash": "7f9f41f8f43e8122f13b66c9028d0872",
+    "semantic_hash": "7f9f41f8f43e8122f13b66c9028d0872"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\perks\\perk_points_icon.png": {
+    "mtime": 1779191438.8244562,
+    "ast_hash": "e25e07727f8362e8fde5e6d384595a44",
+    "semantic_hash": "e25e07727f8362e8fde5e6d384595a44"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\perks\\red_sugar_rocks_perk_icon.png": {
+    "mtime": 1779191439.3815544,
+    "ast_hash": "f5fc38be18e7dfd40458a162dd0c177b",
+    "semantic_hash": "f5fc38be18e7dfd40458a162dd0c177b"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\perks\\resupplier_perk_icon.png": {
+    "mtime": 1779191440.01496,
+    "ast_hash": "5e3fe20ea4ccd54307b911cf94a47f4b",
+    "semantic_hash": "5e3fe20ea4ccd54307b911cf94a47f4b"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\perks\\second_wind_perk_icon.png": {
+    "mtime": 1779191440.6225102,
+    "ast_hash": "7ce541a5d8ba5ec81b4e2bb345402e36",
+    "semantic_hash": "7ce541a5d8ba5ec81b4e2bb345402e36"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\perks\\see_you_in_hell_perk_icon.png": {
+    "mtime": 1779191441.3359084,
+    "ast_hash": "56f3d2a6109848e1cc59ea249870e8eb",
+    "semantic_hash": "56f3d2a6109848e1cc59ea249870e8eb"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\perks\\shield_link_perk_icon.png": {
+    "mtime": 1779191441.9901006,
+    "ast_hash": "8163e2a0293a293af40664f780b4a20b",
+    "semantic_hash": "8163e2a0293a293af40664f780b4a20b"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\perks\\strong_arm_perk_icon.png": {
+    "mtime": 1779191442.6311972,
+    "ast_hash": "3ab5728a8c6a13ad37d648dd86276106",
+    "semantic_hash": "3ab5728a8c6a13ad37d648dd86276106"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\perks\\strong_back_perk_icon.png": {
+    "mtime": 1779191443.3040347,
+    "ast_hash": "0b333956629c54d8e7261d8dc3dd3753",
+    "semantic_hash": "0b333956629c54d8e7261d8dc3dd3753"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\perks\\temperature_insulation_perk_icon.png": {
+    "mtime": 1779191443.958835,
+    "ast_hash": "d0369f40d2bee7870338bc135c9e9b6e",
+    "semantic_hash": "d0369f40d2bee7870338bc135c9e9b6e"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\perks\\thick_soles_perk_icon.png": {
+    "mtime": 1779191444.6608787,
+    "ast_hash": "8148d90e7d617e5a8ec9ae6bf5e5583b",
+    "semantic_hash": "8148d90e7d617e5a8ec9ae6bf5e5583b"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\perks\\thorns_perk_icon.png": {
+    "mtime": 1779191445.268164,
+    "ast_hash": "bb38a0f0ec46dbb37ec4d402abe7f62e",
+    "semantic_hash": "bb38a0f0ec46dbb37ec4d402abe7f62e"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\perks\\unstoppable_perk_icon.png": {
+    "mtime": 1779191445.8962276,
+    "ast_hash": "8e5395dc91796f77fffc12c000cd197f",
+    "semantic_hash": "8e5395dc91796f77fffc12c000cd197f"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\perks\\vampire_perk_icon.png": {
+    "mtime": 1779191446.5524764,
+    "ast_hash": "c523579bc49a4cb7d097b822e1260271",
+    "semantic_hash": "c523579bc49a4cb7d097b822e1260271"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\perks\\weekend_athlete_perk_icon.png": {
+    "mtime": 1779191447.1682231,
+    "ast_hash": "fe85caa80f70fe4bea4bf5461ee55306",
+    "semantic_hash": "fe85caa80f70fe4bea4bf5461ee55306"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\perks\\zip_zoom_perk_icon.png": {
+    "mtime": 1779191447.793296,
+    "ast_hash": "886ff3b8d1d5d4f02b08b9888c96c396",
+    "semantic_hash": "886ff3b8d1d5d4f02b08b9888c96c396"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\resources\\alien_egg_icon.png": {
+    "mtime": 1779191472.387818,
+    "ast_hash": "eebf64d7575b876669980536f8b71807",
+    "semantic_hash": "eebf64d7575b876669980536f8b71807"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\resources\\apoca_bloom_icon.png": {
+    "mtime": 1779191472.867478,
+    "ast_hash": "23f0b86f98a2f1054e7f43dccf671c54",
+    "semantic_hash": "23f0b86f98a2f1054e7f43dccf671c54"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\resources\\aquarq_icon.png": {
+    "mtime": 1779191473.4170005,
+    "ast_hash": "df8c63d02e006f98bb46f6f7b954d304",
+    "semantic_hash": "df8c63d02e006f98bb46f6f7b954d304"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\resources\\barley_bulb_icon.png": {
+    "mtime": 1779191473.9712863,
+    "ast_hash": "d0d6978fa6402675c7bc1e0e538a8ff2",
+    "semantic_hash": "d0d6978fa6402675c7bc1e0e538a8ff2"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\resources\\bha_barnacle_icon.png": {
+    "mtime": 1779191474.5277903,
+    "ast_hash": "ce675016b083415c631b18def6b56fe6",
+    "semantic_hash": "ce675016b083415c631b18def6b56fe6"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\resources\\bismor_icon.png": {
+    "mtime": 1779191475.0823689,
+    "ast_hash": "ce69422630008830baa902f70e709d05",
+    "semantic_hash": "ce69422630008830baa902f70e709d05"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\resources\\bittergem_icon.png": {
+    "mtime": 1779191475.6273253,
+    "ast_hash": "f81d3562d5bacf3c636add061f4e76d6",
+    "semantic_hash": "f81d3562d5bacf3c636add061f4e76d6"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\resources\\boolo_cap_icon.png": {
+    "mtime": 1779191476.1636205,
+    "ast_hash": "ad1af05b16f31a7c0ecb8dac9500287a",
+    "semantic_hash": "ad1af05b16f31a7c0ecb8dac9500287a"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\resources\\compressed_gold_icon.png": {
+    "mtime": 1779191476.6233196,
+    "ast_hash": "1b16c539a9be486b914dced88106833a",
+    "semantic_hash": "1b16c539a9be486b914dced88106833a"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\resources\\core_stone_icon.png": {
+    "mtime": 1779191477.091291,
+    "ast_hash": "7f32b395ad8bd2afaedf3f16d97f16a5",
+    "semantic_hash": "7f32b395ad8bd2afaedf3f16d97f16a5"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\resources\\cosmetic_core.png": {
+    "mtime": 1779191477.769135,
+    "ast_hash": "f86250bc889ae39a95b4c377ec1e6ffd",
+    "semantic_hash": "f86250bc889ae39a95b4c377ec1e6ffd"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\resources\\croppa_icon.png": {
+    "mtime": 1779191478.3285594,
+    "ast_hash": "8c1888b2f61c4e823e14ad7df87c3cc7",
+    "semantic_hash": "8c1888b2f61c4e823e14ad7df87c3cc7"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\resources\\data_rack_icon.png": {
+    "mtime": 1779191479.5773573,
+    "ast_hash": "0b70b202a63ea13f598ff2a939a6c938",
+    "semantic_hash": "0b70b202a63ea13f598ff2a939a6c938"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\resources\\datacell_icon.png": {
+    "mtime": 1779191478.888794,
+    "ast_hash": "d1c032a2e025bb72f21c6287c3822530",
+    "semantic_hash": "d1c032a2e025bb72f21c6287c3822530"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\resources\\dystrum_icon.png": {
+    "mtime": 1779191480.1408896,
+    "ast_hash": "75d0f20220309d3c7442d06983486431",
+    "semantic_hash": "75d0f20220309d3c7442d06983486431"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\resources\\ebonut_icon.png": {
+    "mtime": 1779191480.6073782,
+    "ast_hash": "e6213e6b995a784d45ece94c7ab4e4b1",
+    "semantic_hash": "e6213e6b995a784d45ece94c7ab4e4b1"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\resources\\empty_matrix_core.png": {
+    "mtime": 1779191481.253292,
+    "ast_hash": "5a916ae7f3231647cfdc514fb9e6e40c",
+    "semantic_hash": "5a916ae7f3231647cfdc514fb9e6e40c"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\resources\\enor_pearl_icon.png": {
+    "mtime": 1779191481.831356,
+    "ast_hash": "2701a6ab1e53c8346667c005d6b89869",
+    "semantic_hash": "2701a6ab1e53c8346667c005d6b89869"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\resources\\fleas_icon.png": {
+    "mtime": 1779191482.4665036,
+    "ast_hash": "d2f7ddcdc92836a78c3d3bac384c09ed",
+    "semantic_hash": "d2f7ddcdc92836a78c3d3bac384c09ed"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\resources\\fossil_icon.png": {
+    "mtime": 1779191483.0158288,
+    "ast_hash": "f1813bae4cf7333a11c0b0eef04e8789",
+    "semantic_hash": "f1813bae4cf7333a11c0b0eef04e8789"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\resources\\fuel_cannister_icon.png": {
+    "mtime": 1779191483.6906433,
+    "ast_hash": "4c0441b285d7f5895193a97257c9ddf9",
+    "semantic_hash": "4c0441b285d7f5895193a97257c9ddf9"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\resources\\glyphid_egg_icon.png": {
+    "mtime": 1779191484.2415948,
+    "ast_hash": "5af0b7df5657687c0ffe611f88dfb510",
+    "semantic_hash": "5af0b7df5657687c0ffe611f88dfb510"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\resources\\gold_icon.png": {
+    "mtime": 1779191484.7925825,
+    "ast_hash": "f71e228477dea78cfa158fae695e4b71",
+    "semantic_hash": "f71e228477dea78cfa158fae695e4b71"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\resources\\gunk_seed_icon.png": {
+    "mtime": 1779191485.3436847,
+    "ast_hash": "ed824bac8c9b2c1bfac55be523f1f41a",
+    "semantic_hash": "ed824bac8c9b2c1bfac55be523f1f41a"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\resources\\hollomite_icon.png": {
+    "mtime": 1779191485.8845003,
+    "ast_hash": "d598c22e264860a87bec9e8cb7dad2c5",
+    "semantic_hash": "d598c22e264860a87bec9e8cb7dad2c5"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\resources\\hox_iron_icon.png": {
+    "mtime": 1779191486.527107,
+    "ast_hash": "2e098e86d4a90ef99ec3cb068112a399",
+    "semantic_hash": "2e098e86d4a90ef99ec3cb068112a399"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\resources\\icons_resources_outline_barley01.png": {
+    "mtime": 1779191487.1487162,
+    "ast_hash": "6015354acfd5ef10e3c0894953e29e32",
+    "semantic_hash": "6015354acfd5ef10e3c0894953e29e32"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\resources\\icons_resources_outline_barley02.png": {
+    "mtime": 1779191487.7683463,
+    "ast_hash": "8f64f4b210d492165c3544a2f7351cb5",
+    "semantic_hash": "8f64f4b210d492165c3544a2f7351cb5"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\resources\\icons_resources_outline_barley03.png": {
+    "mtime": 1779191488.4424844,
+    "ast_hash": "2d09bece8a0a9a65315c3cf2f83afb54",
+    "semantic_hash": "2d09bece8a0a9a65315c3cf2f83afb54"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\resources\\icons_resources_outline_barley04.png": {
+    "mtime": 1779191489.10825,
+    "ast_hash": "62f2eee91ad63a78c047c908d0bcefa7",
+    "semantic_hash": "62f2eee91ad63a78c047c908d0bcefa7"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\resources\\jadiz_icon.png": {
+    "mtime": 1779191489.6733336,
+    "ast_hash": "c5c24e72e3fef51925dc49106fc3a960",
+    "semantic_hash": "c5c24e72e3fef51925dc49106fc3a960"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\resources\\kill_dreadnought_objective_icon.png": {
+    "mtime": 1779191490.414807,
+    "ast_hash": "9f41d29633b854553e1a604645c32e27",
+    "semantic_hash": "9f41d29633b854553e1a604645c32e27"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\resources\\magnite_icon.png": {
+    "mtime": 1779191490.9782586,
+    "ast_hash": "d31a27fd39731c4e156450028e91e8d6",
+    "semantic_hash": "d31a27fd39731c4e156450028e91e8d6"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\resources\\malt_star_icon.png": {
+    "mtime": 1779191491.5798335,
+    "ast_hash": "b3f75932a3facb2b5f379cfd0af4419c",
+    "semantic_hash": "b3f75932a3facb2b5f379cfd0af4419c"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\resources\\matrix_core_cosmetics.png": {
+    "mtime": 1779191492.1957767,
+    "ast_hash": "2c93526921f830d81e94abddf280ba7c",
+    "semantic_hash": "2c93526921f830d81e94abddf280ba7c"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\resources\\matrix_core_icon.png": {
+    "mtime": 1779191492.817264,
+    "ast_hash": "bf33675977afc3c7be44153c584d875c",
+    "semantic_hash": "bf33675977afc3c7be44153c584d875c"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\resources\\mineral_container_icon.png": {
+    "mtime": 1779191493.4399433,
+    "ast_hash": "33696e61dade16e112b56c3b0d1184ec",
+    "semantic_hash": "33696e61dade16e112b56c3b0d1184ec"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\resources\\mini_mule_leg_icon.png": {
+    "mtime": 1779191494.0696173,
+    "ast_hash": "c94f565566a7925fa484eb5223e93534",
+    "semantic_hash": "c94f565566a7925fa484eb5223e93534"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\resources\\morkite_icon.png": {
+    "mtime": 1779191494.553805,
+    "ast_hash": "732ff288885cde261eed5c36e9aefe7b",
+    "semantic_hash": "732ff288885cde261eed5c36e9aefe7b"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\resources\\morkite_seed_icon.png": {
+    "mtime": 1779191495.0331278,
+    "ast_hash": "3a3f38a6f4a13ddc6b463219e84ee548",
+    "semantic_hash": "3a3f38a6f4a13ddc6b463219e84ee548"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\resources\\nitra_icon.png": {
+    "mtime": 1779191495.5741343,
+    "ast_hash": "f6581228006f8d8759d5e9ce9ff4eac2",
+    "semantic_hash": "f6581228006f8d8759d5e9ce9ff4eac2"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\resources\\oilshale_icon.png": {
+    "mtime": 1779191496.1355052,
+    "ast_hash": "584d2f37b62c37a3306442c45cad340e",
+    "semantic_hash": "584d2f37b62c37a3306442c45cad340e"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\resources\\ommoran_icon.png": {
+    "mtime": 1779191496.6065729,
+    "ast_hash": "4a43edaaab3cc3ddb428e885b9e7352e",
+    "semantic_hash": "4a43edaaab3cc3ddb428e885b9e7352e"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\resources\\overclock_core_icon.png": {
+    "mtime": 1779191497.2232935,
+    "ast_hash": "4caf2d3f4d46a6f6ed22f68d6a973a95",
+    "semantic_hash": "4caf2d3f4d46a6f6ed22f68d6a973a95"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\resources\\phazyonite_icon.png": {
+    "mtime": 1779191497.8125925,
+    "ast_hash": "a8d7d8c1a490825991599c002a2446da",
+    "semantic_hash": "a8d7d8c1a490825991599c002a2446da"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\resources\\plagueheart_icon.png": {
+    "mtime": 1779191498.3656447,
+    "ast_hash": "48f3b292f64ce47221b2286be024e194",
+    "semantic_hash": "48f3b292f64ce47221b2286be024e194"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\resources\\pp_icon.png": {
+    "mtime": 1779191499.054593,
+    "ast_hash": "44644e76d461dbe0f72734a763b1b92c",
+    "semantic_hash": "44644e76d461dbe0f72734a763b1b92c"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\resources\\pumping_jack_icon.png": {
+    "mtime": 1779191499.6934037,
+    "ast_hash": "b1843de9b6029c32df00519ccf3a3634",
+    "semantic_hash": "b1843de9b6029c32df00519ccf3a3634"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\resources\\quantrite_icon.png": {
+    "mtime": 1779191500.1485016,
+    "ast_hash": "1ce9349c79fd94e476edc8d347b3a356",
+    "semantic_hash": "1ce9349c79fd94e476edc8d347b3a356"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\resources\\red_sugar_icon.png": {
+    "mtime": 1779191500.6232994,
+    "ast_hash": "4442fad3cf9e2ce57cad71d19299eb20",
+    "semantic_hash": "4442fad3cf9e2ce57cad71d19299eb20"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\resources\\resinite_mass_icon.png": {
+    "mtime": 1779191501.2532105,
+    "ast_hash": "a49fb060e106df080ae27b365881ca48",
+    "semantic_hash": "a49fb060e106df080ae27b365881ca48"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\resources\\resource_bag.png": {
+    "mtime": 1779191502.0055182,
+    "ast_hash": "6a48950f0c30f932213ab17eb27b5836",
+    "semantic_hash": "6a48950f0c30f932213ab17eb27b5836"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\resources\\salvage_mules_icon.png": {
+    "mtime": 1779191502.66255,
+    "ast_hash": "bc72e5b1b99d4c0962b4f012ed911df4",
+    "semantic_hash": "bc72e5b1b99d4c0962b4f012ed911df4"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\resources\\scrip_01_icon.png": {
+    "mtime": 1779191503.3712194,
+    "ast_hash": "ba9a2bc2fb4b0e4e5dccc735e965d7ad",
+    "semantic_hash": "ba9a2bc2fb4b0e4e5dccc735e965d7ad"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\resources\\scrip_02_icon.png": {
+    "mtime": 1779191503.91897,
+    "ast_hash": "0a006eaa8a5a4d34db4af1e44c2afce7",
+    "semantic_hash": "0a006eaa8a5a4d34db4af1e44c2afce7"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\resources\\scrip_03_icon.png": {
+    "mtime": 1779191504.60051,
+    "ast_hash": "adeaa43ec57dcc9e92108d81670d88d4",
+    "semantic_hash": "adeaa43ec57dcc9e92108d81670d88d4"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\resources\\scrip_04_icon.png": {
+    "mtime": 1779191505.3325922,
+    "ast_hash": "97a7af48fd6d627190507db7054ccbbb",
+    "semantic_hash": "97a7af48fd6d627190507db7054ccbbb"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\resources\\scrip_05_icon.png": {
+    "mtime": 1779191506.0297692,
+    "ast_hash": "74bbdd14d5fb2758b47d8e2a850e68ad",
+    "semantic_hash": "74bbdd14d5fb2758b47d8e2a850e68ad"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\resources\\scrip_06_icon.png": {
+    "mtime": 1779191506.7323122,
+    "ast_hash": "5a9e3ce975423cf433c392e0acca4463",
+    "semantic_hash": "5a9e3ce975423cf433c392e0acca4463"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\resources\\starch_nut_icon.png": {
+    "mtime": 1779191507.2096717,
+    "ast_hash": "f1c7ca2f539e450b8cc78fea0e0fd03a",
+    "semantic_hash": "f1c7ca2f539e450b8cc78fea0e0fd03a"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\resources\\tyrant_shard_icon.png": {
+    "mtime": 1779191507.6441827,
+    "ast_hash": "de46f898dec8523d3fe76cb1657df956",
+    "semantic_hash": "de46f898dec8523d3fe76cb1657df956"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\resources\\umanite_icon.png": {
+    "mtime": 1779191508.2143686,
+    "ast_hash": "e021f8a46dcd805a5f105994a82a4370",
+    "semantic_hash": "e021f8a46dcd805a5f105994a82a4370"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\resources\\unknown_artifact_icon.png": {
+    "mtime": 1779191508.778091,
+    "ast_hash": "b00494dccdfff3df0db80a67f135e218",
+    "semantic_hash": "b00494dccdfff3df0db80a67f135e218"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\resources\\yeast_cone_icon.png": {
+    "mtime": 1779191509.3052688,
+    "ast_hash": "294d0cbd6b3bf734fb3f0c6c9d914d6b",
+    "semantic_hash": "294d0cbd6b3bf734fb3f0c6c9d914d6b"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\weapons\\armor.png": {
+    "mtime": 1779191448.8265622,
+    "ast_hash": "4c958960d9facbfa4ea88957ce8108a5",
+    "semantic_hash": "4c958960d9facbfa4ea88957ce8108a5"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\weapons\\assault_rifle.png": {
+    "mtime": 1779191449.4454412,
+    "ast_hash": "c3f3863344a8b8a0e5884eaeee3ab4cb",
+    "semantic_hash": "c3f3863344a8b8a0e5884eaeee3ab4cb"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\weapons\\autocannon.png": {
+    "mtime": 1779191450.0725505,
+    "ast_hash": "6433e321851873e9c7eb49a1bb9e767e",
+    "semantic_hash": "6433e321851873e9c7eb49a1bb9e767e"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\weapons\\breach_cutter.png": {
+    "mtime": 1779191450.7122338,
+    "ast_hash": "7d434d50cdb3af541b221cef3c073005",
+    "semantic_hash": "7d434d50cdb3af541b221cef3c073005"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\weapons\\burst_pistol.png": {
+    "mtime": 1779191451.4723933,
+    "ast_hash": "b82a6c9bf657be288a2bd021e5b6d296",
+    "semantic_hash": "b82a6c9bf657be288a2bd021e5b6d296"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\weapons\\coilgun.png": {
+    "mtime": 1779191452.1196928,
+    "ast_hash": "fc8e6dade7625da54c3c189f0010150c",
+    "semantic_hash": "fc8e6dade7625da54c3c189f0010150c"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\weapons\\colette.png": {
+    "mtime": 1779191452.76502,
+    "ast_hash": "2777c7f40176c266b80a28d5b42e7998",
+    "semantic_hash": "2777c7f40176c266b80a28d5b42e7998"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\weapons\\crossbow.png": {
+    "mtime": 1779191453.3487077,
+    "ast_hash": "7190d2874252c854d5780cb0e7018085",
+    "semantic_hash": "7190d2874252c854d5780cb0e7018085"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\weapons\\cryo_cannon.png": {
+    "mtime": 1779191453.95476,
+    "ast_hash": "ebac18938e97a3b16b3146c6c1fed3e0",
+    "semantic_hash": "ebac18938e97a3b16b3146c6c1fed3e0"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\weapons\\detonation_pack.png": {
+    "mtime": 1779191454.6179912,
+    "ast_hash": "21c8b49b0d56b851e1b04b2627f600a9",
+    "semantic_hash": "21c8b49b0d56b851e1b04b2627f600a9"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\weapons\\drak.png": {
+    "mtime": 1779191455.3083043,
+    "ast_hash": "5f61971c95e4a2f42f5ad2aab64c1dd0",
+    "semantic_hash": "5f61971c95e4a2f42f5ad2aab64c1dd0"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\weapons\\drill.png": {
+    "mtime": 1779191455.954061,
+    "ast_hash": "80fda086d3a6d8b5d1b347a7c8835bf9",
+    "semantic_hash": "80fda086d3a6d8b5d1b347a7c8835bf9"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\weapons\\dual_machine_pistols.png": {
+    "mtime": 1779191456.5732644,
+    "ast_hash": "a0fa66120102d40150ff674c9e5f8449",
+    "semantic_hash": "a0fa66120102d40150ff674c9e5f8449"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\weapons\\flamethrower.png": {
+    "mtime": 1779191457.202186,
+    "ast_hash": "b5f91ac68d92fc6c0c08e80c75fa695b",
+    "semantic_hash": "b5f91ac68d92fc6c0c08e80c75fa695b"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\weapons\\flare.png": {
+    "mtime": 1779191458.51393,
+    "ast_hash": "0956d2473fb6be3e6146301fadfc5ff3",
+    "semantic_hash": "0956d2473fb6be3e6146301fadfc5ff3"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\weapons\\flare_gun.png": {
+    "mtime": 1779191457.836779,
+    "ast_hash": "8b41e6a3c23fe8cea7039d19dff3ab93",
+    "semantic_hash": "8b41e6a3c23fe8cea7039d19dff3ab93"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\weapons\\gatling_gun.png": {
+    "mtime": 1779191459.146199,
+    "ast_hash": "4f2c53eda7fbe8014052c23acedd1dd4",
+    "semantic_hash": "4f2c53eda7fbe8014052c23acedd1dd4"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\weapons\\grappling_gun.png": {
+    "mtime": 1779191459.792419,
+    "ast_hash": "55c02abd141fea1549c77f1ec38196d2",
+    "semantic_hash": "55c02abd141fea1549c77f1ec38196d2"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\weapons\\grenade.png": {
+    "mtime": 1779191461.0715306,
+    "ast_hash": "bf4f30930b6be36f1c3f78c859526e9d",
+    "semantic_hash": "bf4f30930b6be36f1c3f78c859526e9d"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\weapons\\grenade_launcher.png": {
+    "mtime": 1779191460.4107914,
+    "ast_hash": "dfab43b9fafd07f6329bc711c1f061bf",
+    "semantic_hash": "dfab43b9fafd07f6329bc711c1f061bf"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\weapons\\hurricane.png": {
+    "mtime": 1779191461.6783552,
+    "ast_hash": "f7b47121c0948372547209b066bcee6e",
+    "semantic_hash": "f7b47121c0948372547209b066bcee6e"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\weapons\\lok_1.png": {
+    "mtime": 1779191462.2729707,
+    "ast_hash": "b46edb2311c93ea1e68ad12bd18ddd30",
+    "semantic_hash": "b46edb2311c93ea1e68ad12bd18ddd30"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\weapons\\m1000.png": {
+    "mtime": 1779191462.911043,
+    "ast_hash": "6b2564f46f6bac8e17bf27b6ac969cc2",
+    "semantic_hash": "6b2564f46f6bac8e17bf27b6ac969cc2"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\weapons\\pickaxe.png": {
+    "mtime": 1779191463.4456537,
+    "ast_hash": "922a65dd9863b1e13c4c38092553fded",
+    "semantic_hash": "922a65dd9863b1e13c4c38092553fded"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\weapons\\pistol.png": {
+    "mtime": 1779191464.0680315,
+    "ast_hash": "587f2a273517113011816dc89d733b9f",
+    "semantic_hash": "587f2a273517113011816dc89d733b9f"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\weapons\\plasma_charger.png": {
+    "mtime": 1779191464.6766818,
+    "ast_hash": "27d6db58b142449d5a14c19aab7f4a0c",
+    "semantic_hash": "27d6db58b142449d5a14c19aab7f4a0c"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\weapons\\platform_gun.png": {
+    "mtime": 1779191465.3379643,
+    "ast_hash": "654dea2c1500d538eca9cc7030a77f58",
+    "semantic_hash": "654dea2c1500d538eca9cc7030a77f58"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\weapons\\revolver.png": {
+    "mtime": 1779191465.915663,
+    "ast_hash": "e3f9c3f58e6a5395cfda861f5e0aabcc",
+    "semantic_hash": "e3f9c3f58e6a5395cfda861f5e0aabcc"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\weapons\\sawedoff_shotgun.png": {
+    "mtime": 1779191466.5367727,
+    "ast_hash": "371baab330b7e4b717481478368294af",
+    "semantic_hash": "371baab330b7e4b717481478368294af"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\weapons\\sentry.png": {
+    "mtime": 1779191467.1834338,
+    "ast_hash": "e533c16e7a2c51cfd372abe5a8a8f16f",
+    "semantic_hash": "e533c16e7a2c51cfd372abe5a8a8f16f"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\weapons\\shard.png": {
+    "mtime": 1779191467.8057275,
+    "ast_hash": "92de7b1f695977392d654f2b08514eb6",
+    "semantic_hash": "92de7b1f695977392d654f2b08514eb6"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\weapons\\shield_generator.png": {
+    "mtime": 1779191468.4357712,
+    "ast_hash": "ca011dfc2d6048a16ce7d1e5b4d9b494",
+    "semantic_hash": "ca011dfc2d6048a16ce7d1e5b4d9b494"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\weapons\\shotgun.png": {
+    "mtime": 1779191469.0824404,
+    "ast_hash": "42a3c05e074bafb071c6f159bb86a834",
+    "semantic_hash": "42a3c05e074bafb071c6f159bb86a834"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\weapons\\sludge_pump.png": {
+    "mtime": 1779191469.6675284,
+    "ast_hash": "0c547b12beb16ea6a175dca20d482a17",
+    "semantic_hash": "0c547b12beb16ea6a175dca20d482a17"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\weapons\\voltaic_smg.png": {
+    "mtime": 1779191470.3286445,
+    "ast_hash": "58781b01afff5bfc74fd160e7b8792ee",
+    "semantic_hash": "58781b01afff5bfc74fd160e7b8792ee"
+  },
+  "C:\\Users\\mchal\\Documents\\DEV\\drg_dashboard\\drg_dashboard_frontend\\public\\icons\\weapons\\zipline_gun.png": {
+    "mtime": 1779191470.9757288,
+    "ast_hash": "8ebf31fe38db71f61ded59cf588d12a6",
+    "semantic_hash": "8ebf31fe38db71f61ded59cf588d12a6"
+  }
+}
