@@ -21,8 +21,8 @@ export async function saveGuestbookMessage(
 
   if (!user) return { ok: false, error: "Non connecté." };
 
-  // Rate limit par user ID (plus fiable que par IP)
-  if (!checkRateLimit(`guestbook:${user.id}`, RATE_LIMIT_MAX, RATE_LIMIT_WINDOW_MS)) {
+  // Rate limit par user ID (plus fiable que par IP) — durable via Supabase
+  if (!(await checkRateLimit(`guestbook:${user.id}`, RATE_LIMIT_MAX, RATE_LIMIT_WINDOW_MS))) {
     return { ok: false, error: "Trop de messages. Réessaie plus tard." };
   }
 

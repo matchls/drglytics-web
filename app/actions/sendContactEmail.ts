@@ -43,10 +43,10 @@ export async function sendContactEmail(
     return { success: false, error: "Message trop long." };
   }
 
-  // 3) Rate limiting par IP : 3 messages / heure. Best-effort (voir lib/rateLimit).
+  // 3) Rate limiting par IP : 3 messages / heure. Durable via Supabase (voir lib/rateLimit).
   const ip =
     (await headers()).get("x-forwarded-for")?.split(",")[0]?.trim() ?? "unknown";
-  if (!checkRateLimit(`contact:${ip}`, RATE_LIMIT_MAX, RATE_LIMIT_WINDOW_MS)) {
+  if (!(await checkRateLimit(`contact:${ip}`, RATE_LIMIT_MAX, RATE_LIMIT_WINDOW_MS))) {
     return { success: false, error: "Trop de messages. Réessaie plus tard." };
   }
 
